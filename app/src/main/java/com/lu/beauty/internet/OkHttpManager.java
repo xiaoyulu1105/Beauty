@@ -17,6 +17,7 @@ import okhttp3.Response;
 
 /**
  * Created by dllo on 16/11/22.
+ * 封装网络请求@wqs
  */
 public class OkHttpManager {
     private OkHttpClient client;
