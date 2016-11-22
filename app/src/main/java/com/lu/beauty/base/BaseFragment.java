@@ -1,4 +1,4 @@
-package com.lu.beauty;
+package com.lu.beauty.base;
 
 import android.app.Fragment;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.lu.beauty;
+package com.lu.beauty.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
