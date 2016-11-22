@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lu.beauty.R;
+
 /**
  * Created by dllo on 16/11/22.
  * Fragment基类@wqs
@@ -17,7 +19,14 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        if (getLayout() == 0){
+            return inflater.inflate(R.layout.null_layout, container, false);
+        }else {
+
         return inflater.inflate(getLayout(), container, false);
+        }
+
     }
 
     @Override

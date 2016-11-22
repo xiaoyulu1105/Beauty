@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.lu.beauty.R;
+
 /**
  * Created by dllo on 16/11/22.
  * Activity基类@wqs
@@ -16,7 +18,12 @@ public abstract class BaseActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (getLayout() == 0){
+            setContentView(R.layout.null_layout);
+        }else {
+
         setContentView(getLayout());
+        }
 
         initViews();
 
