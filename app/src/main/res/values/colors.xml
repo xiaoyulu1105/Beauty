@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- 4个RadioButton 文字的颜色 选中 与 未选中 -->
+    <color name="colorSelectedTabberText">#ff000000</color>
+    <color name="colorUnselectedTabberText">#f5a19d9d</color>
+
+
+
 </resources>
