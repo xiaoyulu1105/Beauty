@@ -1,16 +1,17 @@
-package com.lu.beauty;
+package com.lu.beauty.product;
 
 import android.support.v4.app.Fragment;
 
+import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
 
 /**
  * Created by XiaoyuLu on 16/11/23.
  */
-public class ArticleFragment extends BaseFragment {
+public class ProductFragment extends BaseFragment {
     @Override
     protected int getLayout() {
-        return R.layout.fragment_article;
+        return R.layout.fragment_product;
     }
 
     @Override

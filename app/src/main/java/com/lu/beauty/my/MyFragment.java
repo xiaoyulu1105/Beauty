@@ -1,7 +1,8 @@
-package com.lu.beauty;
+package com.lu.beauty.my;
 
 import android.support.v4.app.Fragment;
 
+import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
 
 /**

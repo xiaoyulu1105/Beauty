@@ -2,14 +2,16 @@ package com.lu.beauty;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.lu.beauty.article.ArticleFragment;
 import com.lu.beauty.base.BaseActivity;
+import com.lu.beauty.designer.DesignerFragment;
+import com.lu.beauty.my.MyFragment;
+import com.lu.beauty.product.ProductFragment;
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
