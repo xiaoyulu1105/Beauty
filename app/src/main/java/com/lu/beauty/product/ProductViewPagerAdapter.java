@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
+import java.util.ArrayList;
+
 
 /**
  * If the operation is no problem, it is written by wangqiaosheng
@@ -13,13 +15,16 @@ import android.util.SparseArray;
 
 public class ProductViewPagerAdapter extends FragmentPagerAdapter{
     private SparseArray<Fragment> arrayList;
-    private final String[] s;
+    private ArrayList<String> s;
 
 
-    public ProductViewPagerAdapter(FragmentManager fm, String[] strings) {
+    public ProductViewPagerAdapter(FragmentManager fm) {
         super(fm);
         arrayList = new SparseArray<>();
-        s = strings;
+    }
+
+    public void setS(ArrayList<String> s) {
+        this.s = s;
     }
 
     @Override
@@ -32,11 +37,11 @@ public class ProductViewPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public int getCount() {
-        return s.length;
+        return s == null ? 0:s.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return s[position];
+        return s.get(position);
     }
 }

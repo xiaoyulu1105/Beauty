@@ -3,18 +3,28 @@ package com.lu.beauty.product;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
+import com.lu.beauty.bean.ProductDailyBean;
+import com.lu.beauty.internet.HttpUtil;
+import com.lu.beauty.internet.ResponseCallBack;
+
+import java.util.ArrayList;
 
 /**
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
+ * 有物Fragment
  */
 public class ProductVpFragment extends BaseFragment{
     private static final String KEY = "position";
     private TextView textView;
+    private ListView productLv;
+    private ProductListViewAdapter adapter;
+    private ArrayList<ProductDailyBean> dailyBeen;
 
 
     public static Fragment getInstance(int position) {
@@ -33,11 +43,13 @@ public class ProductVpFragment extends BaseFragment{
     @Override
     protected void initView() {
         textView = bindView(R.id.product_vp_tv);
+        productLv = bindView(R.id.product_list_view);
     }
 
     @Override
     protected void initData() {
-
+        adapter = new ProductListViewAdapter();
+        dailyBeen = new ArrayList<>();
     }
 
     @Override
@@ -49,6 +61,19 @@ public class ProductVpFragment extends BaseFragment{
             switch (type) {
                 case 0:
                     textView.setText("Daily");
+                    HttpUtil.getProduckDailyBean(new ResponseCallBack<ProductDailyBean>() {
+                        @Override
+                        public void onResponse(ProductDailyBean productDailyBean) {
+                            dailyBeen.add(productDailyBean);
+                            adapter.setArrayList(dailyBeen);
+                            productLv.setAdapter(adapter);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
                     break;
                 case 1:
                     textView.setText("首饰");
