@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    //oneshot是只做一遍
+
+    <item
+        android:drawable="@mipmap/like_1"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_1"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_2"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_2_1"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_2_2"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_2_3"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_3"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_3_1"
+        android:duration="100"/>
+
+    <item
+        android:drawable="@mipmap/like_4"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_4_1"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_4_2"
+        android:duration="200"/>
+    <item
+        android:drawable="@mipmap/like_4_3"
+        android:duration="100"/>
+
+
+    <item
+        android:drawable="@mipmap/like_5"
+        android:duration="100"/>
+
+    <item
+        android:drawable="@mipmap/like_6"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_6_1"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_6_2"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_6_3"
+        android:duration="100"/>
+
+    <item
+        android:drawable="@mipmap/like_7"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_7_1"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_7_2"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_7_3"
+        android:duration="200"/>
+    <item
+        android:drawable="@mipmap/like_7_4"
+        android:duration="100"/>
+
+
+    <item
+        android:drawable="@mipmap/like_8"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_8_1"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_8_2"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_8_3"
+        android:duration="100"/>
+
+
+    <item
+        android:drawable="@mipmap/like_9"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_9_1"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_9_2"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/like_9_3"
+        android:duration="100"/>
+
+    <item
+        android:drawable="@mipmap/like_10"
+        android:duration="100"/>
+
+
+</animation-list>
