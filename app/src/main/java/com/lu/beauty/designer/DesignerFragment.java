@@ -35,5 +35,6 @@ public class DesignerFragment extends BaseFragment {
         designerTabLayout.setupWithViewPager(designerViewPager);
         designerTabLayout.setSelectedTabIndicatorColor(Color.WHITE);
         designerTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
     }
 }
