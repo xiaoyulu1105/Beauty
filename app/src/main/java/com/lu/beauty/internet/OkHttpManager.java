@@ -2,8 +2,11 @@ package com.lu.beauty.internet;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.lu.beauty.R;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -34,7 +37,7 @@ public class OkHttpManager {
 
     public static OkHttpManager getInstance() {
         if (ourInstance == null){
-            synchronized (ourInstance){
+            synchronized (OkHttpManager.class){
                 if (ourInstance == null){
                     ourInstance = new OkHttpManager();
                 }
@@ -109,6 +112,7 @@ public class OkHttpManager {
             }
         });
     }
+
 
     abstract class HTTPRunnable<Bean> implements Runnable{
         protected ResponseCallBack<Bean> responseCallBack;

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="400dp">
+
+
+        <ImageView
+            android:id="@+id/daily_item_img"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:background="@mipmap/test"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="aaaaaaaaaaa"
+            android:layout_alignBottom="@+id/daily_item_img"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="38dp"
+            android:id="@+id/daily_item_title" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="namaaaaaaaa"
+            android:id="@+id/daily_item_name"
+            android:layout_marginStart="12dp"
+            android:layout_alignTop="@+id/daily_item_user_icon"
+            android:layout_toEndOf="@+id/daily_item_user_icon" />
+
+        <TextView
+            android:id="@+id/daily_item_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="labellllllllllll"
+            android:layout_alignBottom="@+id/daily_item_user_icon"
+            android:layout_alignStart="@+id/daily_item_name" />
+
+    <ImageView
+        android:id="@+id/daily_item_user_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/selector_main_my"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="18dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/daily_item_name"
+        android:layout_toEndOf="@+id/daily_item_title"
+        android:layout_marginStart="40dp">
+
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="哭"
+            android:id="@+id/product_btn_cry"
+            android:layout_marginEnd="20dp" />
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="笑"
+            android:id="@+id/daily_item_laugh"
+            android:layout_marginEnd="25dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>
