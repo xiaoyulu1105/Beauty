@@ -58,6 +58,7 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
     }
 
     private void init() {
+        setBackground(getResources().getDrawable(R.drawable.shap));
         //初始化
         mHandler = new Handler();
         mButton = new Button(mContext);
@@ -66,7 +67,7 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
         //DensityTool的方法把DP转换PX
 
         mDP2PX_first = DensityTool.dip2px(mContext, 30);
-        mDP2PX_final = DensityTool.dip2px(mContext, 250);
+        mDP2PX_final = DensityTool.dip2px(mContext, 150);
         LayoutParams params = new LayoutParams(mDP2PX_first, mDP2PX_first);
         addView(mButton, params);
         //为Button设置监听和动画
@@ -87,10 +88,11 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
         //让组件的高等于临时的高度
         layoutParams.height = tempHeight;
-        startAnim();
+
         //设置
         setLayoutParams(layoutParams);
         setBackground(getResources().getDrawable(R.drawable.shapcolor));
+        startAnim();
         //设置帧动画
         mButton.setBackground(getResources().getDrawable(R.drawable.animcry));
         //帧动画跑起来
@@ -103,7 +105,7 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
                 stopAnim();
                 mButton.setBackgroundResource(R.mipmap.dislike_1);
             }
-        }, 30 * 100);
+        }, 20 * 100);
 
         //属性动画
         ObjectAnimator centerToRight = ObjectAnimator.ofFloat(mButton, "translationX", 0, 10);

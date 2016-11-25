@@ -1,67 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="400dp">
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:orientation="vertical">
 
 
-        <ImageView
-            android:id="@+id/daily_item_img"
-            android:layout_width="match_parent"
-            android:layout_height="320dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="aaaaaaaaaaa"
-            android:layout_alignBottom="@+id/daily_item_img"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="38dp"
-            android:id="@+id/daily_item_title" />
+    <ImageView
+        android:id="@+id/daily_item_img"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"/>
 
     <TextView
-            android:layout_width="180dp"
-            android:layout_height="18dp"
-            android:text="namaaaaaaaa"
-            android:id="@+id/daily_item_name"
-            android:layout_marginStart="12dp"
-            android:layout_alignTop="@+id/daily_item_user_icon"
-            android:layout_toEndOf="@+id/daily_item_user_icon" />
+        android:id="@+id/daily_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/daily_item_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="38dp"
+        android:text="aaaaaaaaaaa"/>
 
-        <TextView
-            android:id="@+id/daily_item_label"
-            android:layout_width="180dp"
-            android:layout_height="18dp"
-            android:text="labellllllllllll"
-            android:layout_alignBottom="@+id/daily_item_user_icon"
-            android:layout_alignStart="@+id/daily_item_name" />
+    <TextView
+        android:id="@+id/daily_item_name"
+        android:layout_width="180dp"
+        android:layout_height="18dp"
+        android:layout_alignTop="@+id/daily_item_user_icon"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/daily_item_user_icon"
+        android:text="namaaaaaaaa"/>
+
+    <TextView
+        android:id="@+id/daily_item_label"
+        android:layout_width="180dp"
+        android:layout_height="18dp"
+        android:layout_alignBottom="@+id/daily_item_user_icon"
+        android:layout_alignStart="@+id/daily_item_name"
+        android:text="labellllllllllll"/>
 
     <ImageView
         android:id="@+id/daily_item_user_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/selector_main_my"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="18dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="18dp"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/selector_main_my"/>
 
 
     <com.lu.beauty.tools.CryFaceView
+        android:id="@+id/product_btn_cry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="哭"
-        android:id="@+id/product_btn_cry"
-        android:layout_below="@+id/daily_item_name"
-        android:layout_toEndOf="@+id/daily_item_name" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@+id/daily_item_name"
+        android:text="哭"/>
 
     <com.lu.beauty.tools.SmileFaceView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="笑"
-            android:id="@+id/daily_item_laugh"
+        android:id="@+id/daily_item_laugh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="12dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="40dp"
+        android:text="笑"/>
 
 
 </RelativeLayout>
