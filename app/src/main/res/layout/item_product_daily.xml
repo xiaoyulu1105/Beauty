@@ -19,8 +19,8 @@
             android:id="@+id/daily_item_title" />
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="180dp"
+            android:layout_height="18dp"
             android:text="namaaaaaaaa"
             android:id="@+id/daily_item_name"
             android:layout_marginStart="12dp"
@@ -29,8 +29,8 @@
 
         <TextView
             android:id="@+id/daily_item_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="180dp"
+            android:layout_height="18dp"
             android:text="labellllllllllll"
             android:layout_alignBottom="@+id/daily_item_user_icon"
             android:layout_alignStart="@+id/daily_item_name" />
@@ -45,28 +45,23 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
-    <LinearLayout
+
+    <com.lu.beauty.tools.CryFaceView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/daily_item_name"
-        android:layout_toEndOf="@+id/daily_item_title"
-        android:layout_marginStart="40dp">
+        android:text="哭"
+        android:id="@+id/product_btn_cry"
+        android:layout_below="@+id/daily_item_name"
+        android:layout_toEndOf="@+id/daily_item_name" />
 
-
-        <Button
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="哭"
-            android:id="@+id/product_btn_cry"
-            android:layout_marginEnd="20dp" />
-
-        <Button
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+    <com.lu.beauty.tools.SmileFaceView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="笑"
             android:id="@+id/daily_item_laugh"
-            android:layout_marginEnd="25dp" />
-    </LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="12dp" />
 
 
 </RelativeLayout>
