@@ -8,35 +8,39 @@ package com.lu.beauty.product;
 
 public class GetPercent {
 
-    private static double maxHeight; // 最高的高度, 你们想最高为多少, 就通过set方法设置多少
+    private  double maxHeight = 500; // 最高的高度,默认为500, 你们想最高为多少, 就通过set方法设置多少
 
-    public void setMaxHeight(double maxHeight) {
+    // 通过set方法设置 最高的高度值
+    public  void setMaxHeight(double maxHeight) {
         this.maxHeight = maxHeight;
     }
 
-    public static double getMaxHeight() {
+    public  double getMaxHeight() {
         return maxHeight;
     }
 
-    public static double getLikeHigh(double likeNum, double uLikeNum) {
-        double likeHigh = (likeNum / (likeNum + uLikeNum)) * maxHeight;
-        return likeHigh;
-    }
 
-    public static double getNoLikeCount(double likeNum, double uLikeNum) {
+    // 获取 喜欢和不喜欢的百分比
+    public static double getLikeCount(double likeNum, double uLikeNum) {
+        double LikeCount = (likeNum / (likeNum + uLikeNum)) * 100;
+
+        return LikeCount;
+    }
+    public  double getDislikeCount(double likeNum, double uLikeNum) {
         double noLike = (uLikeNum / (likeNum + uLikeNum)) * 100;
 
         return noLike;
     }
 
-    public static double getNoLikeHigh(double likeNum, double uLikeNum) {
+
+
+    // 获取 喜欢和不喜欢的最终高度
+    public  double getDislikeHigh(double likeNum, double uLikeNum) {
         double noLikeHigh = (uLikeNum / (likeNum + uLikeNum)) * maxHeight;
         return noLikeHigh;
     }
-
-    public static double getLikeCount(double likeNum, double uLikeNum) {
-        double LikeCount = (likeNum / (likeNum + uLikeNum)) * 100;
-
-        return LikeCount;
+    public  double getLikeHigh(double likeNum, double uLikeNum) {
+        double likeHigh = (likeNum / (likeNum + uLikeNum)) * maxHeight;
+        return likeHigh;
     }
 }
