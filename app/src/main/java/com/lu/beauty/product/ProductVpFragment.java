@@ -48,11 +48,6 @@ public class ProductVpFragment extends BaseFragment{
     @Override
     protected void initData() {
         adapter = new ProductListViewAdapter();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         if (getArguments() != null){
             int type = getArguments().getInt(KEY);
 
@@ -93,4 +88,6 @@ public class ProductVpFragment extends BaseFragment{
             }
         }
     }
+
+   
 }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ProductViewPagerAdapter extends FragmentPagerAdapter{
     private SparseArray<Fragment> arrayList;
-    private ArrayList<String> s;
+    private ArrayList<String> s;//TODO 命名改了
 
 
     public ProductViewPagerAdapter(FragmentManager fm) {
