@@ -21,7 +21,7 @@ public class GetPercent {
 
 
     // 获取 喜欢和不喜欢的百分比
-    public static double getLikeCount(double likeNum, double uLikeNum) {
+    public  double getLikeCount(double likeNum, double uLikeNum) {
         double LikeCount = (likeNum / (likeNum + uLikeNum)) * 100;
 
         return LikeCount;
