@@ -13,14 +13,16 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.lu.beauty.R;
+import com.lu.beauty.product.GetPercent;
 
 /**
  * Created by  AngleXiao on 16/11/24.
  * OLiGei  what is your name
  * 轻松拿下一个类 属实有牌面
  */
-
+//TODO 新建一个包 widget包里,自定义组件都放到这里面
 public class SmileFaceView extends RelativeLayout implements View.OnClickListener {
+
     private Context mContext;
     private Button mButton;
     private View.OnClickListener mOnClickListener;
@@ -60,15 +62,16 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
 
     private void init() {
         setBackground(getResources().getDrawable(R.drawable.shap));
+
         mButton = new Button(mContext);
         mHandler = new Handler(Looper.getMainLooper());
 
         //TODO 需要一个工具类,dp转px
 
+        mMDP2PX_FIRST = DensityTool.dip2px(mContext,30); // 圆的直径
+        mDP2PX_FINAL = DensityTool.dip2px(mContext,150); // 最后的拉申高度
 
-        mMDP2PX_FIRST = DensityTool.dip2px(mContext,60);
-        mDP2PX_FINAL = DensityTool.dip2px(mContext,500);
-
+        // 将Button 添加到自定义的相对布局
         LayoutParams layoutParams = new LayoutParams(mMDP2PX_FIRST, mMDP2PX_FIRST);
         addView(mButton, layoutParams);
         mButton.setOnClickListener(this);
@@ -87,10 +90,9 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
         //动画
         //得到布局的高度,然后修改高度,并且给布局加上颜色
         ViewGroup.LayoutParams params = getLayoutParams();
-
         params.height = tempHeight;
-
         setLayoutParams(params);
+
         setBackgroundResource(R.drawable.shapcolor);
         startAnim();
 
