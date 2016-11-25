@@ -3,9 +3,6 @@ package com.lu.beauty.internet;
 import com.lu.beauty.bean.DesignerRecommendBean;
 import com.lu.beauty.bean.ProductDailyBean;
 import com.lu.beauty.bean.ProductTitleBean;
-import com.lu.beauty.tools.UrlValues;
-
-import okhttp3.OkHttpClient;
 
 /**
  * If the operation is no problem, it is written by wangqiaosheng

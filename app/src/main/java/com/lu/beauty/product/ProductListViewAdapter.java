@@ -7,8 +7,8 @@ import android.widget.BaseAdapter;
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.bean.ProductDailyBean;
-
-import java.util.ArrayList;
+import com.lu.beauty.ui.CryFaceView;
+import com.lu.beauty.ui.SmileFaceView;
 
 /**
  * If the operation is no problem, it is written by wangqiaosheng
@@ -49,6 +49,22 @@ public class ProductListViewAdapter extends BaseAdapter{
                 .setCircleImage(R.id.daily_item_user_icon, bean.getData()
                         .getProducts().get(position).getDesigner().getAvatar_url(), parent.getContext());
 
+        int likeCount, disLikeCount;
+        likeCount = bean.getData().getProducts().get(position).getLike_user_num();
+        disLikeCount = bean.getData().getProducts().get(position).getUnlike_user_num();
+
+        // 喜欢和不喜欢的高度
+        double likeHeight = GetPercent.getLikeHigh(likeCount, disLikeCount);
+        double dislikeHeight = GetPercent.getDislikeHigh(likeCount, disLikeCount);
+        // 喜欢和不喜欢的百分比
+        double likePercent = GetPercent.getLikePercent(likeCount, disLikeCount);
+        double dislikePercent = GetPercent.getDislikePercent(likeCount, disLikeCount);
+
+        CryFaceView cryFaceView = viewHolder.getView(R.id.daily_item_cry);
+        cryFaceView.setDP2PX_final((int) dislikeHeight);
+
+        SmileFaceView smileFaceView = viewHolder.getView(R.id.daily_item_laugh);
+        smileFaceView.setDP2PX_FINAL((int) likeHeight);
 
         return viewHolder.getItemView();
     }

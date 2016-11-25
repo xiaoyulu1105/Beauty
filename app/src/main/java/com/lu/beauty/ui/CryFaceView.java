@@ -1,4 +1,4 @@
-package com.lu.beauty.tools;
+package com.lu.beauty.ui;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.lu.beauty.R;
+import com.lu.beauty.tools.DensityTool;
 
 /**
  * Created by  AngleXiao on 16/11/24.
@@ -28,8 +29,16 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
     private int mHeight;
     private int tempHeight;
     private View.OnClickListener mOnClickListener;
-    private int mDP2PX_first;
-    private int mDP2PX_final;
+    private int mDP2PX_first; // 最初的高度
+    private int mDP2PX_final = -1; // 最终的高度
+
+    // 为最终的高度设置set方法, 添加 by 小玉 已实现
+    // 在 ProductListViewAdapter 中调用该set方法, 设置最终高度
+    public void setDP2PX_final(int DP2PX_final) {
+        mDP2PX_final = DP2PX_final;
+    }
+
+
 
     public int getTempHeight() {
         return tempHeight;
@@ -67,7 +76,13 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
         //DensityTool的方法把DP转换PX
 
         mDP2PX_first = DensityTool.dip2px(mContext, 30);
-        mDP2PX_final = DensityTool.dip2px(mContext, 150);
+//        mDP2PX_final = DensityTool.dip2px(mContext, 150);
+        if (mDP2PX_final == -1){
+            // 当未动态设置高度成功, 默认高度为150
+            mDP2PX_final = DensityTool.dip2px(mContext, 150);
+        }
+
+
         LayoutParams params = new LayoutParams(mDP2PX_first, mDP2PX_first);
         addView(mButton, params);
         //为Button设置监听和动画

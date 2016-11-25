@@ -41,8 +41,8 @@
         android:src="@drawable/selector_main_my"/>
 
 
-    <com.lu.beauty.tools.CryFaceView
-        android:id="@+id/product_btn_cry"
+    <com.lu.beauty.ui.CryFaceView
+        android:id="@+id/daily_item_cry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -51,14 +51,14 @@
         android:text="哭"/>
 
 
-    <com.lu.beauty.tools.SmileFaceView
+    <com.lu.beauty.ui.SmileFaceView
         android:id="@+id/daily_item_laugh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="40dp"
         android:text="笑"/>
 
     <TextView

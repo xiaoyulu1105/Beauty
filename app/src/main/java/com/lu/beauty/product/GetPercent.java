@@ -12,12 +12,12 @@ public class GetPercent {
     private static final double MAX_HEIGHT = 500; // 最高的高度,默认为500
 
     // 获取 喜欢和不喜欢的百分比
-    public static double getLikeCount(double likeNum, double uLikeNum) {
+    public static double getLikePercent(double likeNum, double uLikeNum) {
         double LikeCount = (likeNum / (likeNum + uLikeNum)) * 100;
 
         return LikeCount;
     }
-    public static double getDislikeCount(double likeNum, double uLikeNum) {
+    public static double getDislikePercent(double likeNum, double uLikeNum) {
         double noLike = (uLikeNum / (likeNum + uLikeNum)) * 100;
 
         return noLike;
