@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.lu.beauty.R;
+import com.lu.beauty.product.GetPercent;
 
 /**
  * Created by  AngleXiao on 16/11/24.
@@ -65,9 +66,8 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
 
         //TODO 需要一个工具类,dp转px
 
-
-        mMDP2PX_FIRST = DensityTool.dip2px(mContext,60);
-        mDP2PX_FINAL = DensityTool.dip2px(mContext,500);
+        mMDP2PX_FIRST = DensityTool.dip2px(mContext,45);
+        mDP2PX_FINAL = DensityTool.dip2px(mContext,150);
 
         LayoutParams layoutParams = new LayoutParams(mMDP2PX_FIRST, mMDP2PX_FIRST);
         addView(mButton, layoutParams);
