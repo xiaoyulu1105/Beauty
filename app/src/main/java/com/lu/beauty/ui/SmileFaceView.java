@@ -21,7 +21,7 @@ import com.lu.beauty.tools.DensityTool;
  * OLiGei  what is your name
  * 轻松拿下一个类 属实有牌面
  */
-
+//TODO 新建一个包 widget包里,自定义组件都放到这里面
 public class SmileFaceView extends RelativeLayout implements View.OnClickListener {
 
     private Context mContext;
