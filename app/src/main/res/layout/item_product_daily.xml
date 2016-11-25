@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="400dp">
+    android:layout_height="400dp"
+    android:background="#1f1f1f">
 
 
         <ImageView
@@ -9,19 +10,12 @@
             android:layout_width="match_parent"
             android:layout_height="320dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="aaaaaaaaaaa"
-            android:layout_alignBottom="@+id/daily_item_img"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="38dp"
-            android:id="@+id/daily_item_title" />
 
     <TextView
             android:layout_width="180dp"
             android:layout_height="18dp"
             android:text="namaaaaaaaa"
+            android:textColor="#a5a5a5"
             android:id="@+id/daily_item_name"
             android:layout_marginStart="12dp"
             android:layout_alignTop="@+id/daily_item_user_icon"
@@ -30,6 +24,7 @@
         <TextView
             android:id="@+id/daily_item_label"
             android:layout_width="180dp"
+            android:textColor="#a5a5a5"
             android:layout_height="18dp"
             android:text="labellllllllllll"
             android:layout_alignBottom="@+id/daily_item_user_icon"
@@ -62,6 +57,22 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="12dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:paddingRight="10dp"
+        android:alpha="0.8"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/shape_text_view"
+        android:textColor="#dadada"
+        android:layout_marginBottom="18dp"
+        android:id="@+id/daily_item_title"
+        android:layout_alignBottom="@+id/daily_item_img"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

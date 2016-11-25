@@ -58,7 +58,7 @@ public class ProductVpFragment extends BaseFragment{
 
             switch (type) {
                 case 0:
-                    textView.setText("Daily");
+//                    textView.setText("Daily");
                     HttpUtil.getProduckDailyBean(new ResponseCallBack<ProductDailyBean>() {
                         @Override
                         public void onResponse(ProductDailyBean productDailyBean) {
