@@ -1,2 +1,4 @@
 
 tools 包用于存放工具类的文件
+DensityTool是dp和px 的转换工具类
+
