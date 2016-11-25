@@ -2,6 +2,7 @@ package com.lu.beauty.tools;
 
 /**
  * Created by XiaoyuLu on 16/11/22.
+ * TODO 放到internet 包里
  */
 
 public class UrlValues {
