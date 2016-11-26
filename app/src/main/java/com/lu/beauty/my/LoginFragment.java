@@ -1,5 +1,6 @@
 package com.lu.beauty.my;
 
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,16 +18,17 @@ import com.lu.beauty.base.BaseFragment;
  * 轻松拿下一个类 属实有牌面
  */
 
-public class LoginFragment  extends BaseFragment implements LoginContract.View, View.OnClickListener {
+public class LoginFragment extends BaseFragment implements LoginContract.View, View.OnClickListener {
     private LoginContract.Presenter mPresenter;
     private ProgressDialog progressDialog;
     private EditText mEtId;
     private EditText mEtPsw;
     private Button mBtnLogin;
+    private Button mBtnBack;
 
     @Override
     protected int getLayout() {
-       return R.layout.item_login;
+        return R.layout.item_login;
     }
 
     @Override
@@ -34,13 +36,24 @@ public class LoginFragment  extends BaseFragment implements LoginContract.View, 
         mEtId = bindView(R.id.et_login_id);
         mEtPsw = bindView(R.id.et_login_password);
         mBtnLogin = bindView(R.id.btn_login_login);
-       setClick(this,mBtnLogin);
+        mBtnBack = bindView(R.id.btn_login_back);
+        setClick(this, mBtnLogin, mBtnBack);
     }
+
     @Override
     public void onClick(View v) {
-        String etId = mEtId.getText().toString();
-        String etPsw = mEtPsw.getText().toString();
-        mPresenter.login(etId,etPsw);
+        switch (v.getId()) {
+            case R.id.btn_login_login:
+                String etId = mEtId.getText().toString();
+                String etPsw = mEtPsw.getText().toString();
+                mPresenter.login(etId, etPsw);
+                break;
+            case R.id.btn_login_back:
+                
+                break;
+        }
+
+
     }
 
     @Override
@@ -84,6 +97,7 @@ public class LoginFragment  extends BaseFragment implements LoginContract.View, 
     public void loginSuccess() {
         progressDialog.dismiss();
         Toast.makeText(getActivity(), "登录成功", Toast.LENGTH_SHORT).show();
+
 
     }
 

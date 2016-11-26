@@ -1,12 +1,12 @@
 package com.lu.beauty.my;
 
 /**
- * Created by  AngleXiao on 16/11/25.
+ * Created by  AngleXiao on 16/11/26.
  * OLiGei  what is your name
  * 轻松拿下一个类 属实有牌面
  */
 
-interface LoginContract {
+public interface LoginContract {
 
     interface View {
         /**
@@ -93,9 +93,6 @@ interface LoginContract {
 
 
     }
-
-
-
 
 
 

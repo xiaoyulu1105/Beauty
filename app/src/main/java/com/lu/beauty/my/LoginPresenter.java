@@ -51,6 +51,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void loginSuccess() {
         mView.loginSuccess();
+
     }
 
     /**

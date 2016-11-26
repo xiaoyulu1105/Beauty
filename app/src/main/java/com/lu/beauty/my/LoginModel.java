@@ -2,6 +2,7 @@ package com.lu.beauty.my;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
@@ -51,69 +52,28 @@ public class LoginModel implements LoginContract.Model {
     public void login(final String userName, final String psw) {
 
 
+        Log.d("LoginModel", Thread.currentThread().getName());
         BmobUser bmobUser = new BmobUser();
         bmobUser.setUsername(userName);
         bmobUser.setPassword(psw);
+        Log.d("LoginModel", "bmobUser:" + bmobUser.getUsername());
 
         bmobUser.login(new SaveListener<BmobUser>() {
             @Override
             public void done(BmobUser bmobUser, BmobException e) {
-//                if (userName.equals("") || psw.equals("")) {
-//                    Toast.makeText(mContext, "请注册", Toast.LENGTH_SHORT).show();
-//                } else {
 
-                    if (e == null) {
-                        Log.d("LoginModel", "ddd");
+                if (e == null) {
+                    Log.d("LoginModel", "ddd");
                     mPresenter.loginSuccess();
 
-//                    CountDownTimer timer = new CountDownTimer(1000, 1000) {
-//                        @Override
-//                        public void onTick(long millisUntilFinished) {
-//
-//                        }
-//                        @Override
-//                        public void onFinish() {
-//
-//                        }
-//                    };
-//                    timer.start();
+                } else {
+                    mPresenter.loginError(e);
 
-                    } else {
-                      mPresenter.loginError(e);
-//                    }
                 }
             }
         });
 
-
-//         new Thread(new Runnable() {
-//             @Override
-//             public void run() {
-//                 try {
-//                     Thread.sleep(3000);
-//                     if ("111111".equals(userName)&&"222222".equals(psw)){
-//                         mHandler.post(new Runnable() {
-//                             @Override
-//                             public void run() {
-//                                 mPresenter.loginSuccess();
-//
-//                             }
-//                         });
-//                     }else {
-//                         final Exception exception = new Exception("用户名/密码错误");
-//                         mHandler.post(new Runnable() {
-//                             @Override
-//                             public void run() {
-//                                 mPresenter.loginError(exception);
-//
-//                             }
-//                         });
-//                     }
-//                 } catch (InterruptedException e) {
-//                     e.printStackTrace();
-//                 }
-//             }
-//         }).start();
-
     }
+
+
 }

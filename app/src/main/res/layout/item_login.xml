@@ -9,12 +9,12 @@
         android:layout_weight="1"
         android:orientation="horizontal"
         >
-        <!--<Button-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:background="@mipmap/ic_back_dark"-->
-            <!--android:id="@+id/btn_enter_back"-->
-            <!--/>-->
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@mipmap/ic_back_dark"
+            android:id="@+id/btn_login_back"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
