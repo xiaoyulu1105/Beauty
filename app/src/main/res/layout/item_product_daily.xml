@@ -39,28 +39,6 @@
         android:layout_marginBottom="18dp"
         android:layout_marginStart="15dp"
         android:src="@drawable/selector_main_my"/>
-
-
-    <com.lu.beauty.tools.CryFaceView
-        android:id="@+id/product_btn_cry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:layout_toEndOf="@+id/daily_item_name"
-        android:text="哭"/>
-
-
-    <com.lu.beauty.tools.SmileFaceView
-        android:id="@+id/daily_item_laugh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:text="笑"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,6 +55,59 @@
         android:layout_alignBottom="@+id/daily_item_img"
         android:text="title00000000"
         android:layout_centerHorizontal="true" />
+
+
+    <com.lu.beauty.ui.CryFaceView
+        android:id="@+id/daily_item_cry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@+id/daily_item_name"
+        android:text="哭"/>
+
+
+    <com.lu.beauty.ui.SmileFaceView
+        android:id="@+id/daily_item_laugh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="40dp"
+        android:text="笑"/>
+
+    <TextView
+        android:id="@+id/daily_item_dislike_percent_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:maxEms="2"
+        android:hint="dislike"
+        android:layout_above="@id/daily_item_cry"
+        android:layout_toEndOf="@+id/daily_item_name"
+        android:layout_marginBottom="5dp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:id="@+id/daily_item_like_percent_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:maxEms="2"
+        android:hint="like"
+        android:layout_above="@id/daily_item_laugh"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:visibility="invisible"
+        />
+
+
 
 
 </RelativeLayout>
