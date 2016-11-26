@@ -1,4 +1,4 @@
-package com.lu.beauty.tools;
+package com.lu.beauty.internet;
 
 /**
  * Created by XiaoyuLu on 16/11/22.
