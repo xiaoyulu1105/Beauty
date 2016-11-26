@@ -43,11 +43,11 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
 
 
 
-    public int getTempHeight() {
+    private int getTempHeight() {
         return tempHeight;
     }
 
-    public void setTempHeight(int tempHeight) {
+    private void setTempHeight(int tempHeight) {
 
         this.tempHeight = tempHeight;
 
