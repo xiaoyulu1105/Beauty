@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:background="#414141"
+        android:id="@+id/product_head_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TODAY"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="#00cfd6"/>
+
+</LinearLayout>

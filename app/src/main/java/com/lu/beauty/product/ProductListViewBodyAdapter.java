@@ -8,23 +8,22 @@ import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.bean.ProductDailyBean;
 
-import java.util.ArrayList;
-
 /**
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
  */
 
-public class ProductListViewAdapter extends BaseAdapter{
-    ProductDailyBean bean;
+public class ProductListViewBodyAdapter extends BaseAdapter{
+    private ProductDailyBean bean;
 
     public void setBean(ProductDailyBean bean) {
         this.bean = bean;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return bean.getData().getProducts().size();
+        return bean.getData().getProducts() == null ? 0 : bean.getData().getProducts().size();
     }
 
     @Override
@@ -40,7 +39,8 @@ public class ProductListViewAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        CommonViewHolder viewHolder = CommonViewHolder.getViewHolder(convertView, parent, R.layout.item_product_daily);
+        CommonViewHolder viewHolder = CommonViewHolder.getViewHolder(convertView, parent, R.layout.item_product_body);
+
         viewHolder.setText(R.id.daily_item_title, bean.getData().getProducts().get(position).getName())
                 .setText(R.id.daily_item_name, bean.getData().getProducts().get(position).getDesigner().getName())
                 .setText(R.id.daily_item_label, bean.getData().getProducts().get(position).getDesigner().getLabel())
@@ -48,9 +48,6 @@ public class ProductListViewAdapter extends BaseAdapter{
                         .get(position).getCover_images().get(0), parent.getContext())
                 .setCircleImage(R.id.daily_item_user_icon, bean.getData()
                         .getProducts().get(position).getDesigner().getAvatar_url(), parent.getContext());
-
-
         return viewHolder.getItemView();
     }
-
 }
