@@ -9,6 +9,7 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -79,12 +80,22 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
     public static CommonViewHolder getViewHolder(ViewGroup parent, int itemId) {
         return getViewHolder(null, parent, itemId);
     }
+    // 给头布局使用的方法
+    public static CommonViewHolder getHeadViewHolder(View view){
+        return new CommonViewHolder(view);
+    }
 
     /*********ViewHolder 设置数据的方法***********/
     // 设置文字
     public CommonViewHolder setText(int id, String text) {
         TextView textView = getView(id);
         textView.setText(text);
+        return this;
+    }
+
+    public CommonViewHolder setButtonText(int id,String text){
+        Button btn = getView(id);
+        btn.setText(text);
         return this;
     }
 
@@ -95,7 +106,7 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
     }
 
     // 获取圆形图片
-    public CommonViewHolder setCircleImage(int id, String url, Context context){
+    public CommonViewHolder setCircleImage(int id, String url){
         final ImageView imageView = getView(id);
         Glide.with(mContext).load(url).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
@@ -109,7 +120,7 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
     }
 
 
-    public CommonViewHolder setImage(int id, String url, Context context){
+    public CommonViewHolder setImage(int id, String url){
         ImageView imageView = getView(id);
         // 网络请求图片
         Glide.with(mContext).load(url).into(imageView);

@@ -1,0 +1,37 @@
+package com.lu.beauty.designer;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
+
+import com.lu.beauty.R;
+import com.lu.beauty.base.CommonViewHolder;
+import com.lu.beauty.bean.DesignerRecommendBean;
+
+import java.util.ArrayList;
+
+/**
+ * Created by GuoXuanYu on 16/11/26.
+ */
+
+public class HeadItemAdapter extends RecyclerView.Adapter<CommonViewHolder> {
+    private ArrayList<DesignerRecommendBean.DataBean.CategoriesBeanX> arrayList;
+
+    public void setArrayList(ArrayList<DesignerRecommendBean.DataBean.CategoriesBeanX> arrayList) {
+        this.arrayList = arrayList;
+    }
+
+    @Override
+    public CommonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return CommonViewHolder.getViewHolder(parent, R.layout.designer_header_item);
+    }
+
+    @Override
+    public void onBindViewHolder(CommonViewHolder holder, int position) {
+        holder.setButtonText(R.id.designer_header_itembtn,arrayList.get(position).getName());
+    }
+
+    @Override
+    public int getItemCount() {
+        return arrayList == null ? 0 :arrayList.size();
+    }
+}

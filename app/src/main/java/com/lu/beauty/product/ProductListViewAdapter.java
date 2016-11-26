@@ -45,9 +45,9 @@ public class ProductListViewAdapter extends BaseAdapter{
                 .setText(R.id.daily_item_name, bean.getData().getProducts().get(position).getDesigner().getName())
                 .setText(R.id.daily_item_label, bean.getData().getProducts().get(position).getDesigner().getLabel())
                 .setImage(R.id.daily_item_img, bean.getData().getProducts()
-                        .get(position).getCover_images().get(0), parent.getContext())
+                        .get(position).getCover_images().get(0))
                 .setCircleImage(R.id.daily_item_user_icon, bean.getData()
-                        .getProducts().get(position).getDesigner().getAvatar_url(), parent.getContext());
+                        .getProducts().get(position).getDesigner().getAvatar_url());
 
 
         return viewHolder.getItemView();
