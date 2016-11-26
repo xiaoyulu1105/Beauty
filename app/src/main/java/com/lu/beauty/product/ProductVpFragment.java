@@ -3,6 +3,7 @@ package com.lu.beauty.product;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,8 +25,6 @@ public class ProductVpFragment extends BaseFragment{
     private TextView textView;
     private ListView productLv;
     private ProductListViewAdapter adapter;
-    private ArrayList<ProductDailyBean> dailyBeen;
-
 
     public static Fragment getInstance(int position) {
         ProductVpFragment vpFragment = new ProductVpFragment();
@@ -49,7 +48,6 @@ public class ProductVpFragment extends BaseFragment{
     @Override
     protected void initData() {
         adapter = new ProductListViewAdapter();
-        dailyBeen = new ArrayList<>();
     }
 
     @Override
@@ -60,12 +58,11 @@ public class ProductVpFragment extends BaseFragment{
 
             switch (type) {
                 case 0:
-                    textView.setText("Daily");
+//                    textView.setText("Daily");
                     HttpUtil.getProduckDailyBean(new ResponseCallBack<ProductDailyBean>() {
                         @Override
                         public void onResponse(ProductDailyBean productDailyBean) {
-                            dailyBeen.add(productDailyBean);
-                            adapter.setArrayList(dailyBeen);
+                            adapter.setBean(productDailyBean);
                             productLv.setAdapter(adapter);
                         }
 

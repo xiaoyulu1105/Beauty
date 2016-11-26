@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
-import com.lu.beauty.tools.CircleByZYXDrawable;
+import com.lu.beauty.tools.CircleDrawable;
 
 /**
  * Created by XiaoyuLu on 16/11/23.
@@ -37,7 +37,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_mine_portrait);
 
-        CircleByZYXDrawable circleByZYXDrawable = new CircleByZYXDrawable(bitmap);
+        CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
 
         ivHeadIcon.setImageDrawable(circleByZYXDrawable);
       setClick(this,mBtnLogin);
