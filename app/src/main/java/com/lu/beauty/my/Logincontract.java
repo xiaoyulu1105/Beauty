@@ -6,7 +6,7 @@ package com.lu.beauty.my;
  * 轻松拿下一个类 属实有牌面
  */
 
-public interface LoginContract {
+interface LoginContract {
 
     interface View {
         /**

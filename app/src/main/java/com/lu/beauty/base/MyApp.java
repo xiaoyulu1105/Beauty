@@ -3,6 +3,8 @@ package com.lu.beauty.base;
 import android.app.Application;
 import android.content.Context;
 
+import cn.bmob.v3.Bmob;
+
 /**
  * Created by XiaoyuLu on 16/11/25.
  */
@@ -15,6 +17,10 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         sContext = this;
+        //注册Bmob
+    Bmob.initialize(this, "3256dd5402217b9c2ffa7179fd939dc9");
+     //   Bmob.initialize(this,"a35a84d79394af8be41cdc009fd76225");
+
     }
 
     public static Context getContext(){

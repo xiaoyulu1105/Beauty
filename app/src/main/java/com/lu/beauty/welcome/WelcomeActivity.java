@@ -23,9 +23,8 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-       // Bmob.initialize(this, "3256dd5402217b9c2ffa7179fd939dc9");
-       Bmob.initialize(this,"a35a84d79394af8be41cdc009fd76225");
-    }
+
+}
 
     @Override
     protected void initData() {

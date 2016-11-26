@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
 import cn.bmob.v3.BmobUser;
@@ -49,6 +50,7 @@ public class LoginModel implements LoginContract.Model {
     @Override
     public void login(final String userName, final String psw) {
 
+
         BmobUser bmobUser = new BmobUser();
         bmobUser.setUsername(userName);
         bmobUser.setPassword(psw);
@@ -56,23 +58,29 @@ public class LoginModel implements LoginContract.Model {
         bmobUser.login(new SaveListener<BmobUser>() {
             @Override
             public void done(BmobUser bmobUser, BmobException e) {
-                if (e == null) {
+//                if (userName.equals("") || psw.equals("")) {
+//                    Toast.makeText(mContext, "请注册", Toast.LENGTH_SHORT).show();
+//                } else {
+
+                    if (e == null) {
+                        Log.d("LoginModel", "ddd");
                     mPresenter.loginSuccess();
 
-                    CountDownTimer timer = new CountDownTimer(1000, 1000) {
-                        @Override
-                        public void onTick(long millisUntilFinished) {
+//                    CountDownTimer timer = new CountDownTimer(1000, 1000) {
+//                        @Override
+//                        public void onTick(long millisUntilFinished) {
+//
+//                        }
+//                        @Override
+//                        public void onFinish() {
+//
+//                        }
+//                    };
+//                    timer.start();
 
-                        }
-                        @Override
-                        public void onFinish() {
-
-                        }
-                    };
-                    timer.start();
-
-                } else {
-                    mPresenter.loginError(e);
+                    } else {
+                      mPresenter.loginError(e);
+//                    }
                 }
             }
         });

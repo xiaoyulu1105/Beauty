@@ -1,14 +1,11 @@
 package com.lu.beauty.my;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
@@ -21,6 +18,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
 
     private Button mBtnLogin;
+    private Button mBtnSet;
 
 
     @Override
@@ -30,7 +28,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initView() {
-        mBtnLogin = bindView(R.id.btn_login);
+        mBtnLogin = bindView(R.id.btn_my_login);
+        mBtnSet = bindView(R.id.btn_my_set);
 
 //设置圆形头像
         ImageView ivHeadIcon = bindView(R.id.iv_head_icon);
@@ -40,7 +39,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
 
         ivHeadIcon.setImageDrawable(circleByZYXDrawable);
-      setClick(this,mBtnLogin);
+      setClick(this,mBtnLogin,mBtnSet);
 
     }
 
@@ -54,7 +53,16 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getActivity(),LoginActivity.class);
-        startActivity(intent);
+        switch (v.getId()){
+            case R.id.btn_my_login:
+            Intent intent = new Intent(getActivity(),LoginActivity.class);
+            startActivity(intent);
+                break;
+            case R.id.btn_my_set:
+                Intent intent1 = new Intent(getActivity(),SetActivity.class);
+                startActivity(intent1);
+                break;
+
+        }
     }
 }
