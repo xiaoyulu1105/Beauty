@@ -2,13 +2,12 @@ package com.lu.beauty.base;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,10 +28,12 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
     private SparseArray<View> views;
     private View itemView; // 行布局
     private RecyclerView recyclerView;
+    private Context mContext;
 
     public CommonViewHolder(View itemView) {
         super(itemView);
         this.itemView = itemView;
+        this.mContext = itemView.getContext();
         views = new SparseArray<>();
     }
 
@@ -77,12 +78,22 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
     public static CommonViewHolder getViewHolder(ViewGroup parent, int itemId) {
         return getViewHolder(null, parent, itemId);
     }
+    // 给头布局使用的方法
+    public static CommonViewHolder getHeadViewHolder(View view){
+        return new CommonViewHolder(view);
+    }
 
     /*********ViewHolder 设置数据的方法***********/
     // 设置文字
     public CommonViewHolder setText(int id, String text) {
         TextView textView = getView(id);
         textView.setText(text);
+        return this;
+    }
+
+    public CommonViewHolder setButtonText(int id,String text){
+        Button btn = getView(id);
+        btn.setText(text);
         return this;
     }
 
@@ -93,9 +104,9 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
     }
 
     // 获取圆形图片
-    public CommonViewHolder setCircleImage(int id, String url, Context context){
+    public CommonViewHolder setCircleImage(int id, String url){
         final ImageView imageView = getView(id);
-        Glide.with(context).load(url).asBitmap().into(new SimpleTarget<Bitmap>() {
+        Glide.with(mContext).load(url).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 CircleDrawable drawable = new CircleDrawable(resource);
@@ -107,11 +118,11 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
     }
 
 
-    public CommonViewHolder setImage(int id, String url, Context context){
+    public CommonViewHolder setImage(int id, String url){
         ImageView imageView = getView(id);
         // 网络请求图片
-        Glide.with(context).load(url).into(imageView);
-        Glide.with(context)
+        Glide.with(mContext).load(url).into(imageView);
+        Glide.with(mContext)
                 .load(url)
                 .centerCrop()
                 .placeholder(R.mipmap.loading)

@@ -10,37 +10,49 @@ import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 
 /**
- * 显示圆形图片的Drawable
+ * Created by  AngleXiao on 16/11/24.
+ * OLiGei  what is your name
+ * 轻松拿下一个类 属实有牌面
+ * 画圆
  */
-public class CircleDrawable extends Drawable {
-    private Bitmap bitmap;// 原始图片
-    private Paint paint;// 画笔
-    private int r;// 半径
+
+public class CircleDrawable extends Drawable{
+
+    private Bitmap mBitmap;
+    private Paint mPaint;
+    private int r;
 
 
     public CircleDrawable(Bitmap bitmap) {
-        this.bitmap = bitmap;
-        paint = new Paint();
-        paint.setAntiAlias(true);// 抗锯齿
-        BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);// 图片重复时使用的模式
-        paint.setShader(shader);// 设置画笔的花纹
-        // 计算出半径
-        r = Math.min(bitmap.getHeight() / 2 , bitmap.getWidth() / 2);
+        mBitmap = bitmap;
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setAntiAlias(true);//抗锯齿
+// ****着色器
+        BitmapShader shader = new BitmapShader(bitmap
+                , Shader.TileMode.CLAMP//图片重复时使用的模式
+                , Shader.TileMode.CLAMP);
+        mPaint.setShader(shader);//设置画笔的花纹
+
+        //半径
+       r = Math.min(bitmap.getHeight()/2,bitmap.getWidth()/2);
+
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, r, paint);
+        canvas.drawCircle(mBitmap.getWidth()/2,mBitmap.getHeight()/2,r,mPaint);
     }
 
     @Override
-    public void setAlpha(int i) {
-        paint.setAlpha(i);
+    public void setAlpha(int alpha) {
+     mPaint.setAntiAlias(true);
     }
 
     @Override
     public void setColorFilter(ColorFilter colorFilter) {
-        paint.setColorFilter(colorFilter);
+
+        mPaint.setColorFilter(colorFilter);
     }
 
     @Override
@@ -48,14 +60,13 @@ public class CircleDrawable extends Drawable {
         return PixelFormat.UNKNOWN;
     }
 
-    // 负责告诉Drawable它的宽高是多少
     @Override
     public int getIntrinsicHeight() {
-        return 2 * r;
+        return mBitmap.getHeight();
     }
 
     @Override
     public int getIntrinsicWidth() {
-        return 2 * r;
+        return mBitmap.getWidth();
     }
 }
