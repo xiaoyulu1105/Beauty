@@ -136,7 +136,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
     @Override
     public void loginError(String msg) {
         progressDialog.dismiss();
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"用户名/密码输入有误", Toast.LENGTH_SHORT).show();
     }
 
 

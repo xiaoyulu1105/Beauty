@@ -56,12 +56,16 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
         String id = mEtId.getText().toString();
         String psw = mEtPsw.getText().toString();
         if (id.equals("") || psw.equals("")){
-            Toast.makeText(getActivity(), "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
 
-        }else {
+        }else if (id.equals(bmobUser.getUsername())){
+            Log.d("SignInFragment", bmobUser.getUsername());
+            Toast.makeText(mContext, "用户名已经注册过", Toast.LENGTH_SHORT).show();
 
-            bmobUser.getUsername();
+        }
 
+
+        else{
 
 
             bmobUser.setUsername(id);
