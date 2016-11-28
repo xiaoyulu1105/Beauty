@@ -15,8 +15,8 @@ public class HttpUtil {
     public static void getProductTitleBean(ResponseCallBack<ProductTitleBean> responseCallBack) {
         OkHttpManager.getInstance().get(UrlValues.PRODUCT_CATEGORIES_URL, ProductTitleBean.class, responseCallBack);
     }
-    public static void getProduckDailyBean(ResponseCallBack<ProductDailyBean> responseCallBack) {
-        OkHttpManager.getInstance().get(UrlValues.PRODUCT_DAILY_URL, ProductDailyBean.class, responseCallBack);
+    public static void getProduckDailyBean(String date, ResponseCallBack<ProductDailyBean> responseCallBack) {
+        OkHttpManager.getInstance().get(UrlValues.PRODUCT_DAILY_URL + date, ProductDailyBean.class, responseCallBack);
     }
     public static void getDesignerRecommendBean(int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_RECOMMEND_URL_PAGE+page,DesignerRecommendBean.class,responseCallBack);

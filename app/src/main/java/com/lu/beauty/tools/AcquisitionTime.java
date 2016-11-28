@@ -3,6 +3,7 @@ package com.lu.beauty.tools;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * If the operation is no problem, it is written by wangqiaosheng
@@ -33,6 +34,11 @@ public class AcquisitionTime {
         int day = Integer.parseInt(dateEnglish.substring(4,6));
 
         return day;
+    }
+
+    public static Long getDate(){
+        long time = new Date().getTime();
+        return time;
     }
 
 }

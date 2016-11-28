@@ -2,7 +2,6 @@ package com.lu.beauty.internet;
 
 /**
  * Created by XiaoyuLu on 16/11/22.
- * TODO 放到internet 包里
  */
 
 public class UrlValues {
@@ -15,7 +14,7 @@ public class UrlValues {
     // 物品分类的接口
     public static final String PRODUCT_CATEGORIES_URL = "http://design.zuimeia.com/api/v1/product/categories/";
     // Daily项第一级
-    public static final String PRODUCT_DAILY_URL = "http://design.zuimeia.com/api/v1/products/daily/";
+    public static final String PRODUCT_DAILY_URL = "http://design.zuimeia.com/api/v1/products/daily/?timestamp=";
     // 普通第一级 和 第二级 接口
     public static final String PRODUCT_COMMON_URL = "http://design.zuimeia.com/api/v1/products/category/3/?page=1&page_size=30";
     public static final String PRODUCT_DETAIL_URL = "http://design.zuimeia.com/api/v1/product/1559/";
