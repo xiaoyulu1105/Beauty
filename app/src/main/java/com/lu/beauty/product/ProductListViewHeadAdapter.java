@@ -1,5 +1,6 @@
 package com.lu.beauty.product;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,6 +9,8 @@ import android.widget.ListView;
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.bean.ProductDailyBean;
+import com.lu.beauty.internet.HttpUtil;
+import com.lu.beauty.internet.ResponseCallBack;
 import com.lu.beauty.tools.AcquisitionTime;
 
 import java.util.ArrayList;
@@ -21,12 +24,14 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
  */
 
 public class ProductListViewHeadAdapter extends BaseAdapter implements StickyListHeadersAdapter{
-    private ProductDailyBean bean;
     private ArrayList<String> arrayList;
+    private ArrayList<String> dateArray;
 
     public ProductListViewHeadAdapter() {
         int day = AcquisitionTime.getDay();
+        long date = AcquisitionTime.getDate();
         arrayList = new ArrayList<>();
+        dateArray = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             if (0 == i){
                 arrayList.add("TODAY");
@@ -34,25 +39,25 @@ public class ProductListViewHeadAdapter extends BaseAdapter implements StickyLis
                 arrayList.add("YESTERDAY");
             }else {
 
-            arrayList.add(AcquisitionTime.getMouth() + day);
+                arrayList.add(AcquisitionTime.getMouth() + day);
             }
+            dateArray.add(date + "");
             day = day - 1;
+            date = date - 24 * 60 * 60 * 1000;
         }
+        Log.d("ProductListViewHead1234", "dateArray:" + dateArray);
 
     }
 
-    public void setBean(ProductDailyBean bean) {
-        this.bean = bean;
-    }
 
     @Override
     public int getCount() {
-        return bean.getData().getProducts().size();
+        return arrayList == null ? 0 : arrayList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return bean.getData().getProducts().get(position);
+        return arrayList.get(position);
     }
 
     @Override
@@ -65,13 +70,34 @@ public class ProductListViewHeadAdapter extends BaseAdapter implements StickyLis
 
         CommonViewHolder viewHolder = CommonViewHolder.getViewHolder(convertView, parent, R.layout.item_product_daily);
 
-        ListView listView = (ListView) viewHolder.getItemView().findViewById(R.id.lv_product_body);
+       ListView listView = viewHolder.getView(R.id.lv_product_body);
         ProductListViewBodyAdapter adapter = new ProductListViewBodyAdapter();
-        adapter.setBean(bean);
-        listView.setAdapter(adapter);
+        Log.d("ProductListViewHeadAdap", dateArray.get(position));
+        HttpUtil.getProduckDailyBean(dateArray.get(position), new MyListener(listView,adapter));
 
 
         return viewHolder.getItemView();
+    }
+
+    class MyListener implements ResponseCallBack<ProductDailyBean>{
+        ListView listView;
+        ProductListViewBodyAdapter adapter;
+
+        public MyListener(ListView listView, ProductListViewBodyAdapter adapter) {
+            this.listView = listView;
+            this.adapter = adapter;
+        }
+
+        @Override
+        public void onResponse(ProductDailyBean productDailyBean) {
+            adapter.setBean(productDailyBean);
+            listView.setAdapter(adapter);
+        }
+
+        @Override
+        public void onError(Exception e) {
+            Log.d("ProductListViewHeadAdap", "网络请求失败");
+        }
     }
 
     @Override

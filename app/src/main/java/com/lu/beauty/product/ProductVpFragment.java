@@ -1,7 +1,6 @@
 package com.lu.beauty.product;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
@@ -22,7 +21,7 @@ public class ProductVpFragment extends BaseFragment{
     private static final String KEY = "position";
     private TextView textView;
     private StickyListHeadersListView productLv;
-    private ProductListViewHeadAdapter adapter;
+    private ProductListViewHeadAdapter headAdapter;
 
     public static Fragment getInstance(int position) {
         ProductVpFragment vpFragment = new ProductVpFragment();
@@ -43,50 +42,19 @@ public class ProductVpFragment extends BaseFragment{
         productLv = bindView(R.id.product_list_view);
 
 
-
     }
 
     @Override
     protected void initData() {
-        adapter = new ProductListViewHeadAdapter();
-    }
-    //86400000
-    //1480003200000
 
-    //http://design.zuimeia.com/api/v1/products/likeuser/86035/?page=1&page_size=30&device_id=864895024466920
-    // &platform=android&lang=zh&appVersion=1.2.4&appVersionCode=10240&systemVersion=17
-    // &countryCode=CN&user_id=86035&token=4h8-a4e2a822e31549c512fe&package_name=com.zuiapps.zuiworld
-
-    //http://design.zuimeia.com/api/v1/products/daily/?timestamp=1479916800000&device_id=864895024466920
-    // &platform=android&lang=zh&appVersion=1.2.4&appVersionCode=10240&systemVersion=17
-    // &countryCode=CN&user_id=86035&token=4h8-a4e2a822e31549c512fe&package_name=com.zuiapps.zuiworld
-
-    //http://design.zuimeia.com/api/v1/products/daily/?timestamp=1479830400000&device_id=864895024466920
-    // &platform=android&lang=zh&appVersion=1.2.4&appVersionCode=10240&systemVersion=17
-    // &countryCode=CN&user_id=86035&token=4h8-a4e2a822e31549c512fe&package_name=com.zuiapps.zuiworld
-
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         if (getArguments() != null){
             int type = getArguments().getInt(KEY);
 
             switch (type) {
                 case 0:
 //                    textView.setText("Daily");
-                    HttpUtil.getProduckDailyBean(new ResponseCallBack<ProductDailyBean>() {
-                        @Override
-                        public void onResponse(ProductDailyBean productDailyBean) {
-                            adapter.setBean(productDailyBean);
-                            productLv.setAdapter(adapter);
-                        }
-
-                        @Override
-                        public void onError(Exception e) {
-
-                        }
-                    });
+                    headAdapter = new ProductListViewHeadAdapter();
+                    productLv.setAdapter(headAdapter);
                     break;
                 case 1:
                     textView.setText("首饰");
@@ -109,4 +77,22 @@ public class ProductVpFragment extends BaseFragment{
             }
         }
     }
+    //86400000
+    //1480003200000
+
+//    http://design.zuimeia.com/api/v1/products/likeuser/86035/?page=1&page_size=30&device_id=864895024466920
+//     &platform=android&lang=zh&appVersion=1.2.4&appVersionCode=10240&systemVersion=17
+//     &countryCode=CN&user_id=86035&token=4h8-a4e2a822e31549c512fe&package_name=com.zuiapps.zuiworld
+
+    //http://design.zuimeia.com/api/v1/products/daily/?timestamp=1479916800000&device_id=864895024466920
+    // &platform=android&lang=zh&appVersion=1.2.4&appVersionCode=10240&systemVersion=17
+    // &countryCode=CN&user_id=86035&token=4h8-a4e2a822e31549c512fe&package_name=com.zuiapps.zuiworld
+
+    //http://design.zuimeia.com/api/v1/products/daily/?timestamp=1479830400000&device_id=864895024466920
+    // &platform=android&lang=zh&appVersion=1.2.4&appVersionCode=10240&systemVersion=17
+    // &countryCode=CN&user_id=86035&token=4h8-a4e2a822e31549c512fe&package_name=com.zuiapps.zuiworld
+
+
+
+   
 }

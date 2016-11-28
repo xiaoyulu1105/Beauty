@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ProductViewPagerAdapter extends FragmentPagerAdapter{
     private SparseArray<Fragment> arrayList;
-    private ArrayList<String> s;
+    private ArrayList<String> title;
 
 
     public ProductViewPagerAdapter(FragmentManager fm) {
@@ -24,7 +24,7 @@ public class ProductViewPagerAdapter extends FragmentPagerAdapter{
     }
 
     public void setS(ArrayList<String> s) {
-        this.s = s;
+        this.title = s;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class ProductViewPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public int getCount() {
-        return s == null ? 0:s.size();
+        return title == null ? 0: title.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return s.get(position);
+        return title.get(position);
     }
 }
