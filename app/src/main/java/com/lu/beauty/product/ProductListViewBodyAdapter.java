@@ -12,21 +12,23 @@ import com.lu.beauty.bean.ProductDailyBean;
 import com.lu.beauty.ui.CryFaceView;
 import com.lu.beauty.ui.SmileFaceView;
 
+
 /**
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
  */
 
-public class ProductListViewAdapter extends BaseAdapter{
-    ProductDailyBean bean;
+public class ProductListViewBodyAdapter extends BaseAdapter{
+    private ProductDailyBean bean;
 
     public void setBean(ProductDailyBean bean) {
         this.bean = bean;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return bean.getData().getProducts().size();
+        return bean.getData().getProducts() == null ? 0 : bean.getData().getProducts().size();
     }
 
     @Override
@@ -42,7 +44,8 @@ public class ProductListViewAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        CommonViewHolder viewHolder = CommonViewHolder.getViewHolder(convertView, parent, R.layout.item_product_daily);
+        CommonViewHolder viewHolder = CommonViewHolder.getViewHolder(convertView, parent, R.layout.item_product_body);
+
         viewHolder.setText(R.id.daily_item_title, bean.getData().getProducts().get(position).getName())
                 .setText(R.id.daily_item_name, bean.getData().getProducts().get(position).getDesigner().getName())
                 .setText(R.id.daily_item_label, bean.getData().getProducts().get(position).getDesigner().getLabel())
@@ -69,11 +72,11 @@ public class ProductListViewAdapter extends BaseAdapter{
         smileFaceView.setDP2PX_FINAL((int) likeHeight);
 
         // 找到两个textView, 显示喜欢和不喜欢的百分比
-        final TextView dislikePercentTV = viewHolder.getView(R.id.daily_item_dislike_percent_tv);
-        final TextView likePercentTV = viewHolder.getView(R.id.daily_item_like_percent_tv);
+//        final TextView dislikePercentTV = viewHolder.getView(R.id.daily_item_dislike_percent_tv);
+//        final TextView likePercentTV = viewHolder.getView(R.id.daily_item_like_percent_tv);
 
-        dislikePercentTV.setText(dislikePercent + "%" + "无感");
-        likePercentTV.setText(likePercent + "%" + "喜欢");
+//        dislikePercentTV.setText(dislikePercent + "%" + "无感");
+//        likePercentTV.setText(likePercent + "%" + "喜欢");
 
         // TODO 想通过获取 动画中的布尔值, 判断TextView的显示或不显示, 未完全实现
         // 问题: ViewHolder的重用机制导致未点击的表情一样变色
@@ -95,5 +98,4 @@ public class ProductListViewAdapter extends BaseAdapter{
 
         return viewHolder.getItemView();
     }
-
 }
