@@ -104,7 +104,7 @@ public class ProductVpFragment extends BaseFragment{
     // &platform=android&lang=zh&appVersion=1.2.4&appVersionCode=10240&systemVersion=17
     // &countryCode=CN&user_id=86035&token=4h8-a4e2a822e31549c512fe&package_name=com.zuiapps.zuiworld
 
-    
+
 
    
 }
