@@ -37,8 +37,8 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     public void onBindViewHolder(CommonViewHolder holder, int position) {
         holder.setText(R.id.design_item_name,arrayList.get(position).getName());
         holder.setText(R.id.design_item_label,arrayList.get(position).getLabel());
-        holder.setCircleImage(R.id.design_item_avatar,arrayList.get(position).getAvatar_url(),context);
-        holder.setImage(R.id.design_item_images,arrayList.get(position).getRecommend_images().get(0),context);
+        holder.setCircleImage(R.id.design_item_avatar,arrayList.get(position).getAvatar_url());
+        holder.setImage(R.id.design_item_images,arrayList.get(position).getRecommend_images().get(0));
     }
 
     @Override

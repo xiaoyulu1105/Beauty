@@ -30,6 +30,12 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
+
+    compile files('libs/lite-orm-1.9.2.jar')
+    compile 'se.emilsjolander:stickylistheaders:2.7.0'
+
+
     compile 'com.android.support:recyclerview-v7:24.2.1'
     testCompile 'junit:junit:4.12'
     compile files('libs/BmobSDK_3.5.2_20161027.jar')

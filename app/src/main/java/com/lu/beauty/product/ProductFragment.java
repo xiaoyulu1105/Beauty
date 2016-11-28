@@ -39,7 +39,6 @@ public class ProductFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        Log.d("打印这个", "网络请求失败");
 
         adapter = new ProductViewPagerAdapter(getChildFragmentManager());
         productTabLayout.setupWithViewPager(productViewPager);

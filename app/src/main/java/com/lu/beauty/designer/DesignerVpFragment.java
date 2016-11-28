@@ -3,8 +3,11 @@ package com.lu.beauty.designer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TextView;
 
 import com.lu.beauty.R;
@@ -35,6 +38,11 @@ public class DesignerVpFragment extends BaseFragment{
     private int favorPage = 1;
     private String type = "";
     private EndLessOnScrollListener endLessOnScrollListener;
+    private ConmmendHeadAdapter conmmendHeadAdapter;
+    private View headView;
+    private ArrayList<DesignerRecommendBean.DataBean.CategoriesBeanX> headArrayList;
+    private HeadItemAdapter headItemAdapter;
+    private RecyclerView headItemRV;
 
     public static Fragment getInstance(int position) {
 
@@ -63,10 +71,12 @@ public class DesignerVpFragment extends BaseFragment{
         independenceArrayList = new ArrayList<>();
         masterArrayList = new ArrayList<>();
         favorArrayList = new ArrayList<>();
+        headArrayList = new ArrayList<DesignerRecommendBean.DataBean.CategoriesBeanX>();
         allAdapter = new DesignerAllAdapter(getContext());
-
+        headItemAdapter = new HeadItemAdapter();
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
+
         recyclerView.setOnScrollListener(endLessOnScrollListener = new EndLessOnScrollListener(manager) {
             @Override
             protected void onLoadMore(int curentPage) {
@@ -98,8 +108,9 @@ public class DesignerVpFragment extends BaseFragment{
                     type = "Conmmend";
                     textView.setText("推荐");
                     endLessOnScrollListener.resetPreviousTotal();
-                    setRecommendMoreRV(1);
-                    recyclerView.setAdapter(allAdapter);
+
+                    setRecommendRV(1);
+
 
                     break;
                 case 1:
@@ -126,6 +137,36 @@ public class DesignerVpFragment extends BaseFragment{
             }
         }
     }
+    public void setRecommendRV(int page){
+
+        HttpUtil.getDesignerRecommendBean(page,new ResponseCallBack<DesignerRecommendBean>() {
+            @Override
+            public void onResponse(DesignerRecommendBean designerRecommendBean) {
+                for (int i = 0; i < designerRecommendBean.getData().getDesigners().size(); i++) {
+                    recommendArrayList.add(designerRecommendBean.getData().getDesigners().get(i));
+                }
+                for (int i = 0; i < designerRecommendBean.getData().getCategories().size(); i++) {
+                    headArrayList.add(designerRecommendBean.getData().getCategories().get(i));
+                }
+                headItemAdapter.setArrayList(headArrayList);
+                allAdapter.setArrayList(recommendArrayList);
+                conmmendHeadAdapter = new ConmmendHeadAdapter(allAdapter);
+                headView = LayoutInflater.from(mContext).inflate(R.layout.activity_designer_header,null);
+                headItemRV = (RecyclerView) headView.findViewById(R.id.activity_designer_headerRV);
+                GridLayoutManager manager = new GridLayoutManager(getContext(),4);
+                headItemRV.setLayoutManager(manager);
+                headItemRV.setAdapter(headItemAdapter);
+                conmmendHeadAdapter.addHeadView(headView);
+                recyclerView.setAdapter(conmmendHeadAdapter);
+                
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+    }
     public void setRecommendMoreRV(int page){
 
         HttpUtil.getDesignerRecommendBean(page,new ResponseCallBack<DesignerRecommendBean>() {
@@ -136,6 +177,7 @@ public class DesignerVpFragment extends BaseFragment{
                 }
                 allAdapter.setArrayList(recommendArrayList);
                 allAdapter.notifyDataSetChanged();
+                conmmendHeadAdapter.notifyDataSetChanged();
             }
 
             @Override
