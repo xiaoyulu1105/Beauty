@@ -151,7 +151,7 @@ public class DesignerVpFragment extends BaseFragment{
                 headItemAdapter.setArrayList(headArrayList);
                 allAdapter.setArrayList(recommendArrayList);
                 conmmendHeadAdapter = new ConmmendHeadAdapter(allAdapter);
-                headView = LayoutInflater.from(getActivity()).inflate(R.layout.activity_designer_header,null);
+                headView = LayoutInflater.from(mContext).inflate(R.layout.activity_designer_header,null);
                 headItemRV = (RecyclerView) headView.findViewById(R.id.activity_designer_headerRV);
                 GridLayoutManager manager = new GridLayoutManager(getContext(),4);
                 headItemRV.setLayoutManager(manager);
