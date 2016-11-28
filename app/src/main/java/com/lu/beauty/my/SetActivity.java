@@ -4,11 +4,16 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -25,7 +30,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
 
 
     private LinearLayout mLlLogOut;
-    private Button mBtnBack;
+    private ImageButton mBtnBack;
 
     @Override
     protected int getLayout() {
@@ -61,17 +66,23 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        BmobUser bmobUser = BmobUser.getCurrentUser();
+        if (bmobUser != null) {
+            mLlLogOut.setVisibility(View.VISIBLE);
+
+        } else {
+            mLlLogOut.setVisibility(View.INVISIBLE);
+
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
-        BmobUser bmobUser = BmobUser.getCurrentUser();
-        if (bmobUser != null) {
-            mLlLogOut.setVisibility(View.INVISIBLE);
 
-        } else {
-            mLlLogOut.setVisibility(View.VISIBLE);
-
-        }
 
 
     }

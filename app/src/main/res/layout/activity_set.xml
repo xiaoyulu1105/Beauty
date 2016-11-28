@@ -13,7 +13,8 @@
         android:paddingRight="20dp"
         >
 
-        <Button
+        <ImageButton
+            android:layout_gravity="center"
             android:id="@+id/btn_set_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

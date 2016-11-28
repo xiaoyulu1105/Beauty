@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
 
     private Button mBtnLogin;
-    private Button mBtnSet;
+    private ImageButton mBtnSet;
     private TextView mTvName;
 
 

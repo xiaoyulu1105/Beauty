@@ -1,12 +1,18 @@
 package com.lu.beauty.my;
 
+
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lu.beauty.R;
@@ -25,6 +31,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
     private EditText mEtPsw;
     private Button mBtnLogin;
     private Button mBtnBack;
+    private TextView mTvSignIn;
 
     @Override
     protected int getLayout() {
@@ -37,7 +44,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
         mEtPsw = bindView(R.id.et_login_password);
         mBtnLogin = bindView(R.id.btn_login_login);
         mBtnBack = bindView(R.id.btn_login_back);
-        setClick(this, mBtnLogin, mBtnBack);
+        mTvSignIn = bindView(R.id.btn_login_signin);
+        setClick(this, mBtnLogin, mBtnBack, mTvSignIn);
     }
 
     @Override
@@ -49,7 +57,14 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
                 mPresenter.login(etId, etPsw);
                 break;
             case R.id.btn_login_back:
-                
+                getActivity().onBackPressed();
+                break;
+            case R.id.btn_login_signin:
+
+                FragmentManager manager = getChildFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.layout, new SignInFragment());
+                transaction.commit();
                 break;
         }
 
@@ -97,7 +112,19 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
     public void loginSuccess() {
         progressDialog.dismiss();
         Toast.makeText(getActivity(), "登录成功", Toast.LENGTH_SHORT).show();
+        CountDownTimer timer = new CountDownTimer(1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
 
+            }
+
+            @Override
+            public void onFinish() {
+                getActivity().finish();
+
+            }
+        };
+        timer.start();
 
     }
 
