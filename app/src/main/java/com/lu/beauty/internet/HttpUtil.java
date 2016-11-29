@@ -1,5 +1,6 @@
 package com.lu.beauty.internet;
 
+import com.lu.beauty.bean.ArticleBean;
 import com.lu.beauty.bean.DesignerRecommendBean;
 import com.lu.beauty.bean.ProductDailyBean;
 import com.lu.beauty.bean.ProductTitleBean;
@@ -30,4 +31,10 @@ public class HttpUtil {
     public static void getDesignerFavorBean(int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_FAVOR_URL_PAGE + page,DesignerRecommendBean.class,responseCallBack);
     }
+
+    // 获取画报的数据
+    public static void getArticleBean(int page, ResponseCallBack<ArticleBean> responseCallBack) {
+        OkHttpManager.getInstance().get(UrlValues.ARTICLE_URL + page, ArticleBean.class, responseCallBack);
+    }
+
 }

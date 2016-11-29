@@ -8,7 +8,7 @@ package com.lu.beauty.internet;
 public class UrlValues {
     // 画报 接口
     // 第一级 和 第二级 接口
-    public static final String ARTICLE_URL = "http://design.zuimeia.com/api/v1/articles/daily/simple/?page=1&page_size=30";
+    public static final String ARTICLE_URL = "http://design.zuimeia.com/api/v1/articles/daily/simple/?page_size=100&page=";
     public static final String ARTICLE_DETAIL_URL = "http://design.zuimeia.com/api/v1/article/112/";
 
     // 有物 接口
