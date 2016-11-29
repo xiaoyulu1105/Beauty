@@ -21,16 +21,25 @@ public class HttpUtil {
     public static void getProduckDailyBean(ResponseCallBack<ProductDailyBean> responseCallBack) {
         OkHttpManager.getInstance().get(UrlValues.PRODUCT_DAILY_URL, ProductDailyBean.class, responseCallBack);
     }
+    // 推荐
     public static void getDesignerRecommendBean(int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_RECOMMEND_URL_PAGE+page,DesignerRecommendBean.class,responseCallBack);
     }
+    // 独立设计师
     public static void getDesignerIndependenceBean(int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_INDEPENDENT_URL_PAGE + page,DesignerRecommendBean.class,responseCallBack);
     }
+    // 大师
     public static void getDesignerMasterBean(int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_BIG_URL_PAGE + page,DesignerRecommendBean.class,responseCallBack);
     }
+    // 喜欢
     public static void getDesignerFavorBean(int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_FAVOR_URL_PAGE + page,DesignerRecommendBean.class,responseCallBack);
+    }
+    // 头布局跳转
+    public static void getDesignerHeadBean(String type,int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
+        OkHttpManager.getInstance().get(UrlValues.DESIGNER_RECOMMEND_LEFTHEAD + type + UrlValues.DESIGNER_RECOMMEND_RIGHTHEAD + page,
+                DesignerRecommendBean.class,responseCallBack);
     }
 }

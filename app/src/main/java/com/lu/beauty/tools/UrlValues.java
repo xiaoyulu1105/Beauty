@@ -31,6 +31,9 @@ public class UrlValues {
     public static final String DESIGNER_BIG_URL_PAGE = "http://design.zuimeia.com/api/v1/designers/category/31/?page_size=30&page=";
     // 最受欢迎第一级
     public  static final String DESIGNER_FAVOR_URL_PAGE = "http://design.zuimeia.com/api/v1/designers/mostfavor/?page_size=30&page=";
+    // 推荐 第一级 点击头布局
+    public static final String DESIGNER_RECOMMEND_LEFTHEAD ="http://design.zuimeia.com/api/v1/designers/category/";
+    public static final String DESIGNER_RECOMMEND_RIGHTHEAD = "/?page_size=30&page=";
 
     // 第二级
     public static final String DESIGNER_DETAIL_URL = "http://design.zuimeia.com/api/v1/designer/145/";

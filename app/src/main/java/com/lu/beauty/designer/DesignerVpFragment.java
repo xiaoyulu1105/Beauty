@@ -1,11 +1,13 @@
 package com.lu.beauty.designer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
  */
-public class DesignerVpFragment extends BaseFragment{
+public class DesignerVpFragment extends BaseFragment implements DesignerClickListner{
     private static final String KEY = "pos";
     private TextView textView;
     private RecyclerView recyclerView;
@@ -73,7 +75,8 @@ public class DesignerVpFragment extends BaseFragment{
         favorArrayList = new ArrayList<>();
         headArrayList = new ArrayList<DesignerRecommendBean.DataBean.CategoriesBeanX>();
         allAdapter = new DesignerAllAdapter(getContext());
-        headItemAdapter = new HeadItemAdapter();
+        headItemAdapter = new HeadItemAdapter(this);
+
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
 
@@ -240,4 +243,13 @@ public class DesignerVpFragment extends BaseFragment{
     }
 
 
+    @Override
+    public void HeadItemClick(DesignerRecommendBean.DataBean.CategoriesBeanX beanX) {
+        Intent intent = new Intent(getContext(),DesignerHeadMoreActivity.class);
+        intent.putExtra("title",beanX.getName());
+        intent.putExtra("id",beanX.getId() + "");
+        Log.d("DesignerVpFragment", "beanX:" + beanX.getName());
+        Log.d("DesignerVpFragment", "beanX:" + beanX.getId());
+        startActivity(intent);
+    }
 }
