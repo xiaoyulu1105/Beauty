@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.lu.beauty.R;
-import com.lu.beauty.product.GetPercent;
 import com.lu.beauty.tools.DensityTool;
 
 /**

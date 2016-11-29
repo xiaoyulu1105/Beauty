@@ -1,4 +1,4 @@
-package com.lu.beauty.product;
+package com.lu.beauty.product.daily;
 
 import android.util.Log;
 import android.view.View;
@@ -11,10 +11,10 @@ import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.bean.ProductDailyBean;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
+import com.lu.beauty.product.daily.ProductListViewBodyAdapter;
 import com.lu.beauty.tools.AcquisitionTime;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
@@ -74,7 +74,7 @@ public class ProductListViewHeadAdapter extends BaseAdapter implements StickyLis
         ProductListViewBodyAdapter adapter = new ProductListViewBodyAdapter();
         Log.d("ProductListViewHeadAdap", dateArray.get(position));
         HttpUtil.getProduckDailyBean(dateArray.get(position), new MyListener(listView,adapter));
-
+//cfy137000
 
         return viewHolder.getItemView();
     }
