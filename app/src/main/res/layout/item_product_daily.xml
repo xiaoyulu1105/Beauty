@@ -4,12 +4,12 @@
     android:layout_height="match_parent">
 
 
-    <com.lu.beauty.product.MyListView
+    <com.lu.beauty.ui.MyListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lv_product_body">
 
 
-    </com.lu.beauty.product.MyListView>
+    </com.lu.beauty.ui.MyListView>
 
 </LinearLayout>
