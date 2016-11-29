@@ -18,18 +18,10 @@ import com.lu.beauty.R;
 public abstract class BaseFragment extends Fragment {
 
     protected Context mContext;
-<<<<<<< HEAD
-=======
     protected Bundle mSavedInstanceState;
->>>>>>> lxy
 
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-<<<<<<< HEAD
-=======
-
->>>>>>> lxy
         mContext = context;
     }
 

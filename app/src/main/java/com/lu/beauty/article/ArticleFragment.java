@@ -1,16 +1,13 @@
 package com.lu.beauty.article;
 
-<<<<<<< HEAD
 import android.support.v4.app.Fragment;
 import android.util.Log;
-=======
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Toast;
->>>>>>> lxy
 
 import com.appeaser.deckview.views.DeckChildView;
 import com.appeaser.deckview.views.DeckView;
@@ -59,9 +56,6 @@ public class ArticleFragment extends BaseFragment {
     @Override
     protected void initView() {
 
-<<<<<<< HEAD
-
-=======
         getTitles = new ArrayList<>();
         getImageUrls = new ArrayList<>();
         getIds = new ArrayList<>();
@@ -201,7 +195,6 @@ public class ArticleFragment extends BaseFragment {
         };
 
         Picasso.with(mContext).load(item.link).into(item.target);
->>>>>>> lxy
     }
 
 
@@ -210,9 +203,4 @@ public class ArticleFragment extends BaseFragment {
     }
 
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> lxy
 }
