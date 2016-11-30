@@ -39,6 +39,10 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
         holder.setText(R.id.design_item_label,arrayList.get(position).getLabel());
         holder.setCircleImage(R.id.design_item_avatar,arrayList.get(position).getAvatar_url());
         holder.setImage(R.id.design_item_images,arrayList.get(position).getRecommend_images().get(0));
+        if (arrayList.get(position).getType() == 1) {
+            holder.setTextVisibale(R.id.design_item_follow);
+            holder.setText(R.id.design_item_follow, arrayList.get(position).getFollow_num() + " 关注");
+        }
     }
 
     @Override

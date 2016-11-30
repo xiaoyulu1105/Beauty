@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lu.beauty.R;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
  */
 public class DesignerVpFragment extends BaseFragment implements DesignerClickListner{
     private static final String KEY = "pos";
-    private TextView textView;
+//    private TextView textView;
     private RecyclerView recyclerView;
     private DesignerAllAdapter allAdapter;
     private ArrayList<DesignerRecommendBean.DataBean.DesignersBean> recommendArrayList;
@@ -45,6 +47,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
     private ArrayList<DesignerRecommendBean.DataBean.CategoriesBeanX> headArrayList;
     private HeadItemAdapter headItemAdapter;
     private RecyclerView headItemRV;
+    private RelativeLayout pop;
 
     public static Fragment getInstance(int position) {
 
@@ -63,7 +66,8 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
     @Override
     protected void initView() {
 
-        textView = bindView(R.id.designer_tv);
+        pop = bindView(R.id.designer_pop);
+//        textView = bindView(R.id.designer_tv);
         recyclerView = bindView(R.id.designer_recyler);
     }
 
@@ -109,7 +113,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
             switch (getArguments().getInt(KEY)){
                 case 0:
                     type = "Conmmend";
-                    textView.setText("推荐");
+//                    textView.setText("推荐");
                     endLessOnScrollListener.resetPreviousTotal();
 
                     setRecommendRV(1);
@@ -117,22 +121,23 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
 
                     break;
                 case 1:
-                    textView.setText("最受欢迎");
+//                    textView.setText("最受欢迎");
                     type = "Favor";
                     endLessOnScrollListener.resetPreviousTotal();
                     setFavorMoreRV(1);
                     recyclerView.setAdapter(allAdapter);
                     break;
                 case 2:
+                    pop.setVisibility(View.VISIBLE);
                     type = "Independence";
-                    textView.setText("独立设计师");
+//                    textView.setText("独立设计师");
                     endLessOnScrollListener.resetPreviousTotal();
                     setIndependenceMoreRV(1);
                     recyclerView.setAdapter(allAdapter);
                     break;
                 case 3:
                     type = "Master";
-                    textView.setText("大牌设计师");
+//                    textView.setText("大牌设计师");
                     endLessOnScrollListener.resetPreviousTotal();
                     setMasterMoreRV(1);
                     recyclerView.setAdapter(allAdapter);
@@ -170,6 +175,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
             }
         });
     }
+    // 推荐
     public void setRecommendMoreRV(int page){
 
         HttpUtil.getDesignerRecommendBean(page,new ResponseCallBack<DesignerRecommendBean>() {
@@ -189,6 +195,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
             }
         });
     }
+    // 独立设计师
     public void setIndependenceMoreRV(int page){
         HttpUtil.getDesignerIndependenceBean(page, new ResponseCallBack<DesignerRecommendBean>() {
             @Override
@@ -206,6 +213,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
             }
         });
     }
+    // 大牌设计师
     public void setMasterMoreRV(int page){
         HttpUtil.getDesignerMasterBean(page, new ResponseCallBack<DesignerRecommendBean>() {
             @Override
@@ -224,12 +232,15 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
         });
     }
 
+    // 最喜欢的
     public void setFavorMoreRV(int page){
         HttpUtil.getDesignerFavorBean(page, new ResponseCallBack<DesignerRecommendBean>() {
             @Override
             public void onResponse(DesignerRecommendBean designerRecommendBean) {
                 for (int i = 0; i < designerRecommendBean.getData().getDesigners().size(); i++) {
-                    favorArrayList.add(designerRecommendBean.getData().getDesigners().get(i));
+                    DesignerRecommendBean.DataBean.DesignersBean bean = designerRecommendBean.getData().getDesigners().get(i);
+                    bean.setType(1);
+                    favorArrayList.add(bean);
                 }
                 allAdapter.setArrayList(favorArrayList);
                 allAdapter.notifyDataSetChanged();
@@ -251,5 +262,9 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
         Log.d("DesignerVpFragment", "beanX:" + beanX.getName());
         Log.d("DesignerVpFragment", "beanX:" + beanX.getId());
         startActivity(intent);
+    }
+
+    public void PopWindow(){
+//        View view = LayoutInflater.from(getContext()).inflate(R.layout.)
     }
 }

@@ -13,6 +13,18 @@
         android:id="@+id/design_item_images"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:alpha="0.7"
+        android:padding="5dp"
+        android:id="@+id/design_item_follow"
+        android:visibility="gone"
+        />
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"

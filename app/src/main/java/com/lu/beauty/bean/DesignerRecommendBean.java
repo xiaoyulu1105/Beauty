@@ -89,6 +89,15 @@ public class DesignerRecommendBean {
             private int id;
             private List<String> recommend_images;
             private List<CategoriesBean> categories;
+            private int type;
+
+            public int getType() {
+                return type;
+            }
+
+            public void setType(int type) {
+                this.type = type;
+            }
 
             public int getFollow_num() {
                 return follow_num;

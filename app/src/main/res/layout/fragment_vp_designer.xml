@@ -4,11 +4,31 @@
     android:layout_height="match_parent"
     android:background="#000000"
     >
-
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/designer_tv"/>
+        android:orientation="horizontal"
+        android:background="#2C2C2C"
+        android:id="@+id/designer_pop"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+            android:padding="10dp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/icon_category_unfold"
+            android:paddingTop="15dp"
+            android:paddingRight="10dp"
+            />
+    </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

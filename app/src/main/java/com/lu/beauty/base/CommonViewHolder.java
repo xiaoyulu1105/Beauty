@@ -144,6 +144,12 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
         return this;
     }
 
+    public CommonViewHolder setTextVisibale(int id){
+        TextView textView = getView(id);
+        textView.setVisibility(View.VISIBLE); // 设置为可见
+        return this;
+    }
+
 //    public void setBanner(int sale_rv_banner, int center, int i, int circleIndicator, List<String> imgUrls) {
 //
 //        Banner banner = getView(sale_rv_banner);
