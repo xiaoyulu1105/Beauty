@@ -70,11 +70,10 @@ public class ProductListViewHeadAdapter extends BaseAdapter implements StickyLis
 
         CommonViewHolder viewHolder = CommonViewHolder.getViewHolder(convertView, parent, R.layout.item_product_daily);
 
-       ListView listView = viewHolder.getView(R.id.lv_product_body);
+        ListView listView = viewHolder.getView(R.id.lv_product_body);
         ProductListViewBodyAdapter adapter = new ProductListViewBodyAdapter();
         Log.d("ProductListViewHeadAdap", dateArray.get(position));
         HttpUtil.getProduckDailyBean(dateArray.get(position), new MyListener(listView,adapter));
-//cfy137000
 
         return viewHolder.getItemView();
     }

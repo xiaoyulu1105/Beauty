@@ -27,7 +27,13 @@ public class ProductListViewBodyAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return bean.getData().getProducts() == null ? 0 : bean.getData().getProducts().size();
+        int count = 0;
+        try{
+            count = bean.getData().getProducts().size();
+        }catch(Exception e){
+            count = 0;
+        }
+        return 0;
     }
 
     @Override
