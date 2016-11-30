@@ -8,7 +8,8 @@ public class UrlValues {
     // 画报 接口
     // 第一级 和 第二级 接口
     public static final String ARTICLE_URL = "http://design.zuimeia.com/api/v1/articles/daily/simple/?page_size=100&page=";
-    public static final String ARTICLE_DETAIL_URL = "http://design.zuimeia.com/api/v1/article/112/";
+    public static final String ARTICLE_DETAIL_URL = "http://design.zuimeia.com/api/v1/article/";
+    public static final String ARTICLE_DETAIL_EXAMPLE_URL = "http://design.zuimeia.com/api/v1/article/117/";
 
     // 有物 接口
     // 物品分类的接口

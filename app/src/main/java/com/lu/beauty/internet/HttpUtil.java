@@ -1,6 +1,7 @@
 package com.lu.beauty.internet;
 
 import com.lu.beauty.bean.ArticleBean;
+import com.lu.beauty.bean.ArticleDetailBean;
 import com.lu.beauty.bean.DesignerRecommendBean;
 import com.lu.beauty.bean.ProductCommonBean;
 import com.lu.beauty.bean.ProductDailyBean;
@@ -39,9 +40,13 @@ public class HttpUtil {
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_FAVOR_URL_PAGE + page,DesignerRecommendBean.class,responseCallBack);
     }
 
-    // 获取画报的数据
+    // 获取画报的第一级数据
     public static void getArticleBean(int page, ResponseCallBack<ArticleBean> responseCallBack) {
         OkHttpManager.getInstance().get(UrlValues.ARTICLE_URL + page, ArticleBean.class, responseCallBack);
+    }
+    // 获取画报的第二级数据
+    public static void getArticleDetailBean(int id, ResponseCallBack<ArticleDetailBean> responseCallBack) {
+        OkHttpManager.getInstance().get(UrlValues.ARTICLE_DETAIL_URL + id + "/", ArticleDetailBean.class, responseCallBack);
     }
 
 }
