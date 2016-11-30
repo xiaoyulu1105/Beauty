@@ -22,20 +22,27 @@ public class HttpUtil {
     public static void getProduckDailyBean(String date, ResponseCallBack<ProductDailyBean> responseCallBack) {
         OkHttpManager.getInstance().get(UrlValues.PRODUCT_DAILY_URL + date, ProductDailyBean.class, responseCallBack);
     }
+
+
+
     // 网络请求获取有物页通用数据 by wqs
     public static void getProduckCommonBean(String num,int page, ResponseCallBack<ProductCommonBean> responseCallBack) {
         OkHttpManager.getInstance().get(UrlValues.PRODUCT_COMMON_URL_START + num + UrlValues.PRODUCT_COMMON_URL_CENTER
                 + page + UrlValues.PRODUCT_COMMON_URL_END, ProductCommonBean.class, responseCallBack);
     }
+    // 推荐
     public static void getDesignerRecommendBean(int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_RECOMMEND_URL_PAGE+page,DesignerRecommendBean.class,responseCallBack);
     }
+    // 独立设计师
     public static void getDesignerIndependenceBean(int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_INDEPENDENT_URL_PAGE + page,DesignerRecommendBean.class,responseCallBack);
     }
+    // 大师
     public static void getDesignerMasterBean(int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_BIG_URL_PAGE + page,DesignerRecommendBean.class,responseCallBack);
     }
+    // 喜欢
     public static void getDesignerFavorBean(int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_FAVOR_URL_PAGE + page,DesignerRecommendBean.class,responseCallBack);
     }
@@ -47,6 +54,13 @@ public class HttpUtil {
     // 获取画报的第二级数据
     public static void getArticleDetailBean(int id, ResponseCallBack<ArticleDetailBean> responseCallBack) {
         OkHttpManager.getInstance().get(UrlValues.ARTICLE_DETAIL_URL + id + "/", ArticleDetailBean.class, responseCallBack);
+    }
+
+
+    // 头布局跳转
+    public static void getDesignerHeadBean(String type,int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
+        OkHttpManager.getInstance().get(UrlValues.DESIGNER_RECOMMEND_LEFTHEAD + type + UrlValues.DESIGNER_RECOMMEND_RIGHTHEAD + page,
+                DesignerRecommendBean.class,responseCallBack);
     }
 
 }

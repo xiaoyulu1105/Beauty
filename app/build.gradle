@@ -34,6 +34,7 @@ dependencies {
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
 
     compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile 'me.imid.swipebacklayout.lib:library:1.0.0'
 
     // 添加了model: deckview, 和 eventbus by xiaoyu
     compile project(':deckview')

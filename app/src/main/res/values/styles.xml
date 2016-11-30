@@ -22,6 +22,14 @@
     <style name="MyTabLayoutTextAppearanceInverse" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
         <item name="android:textSize">20sp</item>
     </style>
+    <!-- 首页（第一级页面不让Activity透明） -->
+    <style name="mainPageStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
 
+    <!-- 非首页（非第一级页面让Activity透明） -->
+    <style name="otherPageStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
 </resources>
