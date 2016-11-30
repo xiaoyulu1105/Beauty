@@ -69,7 +69,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void qqLogin() {
-        mModel.qqLogin();
+    public void qqLogin(String name,String icon) {
+//        mModel.qqLogin();
     }
 }

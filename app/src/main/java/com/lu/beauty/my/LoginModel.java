@@ -3,11 +3,16 @@ package com.lu.beauty.my;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.lu.beauty.bean.event.EventQQ;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 
@@ -83,7 +88,7 @@ public class LoginModel implements LoginContract.Model {
     }
 
     @Override
-    public void qqLogin() {
+    public void qqLogin(String name,String icon) {
         Platform qq = ShareSDK.getPlatform(QQ.NAME);
         qq.authorize();
         qq.setPlatformActionListener(new PlatformActionListener() {
@@ -93,10 +98,17 @@ public class LoginModel implements LoginContract.Model {
                 String name = platformDb.getUserName();
                 String icon = platformDb.getUserIcon();
 
+                Log.d("LoginFragment", name);
                 Intent intent = new Intent();
                 intent.putExtra("name",name);
                 intent.putExtra("icon",icon);
-                
+
+               //setResult(0,intent);
+
+//                onBackPressed();
+
+                // EventBus.getDefault().post(new EventQQ(name));
+
 
 
 
@@ -113,6 +125,7 @@ public class LoginModel implements LoginContract.Model {
             }
         });
 
+//        mPresenter.qqLogin(String name,String icon);
     }
 
 

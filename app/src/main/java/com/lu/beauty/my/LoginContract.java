@@ -72,7 +72,7 @@ public interface LoginContract {
         /**
          * QQ登录
          */
-        void qqLogin();
+        void qqLogin(String name,String icon);
 
     }
 
@@ -91,11 +91,8 @@ public interface LoginContract {
          * @param psw 密码
          */
         void login(String useName , String psw);
-         void  qqLogin ();
 
-
-
-
+        void  qqLogin (String name,  String icon);
 
 
     }

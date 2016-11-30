@@ -2,9 +2,11 @@ package com.lu.beauty.my;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +16,15 @@ import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
+import com.lu.beauty.bean.event.EventQQ;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.HashMap;
 
 import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.tencent.qq.QQ;
 
@@ -72,7 +81,42 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
                 break;
             case R.id.ll_login_qq:
 
-          mPresenter.qqLogin();
+//                Platform qq = ShareSDK.getPlatform(QQ.NAME);
+//                qq.authorize();
+//                qq.setPlatformActionListener(new PlatformActionListener() {
+//                    @Override
+//                    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+//                        PlatformDb platformDb = platform.getDb();
+//                        String name = platformDb.getUserName();
+//                        String icon = platformDb.getUserIcon();
+//
+//                        Log.d("LoginFragment", name);
+//                Intent intent = new Intent();
+//                intent.putExtra("name",name);
+//                intent.putExtra("icon",icon);
+//                getActivity().setResult(0,intent);
+//                        getActivity().onBackPressed();
+//                       // EventBus.getDefault().post(new EventQQ(name));
+//
+//
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Platform platform, int i, Throwable throwable) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancel(Platform platform, int i) {
+//
+//                    }
+//                });
+//
+//          mPresenter.qqLogin();
+
+                getActivity().onBackPressed();
 
                 break;
 
