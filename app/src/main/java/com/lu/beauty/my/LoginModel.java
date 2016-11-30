@@ -9,9 +9,16 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.PlatformDb;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.tencent.qq.QQ;
 
 /**
  * Created by dllo on 16/11/22.
@@ -70,6 +77,39 @@ public class LoginModel implements LoginContract.Model {
                     mPresenter.loginError(e);
 
                 }
+            }
+        });
+
+    }
+
+    @Override
+    public void qqLogin() {
+        Platform qq = ShareSDK.getPlatform(QQ.NAME);
+        qq.authorize();
+        qq.setPlatformActionListener(new PlatformActionListener() {
+            @Override
+            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                PlatformDb platformDb = platform.getDb();
+                String name = platformDb.getUserName();
+                String icon = platformDb.getUserIcon();
+
+                Intent intent = new Intent();
+                intent.putExtra("name",name);
+                intent.putExtra("icon",icon);
+                
+
+
+
+            }
+
+            @Override
+            public void onError(Platform platform, int i, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCancel(Platform platform, int i) {
+
             }
         });
 

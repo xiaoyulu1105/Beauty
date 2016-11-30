@@ -1,22 +1,23 @@
 package com.lu.beauty.my;
 
 
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.tencent.qq.QQ;
 
 /**
  * Created by  AngleXiao on 16/11/25.
@@ -32,6 +33,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
     private Button mBtnLogin;
     private Button mBtnBack;
     private TextView mTvSignIn;
+    private LinearLayout mllQq;
 
     @Override
     protected int getLayout() {
@@ -45,7 +47,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
         mBtnLogin = bindView(R.id.btn_login_login);
         mBtnBack = bindView(R.id.btn_login_back);
         mTvSignIn = bindView(R.id.btn_login_signin);
-        setClick(this, mBtnLogin, mBtnBack, mTvSignIn);
+        mllQq = bindView(R.id.ll_login_qq);
+        setClick(this, mBtnLogin, mBtnBack, mTvSignIn, mllQq);
     }
 
     @Override
@@ -55,6 +58,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
                 String etId = mEtId.getText().toString();
                 String etPsw = mEtPsw.getText().toString();
                 mPresenter.login(etId, etPsw);
+
                 break;
             case R.id.btn_login_back:
                 getActivity().onBackPressed();
@@ -66,6 +70,13 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
                 transaction.replace(R.id.layout, new SignInFragment());
                 transaction.commit();
                 break;
+            case R.id.ll_login_qq:
+
+          mPresenter.qqLogin();
+
+                break;
+
+
         }
 
 

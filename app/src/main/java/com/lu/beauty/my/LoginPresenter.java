@@ -67,4 +67,9 @@ public class LoginPresenter implements LoginContract.Presenter {
             mView.loginError(exception.getMessage());
         }
     }
+
+    @Override
+    public void qqLogin() {
+        mModel.qqLogin();
+    }
 }

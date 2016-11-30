@@ -49,6 +49,7 @@ public interface LoginContract {
          */
         void login(String useName,String psw);
 
+
         /**
          * 检测用户名或者密码是否为空
          * @param userName 用户名
@@ -68,6 +69,11 @@ public interface LoginContract {
          */
         void loginError(Exception exception);
 
+        /**
+         * QQ登录
+         */
+        void qqLogin();
+
     }
 
 
@@ -85,7 +91,7 @@ public interface LoginContract {
          * @param psw 密码
          */
         void login(String useName , String psw);
-
+         void  qqLogin ();
 
 
 
