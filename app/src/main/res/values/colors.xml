@@ -8,6 +8,6 @@
     <color name="colorSelectedTabberText">#ff000000</color>
     <color name="colorUnselectedTabberText">#f5a19d9d</color>
 
-
+    <color name="colorArticleAuthorText">#f5e9e4e4</color>
 
 </resources>

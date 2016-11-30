@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    >
+
+    <!-- 头部的返回按钮 和 作者信息 -->
+    <RelativeLayout
+        android:id="@+id/article_detail_top_rl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <Button
+            android:id="@+id/article_detail_top_return_btn"
+            android:layout_width="@dimen/circle_return_button_height"
+            android:layout_height= "@dimen/circle_return_button_height"
+            android:layout_margin="10dp"
+            android:background="@mipmap/ic_circle_back_normal"
+            />
+
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="@dimen/circle_return_button_height"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/shape_text_view"
+            android:layout_margin="10dp"
+            >
+            <TextView
+                android:id="@+id/article_detail_top_username_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/circle_return_button_height"
+                android:paddingLeft="5dp"
+                android:paddingRight="2dp"
+                android:layout_marginRight="5dp"
+                android:text="username"
+                android:textColor="@color/colorArticleAuthorText"
+                android:gravity="center"
+                />
+            <ImageView
+                android:id="@+id/article_detail_top_icon_img"
+                android:layout_width="@dimen/article_author_circle_icon_height"
+                android:layout_height="@dimen/article_author_circle_icon_height"
+                android:src="@mipmap/ic_launcher"
+                android:layout_marginRight="5dp"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <!-- 最下面的评论栏 -->
+    <LinearLayout
+        android:id="@+id/article_detail_evaluate_ll"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/article_evaluate_background_color"
+        >
+
+    </LinearLayout>
+
+    <!-- 评论栏之上的布局 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/article_detail_evaluate_ll"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <!-- 第一个布局是网页 -->
+            <WebView
+                android:id="@+id/article_detail_webview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </WebView>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

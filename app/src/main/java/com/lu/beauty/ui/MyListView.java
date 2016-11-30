@@ -1,4 +1,4 @@
-package com.lu.beauty.product;
+package com.lu.beauty.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;

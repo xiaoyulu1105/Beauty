@@ -2,11 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_vp_tv"/>
+    <com.lu.beauty.ui.RefreshLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/product_list_view"
         android:layout_width="match_parent"
@@ -14,5 +13,6 @@
         >
 
     </se.emilsjolander.stickylistheaders.StickyListHeadersListView>
+    </com.lu.beauty.ui.RefreshLayout>
 
 </LinearLayout>

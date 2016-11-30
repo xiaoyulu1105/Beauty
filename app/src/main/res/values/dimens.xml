@@ -2,4 +2,12 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- 画报第二级顶部 Button 和 TextView的高度 -->
+    <dimen name="circle_return_button_height">30dp</dimen>
+
+    <!-- 画报第二级, 头部的作者的小头像的宽高 -->
+    <dimen name="article_author_circle_icon_height">25dp</dimen>
+
+
 </resources>

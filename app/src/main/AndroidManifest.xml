@@ -33,13 +33,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:theme="@style/mainPageStyle">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".my.LoginActivity"/>
         <activity android:name=".welcome.WelcomeActivity"/>
         <activity android:name=".my.SetActivity"/>
@@ -64,6 +66,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+
+        <activity android:name=".article.ArticleDetailActivity"/>
+
+        <activity android:name=".designer.DesignerHeadMoreActivity" android:theme="@style/otherPageStyle" />
+
+
     </application>
 
 </manifest>
