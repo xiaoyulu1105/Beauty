@@ -3,19 +3,19 @@ package com.lu.beauty.article;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
 import com.lu.beauty.bean.ArticleDetailBean;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
+import com.lu.beauty.richtext.HtmlTextView;
 
 /**
  * Created by XiaoyuLu on 16/11/29.
@@ -26,12 +26,19 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
     private int mGetId;
 
-    private RelativeLayout mTopRl;
-    private Button mReturnBtn;
-    private TextView mUsernameTV;
+    private RelativeLayout mTopRl; // 显示和隐藏的相对布局
+    private Button mTopReturnBtn;   // 返回
+    private TextView mTopUsernameTV; // 显示的设计师名字
+    private TextView mTopWhereTV;   // 设计师来自的地方
+    private ImageView mTopAuthorIconIV; // 设计师头像
+    private HtmlTextView mHtmlTextView;
+    private TextView mTitleTV;
+    private TextView mSubTitleTV;
+    private ImageView mTitleImageIV;
     private ImageView mAuthorIconIV;
+    private TextView mAuthorNameTV;
+    private TextView mAuthorSignTV;
 
-    private WebView mWebView;
 
     @Override
     protected int getLayout() {
@@ -42,12 +49,24 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
     protected void initViews() {
 
         mTopRl = (RelativeLayout) findViewById(R.id.article_detail_top_rl);
-        mReturnBtn = bindView(R.id.article_detail_top_return_btn);
-        mUsernameTV = bindView(R.id.article_detail_top_username_tv);
-        mAuthorIconIV = bindView(R.id.article_detail_top_icon_img);
-        mWebView = bindView(R.id.article_detail_webview);
+        mTopReturnBtn = bindView(R.id.article_detail_top_return_btn);
+        mTopUsernameTV = bindView(R.id.article_detail_top_username_tv);
+        mTopWhereTV = bindView(R.id.article_detail_top_where_tv);
+        mTopAuthorIconIV = bindView(R.id.article_detail_top_icon_img);
 
-        setClick(this, mReturnBtn);
+        // 界面开始 与Title相关 的组件, 标题, 副标题, 图片
+        mTitleTV = bindView(R.id.article_detail_title_title_tv);
+        mSubTitleTV = bindView(R.id.article_detail_title_subtitle_tv);
+        mTitleImageIV = bindView(R.id.article_detail_title_image_iv);
+
+        // 与作者相关相关的组件, 头像, 姓名, 标签sign
+        mAuthorIconIV = bindView(R.id.article_detail_author_icon_iv);
+        mAuthorNameTV = bindView(R.id.article_detail_author_username_tv);
+        mAuthorSignTV = bindView(R.id.article_detail_author_sign_tv);
+
+        mHtmlTextView = (HtmlTextView) findViewById(R.id.article_detail_html_tv);
+
+        setClick(this, mTopReturnBtn, mTitleImageIV);
 
     }
 
@@ -57,47 +76,64 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         Intent intent = getIntent();
         mGetId = intent.getIntExtra(ArticleFragment.INTENT_ID_KEY, 117);
 
-        // TODO 进行网络请求
-        ArticleDetailDataRequest();
+        articleDetailDataRequest();
     }
 
-    private void ArticleDetailDataRequest() {
+    private void articleDetailDataRequest() {
         HttpUtil.getArticleDetailBean(mGetId, new ResponseCallBack<ArticleDetailBean>() {
             @Override
             public void onResponse(ArticleDetailBean articleDetailBean) {
                 Log.d("ArticleDetailActivity", "画报第二级数据请求成功!");
 
-                ArticleDetailBean.DataBean dataBean = articleDetailBean.getData();
-                String getWebLink = dataBean.getWeb_url();
-
-                // 显示网页内容
-                webViewMethod(getWebLink);
+                showHttpData(articleDetailBean);
 
             }
 
             @Override
             public void onError(Exception e) {
                 Log.d("ArticleDetailActivity", "画报第二级数据请求失败!");
+                Toast.makeText(ArticleDetailActivity.this, "请返回后重新请求!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    /** 实现网页内容铺建的 相关操作 */
-    private void webViewMethod(String getWebLink) {
-        mWebView.setWebChromeClient(new WebChromeClient());
-        WebSettings webSettings = mWebView.getSettings();
+    /**
+     * 将网络请求获得的图片进行显示
+     * @param articleDetailBean 网络请求的数据
+     */
+    private void showHttpData(ArticleDetailBean articleDetailBean) {
+        ArticleDetailBean.DataBean dataBean = articleDetailBean.getData();
+        // 获取 设计师的简单信息: 名字, 城市, 头像
+        String designerName = dataBean.getDesigners().get(0).getName();
+        String designerCity = dataBean.getDesigners().get(0).getCity();
+        String designerIcon = dataBean.getDesigners().get(0).getAvatar_url();
+        // 获得 大标题, 副标题, 图片
+        String title = dataBean.getTitle();
+        String subTitle = dataBean.getSub_title();
+        String image_url = dataBean.getImage_url();
+        // 获得 编辑者的信息: 头像, 名字, 标签sign
+        String authorIcon = dataBean.getAuthor().getAvatar_url();
+        String authorName = dataBean.getAuthor().getUsername();
+        String authorSign = dataBean.getAuthor().getSign();
+        // 获得 富文本数据
+        String content = dataBean.getContent();
 
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        mWebView.loadUrl(getWebLink);
+        // 显示 富文本数据
+        mHtmlTextView.setHtmlFromString(content);
+        // 显示 标题信息
+        mTitleTV.setText(title);
+        mSubTitleTV.setText(subTitle);
+        Glide.with(ArticleDetailActivity.this).load(image_url).into(mTitleImageIV);
+        // 显示 作者信息
+        Glide.with(ArticleDetailActivity.this).load(authorIcon).into(mAuthorIconIV);
+        mAuthorNameTV.setText(authorName);
+        mAuthorSignTV.setText(authorSign);
+        // 显示 top 栏设计师的信息
+        mTopUsernameTV.setText(designerName);
+        mTopWhereTV.setText(designerCity);
+        Glide.with(ArticleDetailActivity.this).load(designerIcon).into(mTopAuthorIconIV);
     }
 
-    /** 显示网页时需要手动复写的方法, 添加 finish() 方法 */
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return super.onSupportNavigateUp();
-    }
 
     @Override
     public void onClick(View v) {
@@ -106,8 +142,12 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
                 finish();
 
                 break;
-            default:
+            case R.id.article_detail_title_image_iv:
+                Toast.makeText(this, "点击了图片", Toast.LENGTH_SHORT).show();
+                Log.d("ArticleDetailActivity", "点击了图片");
 
+                break;
+            default:
                 Log.d("ArticleDetailActivity", "点击出错啦!");
                 break;
         }
