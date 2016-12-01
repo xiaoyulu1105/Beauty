@@ -1,5 +1,6 @@
 package com.lu.beauty.designer;
 
+import com.lu.beauty.bean.DesignerHeadlineBean;
 import com.lu.beauty.bean.DesignerRecommendBean;
 
 /**
@@ -7,5 +8,7 @@ import com.lu.beauty.bean.DesignerRecommendBean;
  */
 
 public interface DesignerClickListner {
-    public void HeadItemClick(DesignerRecommendBean.DataBean.CategoriesBeanX beanX);
+    public void headItemClick(DesignerRecommendBean.DataBean.CategoriesBeanX beanX);
+    public void popItemClick(DesignerHeadlineBean.DataBean.CategoriesBean.SubCategoriesBean bean);
+
 }
