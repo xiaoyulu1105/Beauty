@@ -2,8 +2,6 @@ package com.lu.beauty.my;
 
 
 import android.os.CountDownTimer;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +13,6 @@ import com.lu.beauty.base.BaseFragment;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -42,16 +39,14 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
         mBtnSignIn = bindView(R.id.btn_signin_signin);
         setClick(this,mBtnSignIn);
 
-
     }
 
     @Override
     protected void initData() {
 
-
     }
 
-    private void SignIn() {
+    private void signIn() {
         BmobUser bmobUser = new BmobUser();
         String id = mEtId.getText().toString();
         String psw = mEtPsw.getText().toString();
@@ -64,9 +59,7 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
 
         }
 
-
         else{
-
 
             bmobUser.setUsername(id);
             bmobUser.setPassword(psw);
@@ -98,12 +91,11 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
             });
         }
 
-
     }
 
     @Override
     public void onClick(View v) {
-        SignIn();
+        signIn();
 
     }
 }

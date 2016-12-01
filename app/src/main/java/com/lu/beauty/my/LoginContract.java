@@ -72,12 +72,13 @@ public interface LoginContract {
         /**
          * QQ登录
          */
-        void qqLogin(String name,String icon);
+        void qqLogin();
 
     }
 
 
     interface Model {
+
         /**
          * 把P层放到M层里
          *
@@ -92,7 +93,8 @@ public interface LoginContract {
          */
         void login(String useName , String psw);
 
-        void  qqLogin (String name,  String icon);
+
+        void  qqLogin ();
 
 
     }

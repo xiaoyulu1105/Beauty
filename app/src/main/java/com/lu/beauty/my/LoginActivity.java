@@ -25,8 +25,6 @@ public class LoginActivity extends BaseActivity{
 
         getSupportFragmentManager().beginTransaction().add(android.R.id.content,loginFragment).commit();
 
-
-
     }
 
     @Override

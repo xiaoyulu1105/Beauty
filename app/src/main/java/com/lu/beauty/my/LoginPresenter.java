@@ -61,6 +61,7 @@ public class LoginPresenter implements LoginContract.Presenter {
      */
     @Override
     public void loginError(Exception exception) {
+
         if (exception == null) {
             mView.loginError("登录失败");
         } else {
@@ -69,7 +70,9 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void qqLogin(String name,String icon) {
-//        mModel.qqLogin();
+    public void qqLogin() {
+
+     mModel.qqLogin();
+
     }
 }

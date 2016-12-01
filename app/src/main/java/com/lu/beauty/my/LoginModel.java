@@ -61,21 +61,20 @@ public class LoginModel implements LoginContract.Model {
      * @param psw      密码
      */
     @Override
-    public void login(final String userName, final String psw) {
+    public void login( String userName,  String psw) {
 
-
-        Log.d("LoginModel", Thread.currentThread().getName());
+      //  Log.d("LoginModel", Thread.currentThread().getName());
         BmobUser bmobUser = new BmobUser();
         bmobUser.setUsername(userName);
         bmobUser.setPassword(psw);
-        Log.d("LoginModel", "bmobUser:" + bmobUser.getUsername());
+      //  Log.d("LoginModel", "bmobUser:" + bmobUser.getUsername());
 
         bmobUser.login(new SaveListener<BmobUser>() {
             @Override
             public void done(BmobUser bmobUser, BmobException e) {
 
                 if (e == null) {
-                    Log.d("LoginModel", "ddd");
+                //    Log.d("LoginModel", "ddd");
                     mPresenter.loginSuccess();
 
                 } else {
@@ -88,29 +87,19 @@ public class LoginModel implements LoginContract.Model {
     }
 
     @Override
-    public void qqLogin(String name,String icon) {
+    public void qqLogin() {
         Platform qq = ShareSDK.getPlatform(QQ.NAME);
         qq.authorize();
+
         qq.setPlatformActionListener(new PlatformActionListener() {
             @Override
             public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+
                 PlatformDb platformDb = platform.getDb();
                 String name = platformDb.getUserName();
-                String icon = platformDb.getUserIcon();
-
-                Log.d("LoginFragment", name);
-                Intent intent = new Intent();
-                intent.putExtra("name",name);
-                intent.putExtra("icon",icon);
-
-               //setResult(0,intent);
-
-//                onBackPressed();
-
-                // EventBus.getDefault().post(new EventQQ(name));
 
 
-
+              //   EventBus.getDefault().post(new EventQQ(name));
 
             }
 
@@ -125,7 +114,6 @@ public class LoginModel implements LoginContract.Model {
             }
         });
 
-//        mPresenter.qqLogin(String name,String icon);
     }
 
 
