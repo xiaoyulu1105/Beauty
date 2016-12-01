@@ -1,6 +1,7 @@
 package com.lu.beauty.designer;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,12 +11,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
+import com.lu.beauty.bean.DesignerHeadlineBean;
 import com.lu.beauty.bean.DesignerRecommendBean;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
@@ -27,7 +31,7 @@ import java.util.ArrayList;
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
  */
-public class DesignerVpFragment extends BaseFragment implements DesignerClickListner{
+public class DesignerVpFragment extends BaseFragment implements DesignerClickListner, View.OnClickListener {
     private static final String KEY = "pos";
 //    private TextView textView;
     private RecyclerView recyclerView;
@@ -36,6 +40,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
     private ArrayList<DesignerRecommendBean.DataBean.DesignersBean> independenceArrayList;
     private ArrayList<DesignerRecommendBean.DataBean.DesignersBean> masterArrayList;
     private ArrayList<DesignerRecommendBean.DataBean.DesignersBean> favorArrayList;
+    private ArrayList<DesignerHeadlineBean.DataBean.CategoriesBean.SubCategoriesBean> headLineBean;
     private int recommendPage = 1;
     private int independencePage = 1;
     private int masterPage = 1;
@@ -48,6 +53,12 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
     private HeadItemAdapter headItemAdapter;
     private RecyclerView headItemRV;
     private RelativeLayout pop;
+    private PopupWindow popupWindow;
+    private PopAdapter mPopadapter;
+    private LinearLayout coords;
+    private TextView popText;
+    private String popTextValue = "全部";
+    private String independenceType = "30";
 
     public static Fragment getInstance(int position) {
 
@@ -69,6 +80,9 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
         pop = bindView(R.id.designer_pop);
 //        textView = bindView(R.id.designer_tv);
         recyclerView = bindView(R.id.designer_recyler);
+        setClick(this,pop);
+        coords = bindView(R.id.designer_popcoords);
+        popText = bindView(R.id.designer_poptext);
     }
 
     @Override
@@ -92,7 +106,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
                     setRecommendMoreRV(recommendPage);
                 }else if (type.equals("Independence")){
                     independencePage = independencePage + 1;
-                    setIndependenceMoreRV(independencePage);
+                    headConmmendMore(independenceType,independencePage);
                 }else if (type.equals("Master")){
                     masterPage = masterPage + 1;
                     setMasterMoreRV(masterPage);
@@ -102,7 +116,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
                 }
             }
         });
-
+        popWindow();
 
     }
 
@@ -132,8 +146,9 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
                     type = "Independence";
 //                    textView.setText("独立设计师");
                     endLessOnScrollListener.resetPreviousTotal();
-                    setIndependenceMoreRV(1);
+                    headConmmendMore(independenceType,1);
                     recyclerView.setAdapter(allAdapter);
+                    popText.setText(popTextValue);
                     break;
                 case 3:
                     type = "Master";
@@ -253,9 +268,29 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
         });
     }
 
+    // Pop里的数据
+    public void setHeadLineRV(){
+        HttpUtil.getDesignerCategories(new ResponseCallBack<DesignerHeadlineBean>() {
+            @Override
+            public void onResponse(DesignerHeadlineBean designerHeadlineBean) {
+                for(int i = 0 ; i <designerHeadlineBean.getData().getCategories().get(0).getSub_categories().size();i++){
+                    headLineBean.add(designerHeadlineBean.getData().getCategories().get(0).getSub_categories().get(i));
+                }
+                changePopItemBackground("全部",30);
+                mPopadapter.setArrayList(headLineBean);
+                mPopadapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+    }
+
 
     @Override
-    public void HeadItemClick(DesignerRecommendBean.DataBean.CategoriesBeanX beanX) {
+    public void headItemClick(DesignerRecommendBean.DataBean.CategoriesBeanX beanX) {
         Intent intent = new Intent(getContext(),DesignerHeadMoreActivity.class);
         intent.putExtra("title",beanX.getName());
         intent.putExtra("id",beanX.getId() + "");
@@ -264,7 +299,86 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
         startActivity(intent);
     }
 
-    public void PopWindow(){
-//        View view = LayoutInflater.from(getContext()).inflate(R.layout.)
+    @Override
+    public void popItemClick(DesignerHeadlineBean.DataBean.CategoriesBean.SubCategoriesBean bean) {
+        independenceArrayList = new ArrayList<>();
+        popTextValue = bean.getName();
+        popText.setText(popTextValue);
+        independenceType = String.valueOf(bean.getId());
+        headConmmendMore(independenceType,1);
+        endLessOnScrollListener.resetPreviousTotal();
+        independencePage = 1;
+        popupWindow.dismiss();
+        changePopItemBackground(popTextValue,bean.getId());
+    }
+
+    public void changePopItemBackground(String name,int id){
+        for (int i = 0; i < headLineBean.size(); i++) {
+            if (name.equals(headLineBean.get(i).getName()) && id == headLineBean.get(i).getId()){
+                headLineBean.get(i).setSelect(1);
+            }else if (!name.equals(headLineBean.get(i).getName())||id != headLineBean.get(i).getId()){
+                headLineBean.get(i).setSelect(0);
+            }
+            Log.d("DesignerVpFragment", "headLineBean.get(i).getSelect():" + headLineBean.get(i).getSelect());
+        }
+        mPopadapter.setArrayList(headLineBean);
+        mPopadapter.notifyDataSetChanged();
+    }
+    public void headConmmendMore(String type,int page){
+        HttpUtil.getDesignerHeadBean(type, page, new ResponseCallBack<DesignerRecommendBean>() {
+            @Override
+            public void onResponse(DesignerRecommendBean designerRecommendBean) {
+                for (int i = 0; i < designerRecommendBean.getData().getDesigners().size(); i++) {
+                    independenceArrayList.add(designerRecommendBean.getData().getDesigners().get(i));
+                }
+                allAdapter.setArrayList(independenceArrayList);
+                allAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+    }
+
+    // 创建一个pop
+    public void popWindow(){
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.designer_popwindow,null);
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.designer_pop_rv);
+        GridLayoutManager manager = new GridLayoutManager(getContext(),3);
+        recyclerView.setLayoutManager(manager);
+        mPopadapter = new PopAdapter(this);
+        headLineBean = new ArrayList<>();
+        DesignerHeadlineBean.DataBean.CategoriesBean.SubCategoriesBean bean = new DesignerHeadlineBean.DataBean.CategoriesBean.SubCategoriesBean();
+        bean.setId(30);
+        bean.setName("全部");
+        bean.setSelect(1);
+        Log.d("DesignerVpFragment", bean.getName() + bean.getId());
+        headLineBean.add(bean);
+        setHeadLineRV();
+        recyclerView.setAdapter(mPopadapter);
+    }
+
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.designer_pop:
+                popupWindow.showAsDropDown(coords);
+                break;
+        }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (popupWindow != null && popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        }
     }
 }

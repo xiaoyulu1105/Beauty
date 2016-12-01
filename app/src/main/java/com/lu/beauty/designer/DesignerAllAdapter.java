@@ -47,6 +47,6 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
 
     @Override
     public int getItemCount() {
-        return arrayList == null?0 : arrayList.size();
+        return arrayList == null? 0 : arrayList.size();
     }
 }
