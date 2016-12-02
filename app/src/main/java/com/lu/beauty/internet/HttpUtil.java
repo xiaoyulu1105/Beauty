@@ -1,7 +1,9 @@
 package com.lu.beauty.internet;
 
 import com.lu.beauty.bean.ArticleBean;
+
 import com.lu.beauty.bean.ArticleDetailBean;
+import com.lu.beauty.bean.DesignerHeadlineBean;
 import com.lu.beauty.bean.DesignerRecommendBean;
 import com.lu.beauty.bean.ProductCommonBean;
 import com.lu.beauty.bean.ProductDailyBean;
@@ -45,6 +47,9 @@ public class HttpUtil {
     // 喜欢
     public static void getDesignerFavorBean(int page,ResponseCallBack<DesignerRecommendBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_FAVOR_URL_PAGE + page,DesignerRecommendBean.class,responseCallBack);
+    }
+    public static void getDesignerCategories(ResponseCallBack<DesignerHeadlineBean> responseCallBack){
+        OkHttpManager.getInstance().get(UrlValues.DESIGNER_CATEGORIES_URL,DesignerHeadlineBean.class,responseCallBack);
     }
 
     // 获取画报的第一级数据
