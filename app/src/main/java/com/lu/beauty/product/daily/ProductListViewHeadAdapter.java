@@ -28,22 +28,13 @@ public class ProductListViewHeadAdapter extends BaseAdapter implements StickyLis
     private ArrayList<String> dateArray;
 
     public ProductListViewHeadAdapter() {
-        int day = AcquisitionTime.getDay();
         long date = AcquisitionTime.getDate();
-        arrayList = new ArrayList<>();
+        arrayList = AcquisitionTime.getDay();
         dateArray = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            if (0 == i){
-                arrayList.add("TODAY");
-            } else if (1 == i){
-                arrayList.add("YESTERDAY");
-            }else {
+           // arrayList.add(AcquisitionTime.getDay().get(i));
+            dateArray.add(date - i * 24 * 60 * 60 * 1000 + "");
 
-                arrayList.add(AcquisitionTime.getMouth() + day);
-            }
-            dateArray.add(date + "");
-            day = day - 1;
-            date = date - 24 * 60 * 60 * 1000;
         }
         Log.d("ProductListViewHead1234", "dateArray:" + dateArray);
 
@@ -72,7 +63,7 @@ public class ProductListViewHeadAdapter extends BaseAdapter implements StickyLis
 
         ListView listView = viewHolder.getView(R.id.lv_product_body);
         ProductListViewBodyAdapter adapter = new ProductListViewBodyAdapter();
-        Log.d("ProductListViewHeadAdap", dateArray.get(position));
+//        Log.d("ProductListViewHeadAdap", dateArray.get(position));
         HttpUtil.getProduckDailyBean(dateArray.get(position), new MyListener(listView,adapter));
 
         return viewHolder.getItemView();

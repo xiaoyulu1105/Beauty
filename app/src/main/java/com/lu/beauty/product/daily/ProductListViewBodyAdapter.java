@@ -33,7 +33,7 @@ public class ProductListViewBodyAdapter extends BaseAdapter{
         }catch(Exception e){
             count = 0;
         }
-        return 0;
+        return count;
     }
 
     @Override

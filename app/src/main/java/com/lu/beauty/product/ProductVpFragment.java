@@ -41,7 +41,7 @@ public class ProductVpFragment extends BaseFragment{
     private RefreshLayout refreshLayout;
     private ArrayList<ProductCommonBean.DataBean.ProductsBean> arrayList;
 
-//TODO 参数就把 当前页面的key传过来 网络请求
+// 参数就把 当前页面的key传过来 网络请求
     public static Fragment getInstance(int position) {
         ProductVpFragment vpFragment = new ProductVpFragment();
         Bundle bundle = new Bundle();
@@ -178,12 +178,10 @@ public class ProductVpFragment extends BaseFragment{
                 }
                 adapter.setArrayList(arrayList);
                 adapter.notifyDataSetChanged();
-                refreshLayout.setLoading(false);
             }
 
             @Override
             public void onError(Exception e) {
-                refreshLayout.setLoading(false);
             }
         });
     }

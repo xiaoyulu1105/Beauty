@@ -49,11 +49,12 @@ public class ProductFragment extends BaseFragment {
             public void onResponse(ProductTitleBean productTitleBean) {
                 Log.d("打印这个", "productTitleBean.getData().getCategories().size():" + productTitleBean.getData().getCategories().size());
                 for (int i = 0; i < productTitleBean.getData().getCategories().size(); i++) {
+
                     arrayList.add(productTitleBean.getData().getCategories().get(i).getName());
-                    adapter.setS(arrayList);
-                    productViewPager.setAdapter(adapter);
-                    Log.d("打印这个", productTitleBean.getData().getCategories().get(i).getName());
                 }
+                    adapter.setBeanArrayList(arrayList);
+                    productViewPager.setAdapter(adapter);
+
             }
 
             @Override
@@ -62,7 +63,7 @@ public class ProductFragment extends BaseFragment {
             }
         });
         arrayList.add(0, "Daily");
-        adapter.setS(arrayList);
+//        adapter.setS(arrayList);
         adapter.notifyDataSetChanged();
 
 
