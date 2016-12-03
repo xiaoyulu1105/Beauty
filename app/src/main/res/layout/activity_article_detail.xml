@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_margin="20dp"
-                android:paddingTop="20dp"
+                android:paddingTop="30dp"
                 android:orientation="vertical"
                 >
                 <TextView
@@ -51,7 +51,7 @@
                 <TextView
                     android:id="@+id/article_detail_title_subtitle_tv"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     android:text="sub_title_副标题"
                     android:gravity="center"
                     android:layout_marginBottom="10dp"
@@ -61,7 +61,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:src="@mipmap/a479c8bae"
-                    android:scaleType="fitXY"
                     />
             </LinearLayout>
 
@@ -71,7 +70,7 @@
                 android:id="@+id/article_detail_author_rl"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
-                android:layout_margin="15dp"
+                android:layout_margin="25dp"
                 android:layout_marginTop="26dp"
                 android:background="@color/colorArticleAuthorText"
                 android:layout_below="@+id/article_detail_title_ll">
@@ -111,8 +110,7 @@
                 android:layout_height="@dimen/circle_return_button_height"
                 android:src="@mipmap/ic_launcher"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="440dp"
-                android:scaleType="fitXY"
+                android:layout_marginTop="450dp"
                 />
 
             <!-- 富文本内容 -->
@@ -173,7 +171,7 @@
                 android:layout_marginRight="5dp"
                 android:text="username"
                 android:textColor="@color/colorArticleAuthorText"
-                android:gravity="right"
+                android:gravity="center"
                 />
             <TextView
                 android:id="@+id/article_detail_top_where_tv"
@@ -183,7 +181,7 @@
                 android:layout_marginRight="5dp"
                 android:text="where"
                 android:textSize="14px"
-                android:gravity="right"
+                android:gravity="center"
                 android:textColor="@color/colorArticleAuthorText"
                 android:layout_below="@id/article_detail_top_username_tv"
                 />
@@ -193,8 +191,8 @@
                 android:layout_height="@dimen/article_author_circle_icon_height"
                 android:layout_alignParentRight="true"
                 android:src="@mipmap/ic_launcher"
-                android:layout_marginRight="5dp"
-                android:scaleType="fitXY"
+                android:layout_marginRight="3dp"
+                android:layout_centerVertical="true"
                 />
         </RelativeLayout>
     </RelativeLayout>

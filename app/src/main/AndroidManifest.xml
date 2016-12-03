@@ -18,11 +18,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".article.ArticleDetailActivity"/>
+        <activity android:name=".article.ArticleDetailActivity"
+            android:theme="@style/otherPageStyle"/>
 
-        <activity android:name=".designer.DesignerHeadMoreActivity" android:theme="@style/otherPageStyle" />
+        <activity android:name=".designer.DesignerHeadMoreActivity"
+                  android:theme="@style/otherPageStyle" />
 
-        <activity android:name=".richtext.RichTextTestActivity"/>
 
     </application>
 

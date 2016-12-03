@@ -3,12 +3,13 @@
 
 DesignerHeadMoreActivity侧滑方法
 包已导好
+   compile 'me.imid.swipebacklayout.lib:library:1.0.0'
 1.implements SwipeBackActivityBase
 2.设一个全局变量 private SwipeBackActivityHelper swipeBackActivityHelper;
 3.在 initData() 中绑定activity
 swipeBackActivityHelper = new SwipeBackActivityHelper(this);
         swipeBackActivityHelper.onActivityCreate();
-4.写全四个方法
+4.写全5个方法, 其中前两个是 手动复写的.
 @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
