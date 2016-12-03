@@ -163,7 +163,7 @@
             android:layout_height="@dimen/circle_return_button_height"
             android:layout_alignParentRight="true"
             android:background="@drawable/shape_text_view"
-            android:alpha="0.8"
+            android:alpha="0.9"
             >
             <TextView
                 android:id="@+id/article_detail_top_username_tv"
