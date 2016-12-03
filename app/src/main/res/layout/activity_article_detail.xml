@@ -18,6 +18,7 @@
 
     <!-- 评论栏之上的布局 -->
     <ScrollView
+        android:id="@+id/article_detail_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/article_detail_evaluate_ll"
@@ -171,7 +172,7 @@
                 android:layout_marginRight="5dp"
                 android:text="username"
                 android:textColor="@color/colorArticleAuthorText"
-                android:gravity="center"
+                android:gravity="right"
                 />
             <TextView
                 android:id="@+id/article_detail_top_where_tv"
@@ -180,8 +181,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:text="where"
-                android:textSize="14px"
-                android:gravity="center"
+                android:textSize="15px"
+                android:gravity="right"
                 android:textColor="@color/colorArticleAuthorText"
                 android:layout_below="@id/article_detail_top_username_tv"
                 />

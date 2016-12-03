@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +37,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
  * 显示 画报详细信息 的Activity
  * 实现了侧滑退出
  */
-public class ArticleDetailActivity extends BaseActivity implements View.OnClickListener, SwipeBackActivityBase {
+public class ArticleDetailActivity extends BaseActivity implements View.OnClickListener, SwipeBackActivityBase, View.OnTouchListener {
 
 
     private int mGetId;
@@ -54,7 +57,10 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
     private TextView mAuthorSignTV;
 
     private HtmlTextView mHtmlTextView;
+    private ScrollView mScrollView;
     private SwipeBackActivityHelper swipeBackActivityHelper; // 侧滑退出所用
+    private MyArticleGestureDetectorListener mGestureDetectorListener;
+    private GestureDetector mGestureDetector;
 
 
     @Override
@@ -82,8 +88,10 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         mAuthorSignTV = bindView(R.id.article_detail_author_sign_tv);
 
         mHtmlTextView = (HtmlTextView) findViewById(R.id.article_detail_html_tv);
+        mScrollView = (ScrollView) findViewById(R.id.article_detail_scroll_view);
 
         setClick(this, mTopReturnBtn, mTitleImageIV);
+        mScrollView.setOnTouchListener(this);
 
     }
 
@@ -99,6 +107,10 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 实现侧滑 需要绑定 activity
         swipeBackActivityHelper = new SwipeBackActivityHelper(this);
         swipeBackActivityHelper.onActivityCreate();
+
+        // 初始化 自定义的 GestureDetectorListener 监听接口的对象
+        mGestureDetectorListener = new MyArticleGestureDetectorListener(mTopRl);
+        mGestureDetector = new GestureDetector(ArticleDetailActivity.this, mGestureDetectorListener);
     }
 
     @Override
@@ -175,7 +187,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 显示 作者信息
         mAuthorNameTV.setText(authorName);
         mAuthorSignTV.setText(authorSign);
-//        Glide.with(ArticleDetailActivity.this).load(authorIcon).into(mAuthorIconIV);
         Glide.with(ArticleDetailActivity.this).load(authorIcon).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -215,7 +226,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 显示 top 栏设计师的信息
         mTopUsernameTV.setText(designerName);
         mTopWhereTV.setText(designerCity);
-//        Glide.with(ArticleDetailActivity.this).load(designerIcon).into(mTopDesignerIconIV);
         Glide.with(ArticleDetailActivity.this).load(designerIcon).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -261,7 +271,17 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         if (v == null && swipeBackActivityHelper != null) {
             return swipeBackActivityHelper.findViewById(id);
         }
-
         return v;
+    }
+
+    /**
+     * 实现 接口View.OnTouchListener, 需要复写该方法
+     * @param v
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return mGestureDetector.onTouchEvent(event);
     }
 }

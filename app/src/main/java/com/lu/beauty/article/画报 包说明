@@ -1,8 +1,16 @@
 
 这是 最美有物 第一项 画报 的包
 
-画报页的数据是在MainActivity 请求下来后传递过来的,
-因为使用的别人自定义的DeckView布局就是需要已经存在的数据, 图片就传递网址即可
+接下来做什么:
+实现顶端的 相对布局的隐藏和出现
+
+1. 画报页的数据是在MainActivity 请求下来后传递过来的,
+   因为使用的别人自定义的DeckView布局就是需要已经存在的数据, 图片就传递网址即可
+
+2. MyArticleGestureDetectorListener 类说明:
+   实现画报的 第二级的 顶端的 相对布局的 显示和隐藏
+   需要在其构造方法里 传入一个 RelativeLayout 的对象
+
 
 MyArticleDatum类:
 是 参照 Model的Datum类书写的 画报的第一级的数据的 序列化的类
