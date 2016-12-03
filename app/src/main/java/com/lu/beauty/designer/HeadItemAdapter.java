@@ -43,7 +43,7 @@ public class HeadItemAdapter extends RecyclerView.Adapter<CommonViewHolder> {
             public void onClick(View v) {
 //                designerClickListner.HeadItemClick(arrayList.get(position));
                 Log.d("HeadItemAdapter", "点击");
-                designerClickListner.HeadItemClick(arrayList.get(position));
+                designerClickListner.headItemClick(arrayList.get(position));
             }
         });
     }

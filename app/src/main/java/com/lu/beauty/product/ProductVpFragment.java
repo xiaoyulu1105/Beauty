@@ -41,6 +41,7 @@ public class ProductVpFragment extends BaseFragment{
     private RefreshLayout refreshLayout;
     private ArrayList<ProductCommonBean.DataBean.ProductsBean> arrayList;
 
+// 参数就把 当前页面的key传过来 网络请求
     public static Fragment getInstance(int position) {
         ProductVpFragment vpFragment = new ProductVpFragment();
         Bundle bundle = new Bundle();
@@ -156,14 +157,14 @@ public class ProductVpFragment extends BaseFragment{
             @Override
             public void onLoad() {
                 Toast.makeText(mContext, "load", Toast.LENGTH_SHORT).show();
-                refreshLayout.postDelayed(new Runnable() {
+                refreshLayout.post(new Runnable() {
                     @Override
                     public void run() {
                         page = page + 1;
                         okHttp(num, page);
-                        refreshLayout.setLoading(false);
+                        
                     }
-                }, 1500);
+                });
             }
         });
     }
@@ -181,7 +182,6 @@ public class ProductVpFragment extends BaseFragment{
 
             @Override
             public void onError(Exception e) {
-
             }
         });
     }
