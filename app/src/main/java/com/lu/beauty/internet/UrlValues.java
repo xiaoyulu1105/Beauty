@@ -50,6 +50,13 @@ public class UrlValues {
     public static final String DESIGNER_RECOMMEND_LEFTHEAD ="http://design.zuimeia.com/api/v1/designers/category/";
     public static final String DESIGNER_RECOMMEND_RIGHTHEAD = "/?page_size=30&page=";
 
+    // 第二级页面  信息获取
+    public static final String DESIGNER_SECOND_DESIGHNERHEAD = "http://design.zuimeia.com/api/v1/";
+    public static final String DESIGNER_SECOND_DESIGHNERLAST = "/?page=1&page_size=30";
+    public static final String DESIGNER_SECOND_PRODUCTS = "products/designer/";
+    public static final String DESIGNER_SECOND_ARTICLES = "articles/designer/";
+    public static final String DESIGNER_SECOND_SHOPS = "shops/designer/";
+
     // 第二级
     public static final String DESIGNER_DETAIL_URL = "http://design.zuimeia.com/api/v1/designer/145/";
 

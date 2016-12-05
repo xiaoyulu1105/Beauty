@@ -23,6 +23,7 @@
 
         <activity android:name=".designer.DesignerHeadMoreActivity"
                   android:theme="@style/otherPageStyle" />
+        <activity android:name=".designer.DesignerItemActivity" android:theme="@style/otherPageStyle"/>
 
 
     </application>
