@@ -38,5 +38,5 @@ dependencies {
     compile project(':deckview')
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.ms-square:expandableTextView:0.1.4'
-    compile 'it.sephiroth.android.library.picasso:picasso:2.5.2.4b'
+//    compile 'it.sephiroth.android.library.picasso:picasso:2.5.2.4b'
 }

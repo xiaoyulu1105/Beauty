@@ -128,7 +128,6 @@ public class ArticleFragment extends BaseFragment {
 //                        "Item with title: '" + item.headerTitle + "' clicked",
 //                        Toast.LENGTH_SHORT).show();
 
-                // TODO 点击了Item
                 Intent intent = new Intent(mContext, ArticleDetailActivity.class);
                 intent.putExtra(INTENT_ID_KEY, item.id);
                 startActivity(intent);
