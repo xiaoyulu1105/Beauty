@@ -8,7 +8,8 @@ import com.lu.beauty.bean.DesignerRecommendBean;
  */
 
 public interface DesignerClickListner {
-    public void headItemClick(DesignerRecommendBean.DataBean.CategoriesBeanX beanX);
-    public void popItemClick(DesignerHeadlineBean.DataBean.CategoriesBean.SubCategoriesBean bean);
+    void headItemClick(DesignerRecommendBean.DataBean.CategoriesBeanX beanX);
+    void popItemClick(DesignerHeadlineBean.DataBean.CategoriesBean.SubCategoriesBean bean);
+    void allAdapterItemClick(int id);
 
 }

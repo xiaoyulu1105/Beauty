@@ -92,7 +92,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
         masterArrayList = new ArrayList<>();
         favorArrayList = new ArrayList<>();
         headArrayList = new ArrayList<DesignerRecommendBean.DataBean.CategoriesBeanX>();
-        allAdapter = new DesignerAllAdapter(getContext());
+        allAdapter = new DesignerAllAdapter(this);
         headItemAdapter = new HeadItemAdapter(this);
 
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -310,6 +310,13 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
         independencePage = 1;
         popupWindow.dismiss();
         changePopItemBackground(popTextValue,bean.getId());
+    }
+
+    @Override
+    public void allAdapterItemClick(int id) {
+        Intent intent = new Intent(getContext(),DesignerItemActivity.class);
+        intent.putExtra("id",id + "");
+        startActivity(intent);
     }
 
     public void changePopItemBackground(String name,int id){
