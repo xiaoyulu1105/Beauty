@@ -153,49 +153,12 @@
             android:layout_height= "@dimen/circle_return_button_height"
             android:background="@mipmap/ic_circle_back_normal"
             android:alpha="0.9"
-            android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/article_detail_top_author_rl"/>
+            android:layout_alignParentStart="true"/>
 
-        <RelativeLayout
-            android:id="@+id/article_detail_top_author_rl"
-            android:layout_width="120dp"
-            android:layout_height="@dimen/circle_return_button_height"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/shape_text_view"
-            android:alpha="0.9"
-            >
-            <TextView
-                android:id="@+id/article_detail_top_username_tv"
-                android:layout_width="70dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text="username"
-                android:textColor="@color/colorArticleAuthorText"
-                android:gravity="right"
-                />
-            <TextView
-                android:id="@+id/article_detail_top_where_tv"
-                android:layout_width="70dp"
-                android:layout_height="18dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text="where"
-                android:textSize="15px"
-                android:gravity="right"
-                android:textColor="@color/colorArticleAuthorText"
-                android:layout_below="@id/article_detail_top_username_tv"
-                />
-            <ImageView
-                android:id="@+id/article_detail_top_icon_img"
-                android:layout_width="@dimen/article_author_circle_icon_height"
-                android:layout_height="@dimen/article_author_circle_icon_height"
-                android:layout_alignParentRight="true"
-                android:src="@mipmap/ic_launcher"
-                android:layout_marginRight="3dp"
-                android:layout_centerVertical="true"
-                />
-        </RelativeLayout>
+        <!-- 顶端进行显示和隐藏的相对布局 -->
+        <include layout="@layout/article_detail_top_relative_layout"/>
+
+
     </RelativeLayout>
 
 </RelativeLayout>

@@ -27,6 +27,8 @@ import com.lu.beauty.internet.ResponseCallBack;
 import com.lu.beauty.richtext.HtmlTextView;
 import com.lu.beauty.tools.CircleDrawable;
 
+import java.util.ArrayList;
+
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
@@ -61,7 +63,10 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
     private SwipeBackActivityHelper swipeBackActivityHelper; // 侧滑退出所用
     private MyArticleGestureDetectorListener mGestureDetectorListener;
     private GestureDetector mGestureDetector;
+    private RelativeLayout mTopDesignerRl;
 
+    private ArticleImageSingleton mImageSingleton; // 存放图片的单例类
+    private ArrayList<String> mImageUrlList; // 存放所有图片的 数据类
 
     @Override
     protected int getLayout() {
@@ -73,6 +78,8 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
         mTopRl = (RelativeLayout) findViewById(R.id.article_detail_top_rl);
         mTopReturnBtn = bindView(R.id.article_detail_top_return_btn);
+        mTopDesignerRl = bindView(R.id.article_detail_top_author_rl);
+
         mTopUsernameTV = bindView(R.id.article_detail_top_username_tv);
         mTopWhereTV = bindView(R.id.article_detail_top_where_tv);
         mTopDesignerIconIV = bindView(R.id.article_detail_top_icon_img);
@@ -90,7 +97,7 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         mHtmlTextView = (HtmlTextView) findViewById(R.id.article_detail_html_tv);
         mScrollView = (ScrollView) findViewById(R.id.article_detail_scroll_view);
 
-        setClick(this, mTopReturnBtn, mTitleImageIV);
+        setClick(this, mTopReturnBtn, mTopDesignerRl, mTitleImageIV);
         mScrollView.setOnTouchListener(this);
 
     }
@@ -111,6 +118,11 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 初始化 自定义的 GestureDetectorListener 监听接口的对象
         mGestureDetectorListener = new MyArticleGestureDetectorListener(mTopRl);
         mGestureDetector = new GestureDetector(ArticleDetailActivity.this, mGestureDetectorListener);
+
+        // 单例类的 图片集合 的初始化
+        mImageSingleton = ArticleImageSingleton.getInstance();
+        mImageUrlList = new ArrayList<>();
+
     }
 
     @Override
@@ -121,8 +133,18 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
                 break;
             case R.id.article_detail_title_image_iv:
-                Toast.makeText(this, "点击了图片", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "点击了title图片", Toast.LENGTH_SHORT).show();
                 Log.d("ArticleDetailActivity", "点击了图片");
+                // TODO 将该图片作为轮播图的第一张图片
+                // 在 showBannerImage 方法里 实现图片的 popUpWindow 里的 轮播图 的展示
+//                showBannerImage();
+
+
+                break;
+            case R.id.article_detail_top_author_rl:
+
+                Toast.makeText(this, "跳转", Toast.LENGTH_SHORT).show();
+                // TODO 跳转到 轩轩的三级界面
 
                 break;
             default:
@@ -205,6 +227,13 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         String title = dataBean.getTitle();
         String subTitle = dataBean.getSub_title();
         String image_url = dataBean.getImage_url();
+
+        // 将图片链接放入 单例的图片链接中
+        // TODO 
+        mImageUrlList = mImageSingleton.getImageUrlArrayList();
+        Log.d("ArticleDetailActivity", "mImageUrlList.size():" + mImageUrlList.size()); // 空指针异常
+        mImageUrlList.add(0, image_url);
+        mImageSingleton.setImageUrlArrayList(mImageUrlList);
 
         // 显示 标题信息
         mTitleTV.setText(title);

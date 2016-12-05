@@ -27,7 +27,7 @@ public class MyArticleGestureDetectorListener implements GestureDetector.OnGestu
 
     @Override
     public boolean onDown(MotionEvent e) {
-        Log.d("MainActivity", "点击了 画报详情页");
+        Log.d("MyGestureListener", "点击了 画报详情页");
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
 
