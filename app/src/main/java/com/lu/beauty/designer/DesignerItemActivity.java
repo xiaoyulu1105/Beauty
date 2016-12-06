@@ -91,6 +91,7 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
             }
         });
     }
+
     // 初始化点
     public void initPoints(){
         pointImageViews = new ArrayList<>();

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by XiaoyuLu on 16/12/1.
  * <p>
- * 在这里 可以实现图片网址的获取
+ * 在这里 可以实现 图片网址 的获取
  */
 public class UrlImageGetter implements Html.ImageGetter {
     private Context mContext;
@@ -49,19 +49,14 @@ public class UrlImageGetter implements Html.ImageGetter {
                     mTextView.invalidate();
                     mTextView.setText(mTextView.getText());
 
-                    // TODO 当图片网址不为空时, 获取图片网址.
-                    Log.d("UrlImageGetter", source1);
+                    // 获取 画报二级的 图片网址
                     mArrayList.add(source1);
-                    Log.d("UrlImageGetter", "size():" + mArrayList.size());
                     singleton.setImageUrlArrayList(mArrayList);
-                    Log.d("UrlImageGetter", "singleton.size():" + singleton.getImageUrlArrayList().size());
-
                 }
+
+//                singleton.setImageUrlArrayList(mArrayList);
             }
         });
-
-        singleton.setImageUrlArrayList(mArrayList);
-        Log.d("UrlImageGetter", "singleton.size():" + singleton.getImageUrlArrayList().size()); // 0
 
         return urlDrawable;
     }

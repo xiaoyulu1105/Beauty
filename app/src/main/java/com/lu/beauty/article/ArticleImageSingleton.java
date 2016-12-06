@@ -7,6 +7,9 @@ import java.util.ArrayList;
  *
  * 该单例类 的用途
  * 用来 存放 画报详情页 第一张图片 和富文本里面的图片的
+ *
+ * 出现的问题
+ *
  */
 public class ArticleImageSingleton {
 

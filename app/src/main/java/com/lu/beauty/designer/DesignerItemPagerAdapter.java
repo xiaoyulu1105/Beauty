@@ -15,10 +15,12 @@ import com.squareup.picasso.Picasso;
 
 public class DesignerItemPagerAdapter  extends PagerAdapter{
     private String[] urls;
+
     @Override
     public int getCount() {
         return urls == null?0:urls.length;
     }
+
     // 获得图片的数量
     public int getImageCount(){
         return urls.length;
@@ -27,6 +29,7 @@ public class DesignerItemPagerAdapter  extends PagerAdapter{
     public void setUrls(String[] urls){
         this.urls =urls;
     }
+
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;

@@ -67,6 +67,7 @@ public class ArticleFragment extends BaseFragment {
         getImageUrls = bundle.getStringArrayList(MainActivity.BUNDLE_IMAGE_URLS_KEY);
 
         mDeckView = (DeckView<Datum>) getView().findViewById(R.id.article_deckview);
+        // 加载时的图片
         mDefaultThumbnail = BitmapFactory.decodeResource(getResources(),
                 R.mipmap.loading);
         mDefaultHeaderIcon = getResources().getDrawable(R.drawable.default_header_icon);
