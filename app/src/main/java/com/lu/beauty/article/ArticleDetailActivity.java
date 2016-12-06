@@ -5,17 +5,13 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -27,7 +23,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
 import com.lu.beauty.bean.ArticleDetailBean;
-import com.lu.beauty.designer.PointImageView;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
 import com.lu.beauty.richtext.HtmlTextView;
@@ -44,9 +39,9 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
  * Created by XiaoyuLu on 16/11/29.
  * 显示 画报第二级 详细信息 的Activity
  * 实现了侧滑退出
+ * 图片的轮播图 在ArticleBannerActivity 中实现的
  */
 public class ArticleDetailActivity extends BaseActivity implements View.OnClickListener, SwipeBackActivityBase, View.OnTouchListener {
-
 
     private int mGetId;
 
@@ -74,14 +69,7 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
     private ArticleImageSingleton mImageSingleton; // 存放图片的单例类
     private ArrayList<String> mImageUrlList; // 存放所有图片的 数据类
-    private String mTitleImageUrl;  // 轮播图中的第一张图片
-    private PopupWindow mPopupWindow; // 轮播图显示在 popUpWindow中
-    private ViewPager mPopViewPager;  // 显示轮播图的 ViewPager
-    private LinearLayout mPopPointsLl; // 显示轮播图的 点点的线性布局
-    private ArticleBannerVPAdapter mBannerVPAdapter; // 轮播图中 VP的适配器
-    private RelativeLayout mPopRl;  // 轮播图所在的 pop的全部
-
-    private int clickCount = 0;
+    private String mTitleImageUrl;
 
 
     @Override
@@ -117,7 +105,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
         setClick(this, mTopReturnBtn, mTopDesignerRl, mTitleImageIV);
         mScrollView.setOnTouchListener(this);
-
     }
 
     @Override
@@ -142,51 +129,7 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         mImageSingleton = ArticleImageSingleton.getInstance();
         mImageUrlList = new ArrayList<>();
 
-        // 初始化 popUpWindow
-        initImagePopupWindow();
     }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (mPopupWindow != null && mPopupWindow.isShowing()) {
-            mPopupWindow.dismiss();
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mPopupWindow.isShowing()) {
-            mPopupWindow.dismiss();
-
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-
-
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//        Toast.makeText(this, "restart", Toast.LENGTH_SHORT).show();
-//        Log.d("ArticleDetailActivity", "restart");
-//    }
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        Toast.makeText(this, "onresume", Toast.LENGTH_SHORT).show();
-//        Log.d("ArticleDetailActivity", "onresume");
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        Log.d("ArticleDetailActivity", "onpause");
-//        Log.d("ArticleDetailActivity", "pause");
-//    }
 
     @Override
     public void onClick(View v) {
@@ -197,30 +140,15 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.article_detail_title_image_iv:
 
-                // TODO 将该图片作为轮播图的第一张图片, 图片会经常出毛病
+                // TODO 将该图片作为轮播图的第一张图片, 富文本的图片顺序不对
 
-                if (clickCount == 0) {
-                    // 如果是第一次点击, 数据正常获取
-                    mImageUrlList = mImageSingleton.getImageUrlArrayList();
-                    mImageUrlList.add(0, mTitleImageUrl);
-
-                } else {
-                    // 不是第一次点击时, 不需要再添加了, why?
-                    mImageUrlList = mImageSingleton.getImageUrlArrayList();
-                }
+                mImageUrlList = mImageSingleton.getImageUrlArrayList();
                 Log.d("ArticleDetailActivity", "mImageUrlList.size():" + mImageUrlList.size());
 
-                // 在 showBannerImage 方法里 实现图片的 popUpWindow 里的 轮播图 的展示
-                showBannerImage(mImageUrlList);
-
-                clickCount ++;
-
-                break;
-            case R.id.pop_article_rl:
-                // 点击pop的任何位置 都可以让 pop消失
-                if (mPopupWindow.isShowing()) {
-                    mPopupWindow.dismiss();
-                }
+                Intent intent = new Intent(ArticleDetailActivity.this, ArticleBannerActivity.class);
+                intent.putExtra("ArrayList", mImageUrlList);
+                intent.putExtra("String", mTitleImageUrl);
+                startActivity(intent);
 
                 break;
             case R.id.article_detail_top_author_rl:
@@ -233,84 +161,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
                 Log.d("ArticleDetailActivity", "点击出错啦!");
                 break;
         }
-    }
-
-    /**
-     * 初始化 显示图片的 popupWindow
-     */
-    private void initImagePopupWindow() {
-        mPopupWindow = new PopupWindow(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        View view = LayoutInflater.from(ArticleDetailActivity.this)
-                .inflate(R.layout.pop_article_images, null);
-        mPopViewPager = (ViewPager) view.findViewById(R.id.pop_article_images_vp);
-        mPopPointsLl = (LinearLayout) view.findViewById(R.id.pop_article_points_ll);
-        mPopRl = (RelativeLayout) view.findViewById(R.id.pop_article_rl);
-        mPopRl.setOnClickListener(this);
-
-        mPopupWindow.setContentView(view);
-
-        // 因为这是布局还在铺建执行的代码,
-        // 此时还获取不到 图片集合的数据, 所有不在这里进行popWindow 里面图片的铺建
-    }
-
-    /**
-     * 在 showBannerImage 方法里 实现图片的 popUpWindow 里的 轮播图 的展示
-     *
-     * @param imageUrlList 图片的 网址的集合
-     */
-    private void showBannerImage(ArrayList<String> imageUrlList) {
-
-        mBannerVPAdapter = new ArticleBannerVPAdapter();
-        mBannerVPAdapter.setImageUrlList(imageUrlList);
-        mPopViewPager.setAdapter(mBannerVPAdapter);
-
-        // 在点击事件 初始化菱形的点点 是因为点击后才知道图片的总数
-        initBannerPoints();
-
-        // 显示 popupWindow
-        mPopupWindow.showAsDropDown(mUpPopLl);
-
-    }
-
-    /**
-     * 设置轮播图 小菱形 的点点
-     */
-    private void initBannerPoints() {
-        // 需要先把 之前的点点 都删掉
-        mPopPointsLl.removeAllViews();
-
-        final ArrayList<PointImageView> pointImageViews = new ArrayList<>();
-
-        for (int i = 0; i < mImageUrlList.size(); i++) {
-            PointImageView pointImageView = new PointImageView(ArticleDetailActivity.this);
-            pointImageViews.add(pointImageView);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
-            mPopPointsLl.addView(pointImageView, layoutParams);
-        }
-
-        mPopViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                int current = position % mBannerVPAdapter.getImageUrlList().size();
-                for (PointImageView pointImageView : pointImageViews) {
-                    pointImageView.setSelected(false);
-                }
-                pointImageViews.get(current).setSelected(true);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
 
@@ -334,7 +184,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
     /**
      * 将网络请求获得的图片进行显示
-     *
      * @param articleDetailBean 网络请求的数据
      */
     private void showHttpData(ArticleDetailBean articleDetailBean) {
@@ -358,7 +207,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
     /**
      * 显示画报二级 author编辑者相关 的数据
-     *
      * @param dataBean 传递过来的数据: articleDetailBean.getData()
      */
     private void showAuthorData(ArticleDetailBean.DataBean dataBean) {
@@ -381,7 +229,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
     /**
      * 显示画报二级 title相关 的数据
-     *
      * @param dataBean 传递过来的数据: articleDetailBean.getData()
      */
     private void showTitleData(ArticleDetailBean.DataBean dataBean) {
@@ -389,6 +236,11 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         String title = dataBean.getTitle();
         String subTitle = dataBean.getSub_title();
         mTitleImageUrl = dataBean.getImage_url();
+
+        // 将第一张图片的网址放入 单例类
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add(0, mTitleImageUrl);
+        mImageSingleton.setImageUrlArrayList(arrayList);
 
         // 显示 标题信息
         mTitleTV.setText(title);
@@ -399,7 +251,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
     /**
      * 显示画报二级顶端Top 的数据
-     *
      * @param dataBean 传递过来的数据: articleDetailBean.getData()
      */
     private void showTopData(ArticleDetailBean.DataBean dataBean) {
@@ -461,10 +312,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
     /**
      * 实现 接口View.OnTouchListener, 需要复写该方法, 实现top栏的 显示和隐藏
-     *
-     * @param v
-     * @param event
-     * @return
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {

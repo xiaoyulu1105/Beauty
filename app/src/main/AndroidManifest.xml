@@ -20,6 +20,7 @@
 
         <activity android:name=".article.ArticleDetailActivity"
             android:theme="@style/otherPageStyle"/>
+        <activity android:name=".article.ArticleBannerActivity"/>
 
         <activity android:name=".designer.DesignerHeadMoreActivity"
                   android:theme="@style/otherPageStyle" />

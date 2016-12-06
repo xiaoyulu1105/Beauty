@@ -50,11 +50,12 @@ public class UrlImageGetter implements Html.ImageGetter {
                     mTextView.setText(mTextView.getText());
 
                     // 获取 画报二级的 图片网址
+                    // 先获取在 ArticleDetailActivity 中的showTitleData 方法中存入单例类 的第一张图片
+                    mArrayList = singleton.getImageUrlArrayList();
                     mArrayList.add(source1);
                     singleton.setImageUrlArrayList(mArrayList);
                 }
 
-//                singleton.setImageUrlArrayList(mArrayList);
             }
         });
 

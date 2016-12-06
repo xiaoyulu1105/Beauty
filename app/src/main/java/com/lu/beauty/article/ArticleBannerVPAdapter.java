@@ -28,7 +28,7 @@ public class ArticleBannerVPAdapter extends PagerAdapter {
     }
     public void setImageUrlList(ArrayList<String> imageUrlList) {
         mImageUrlList = imageUrlList;
-//        notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.lu.beauty.richtext;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
@@ -12,6 +13,7 @@ import android.util.SparseArray;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lu.beauty.article.ArticleBannerActivity;
 import com.lu.beauty.article.ArticleDetailActivity;
 import com.lu.beauty.article.ArticleImageSingleton;
 
@@ -26,6 +28,9 @@ import java.util.Scanner;
  */
 
 public class HtmlTextView extends TextView{
+
+    public static final String INTENT_ARRAY_LIST_KEY = "ArrayList";
+    public static final String INTENT_SOUR_URL_KEY = "String";
 
     // 选择了复写两个构造方法
     public HtmlTextView(Context context) {
@@ -64,16 +69,28 @@ public class HtmlTextView extends TextView{
                             ArrayList<String> arrayList = new ArrayList<String>();
 
                             arrayList = mArticleImageSingleton.getImageUrlArrayList();
-                            Log.d("HtmlTextView", "arrayList:" + arrayList); 
+                            Log.d("HtmlTextView", "arrayList.size():" + arrayList.size());
 
-                            // TODO 点击图片后 的代码
+                            // TODO 点击图片后 将集合进行 轮播显示
+                            Intent intent = new Intent(getContext(), ArticleBannerActivity.class);
+                            intent.putExtra("ArrayList", arrayList);
+                            intent.putExtra("String", ((ImageSpan) span).getSource());
 
+                            getContext().startActivity(intent);
                         }
                     }
                 }
             }
         };
         setMovementMethod(LinkMovementMethodExt.getInstance(handler, ImageSpan.class));
+    }
+
+    /**
+     * 通过接口回调 实现将点击的富文本的 图片的网址在 ArticleDetailActivity 里实现回调
+     * 没有用到 该接口
+     */
+    interface OnRichTextImageClickListener {
+        void onImageClick(String image_url);
     }
 
 }
