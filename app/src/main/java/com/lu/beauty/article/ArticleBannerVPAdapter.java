@@ -26,6 +26,7 @@ public class ArticleBannerVPAdapter extends PagerAdapter {
     public ArrayList<String> getImageUrlList() {
         return mImageUrlList;
     }
+
     public void setImageUrlList(ArrayList<String> imageUrlList) {
         mImageUrlList = imageUrlList;
         notifyDataSetChanged();
@@ -40,6 +41,19 @@ public class ArticleBannerVPAdapter extends PagerAdapter {
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
     }
+
+
+    @Override
+    public int getItemPosition(Object object) {
+        for (int i = 0; i < mImageUrlList.size(); i++) {
+            if (object.equals(mImageUrlList.get(i))) {
+                return i;
+            }
+        }
+
+        return super.getItemPosition(object);
+    }
+
 
     // 手动复写的 instantiateItem 方法
     @Override

@@ -61,22 +61,22 @@ public class HtmlTextView extends TextView{
                     for (Object span : spans) {
                         if (span instanceof ImageSpan) {
 
-                            Log.d("HtmlTextView", "点击了图片");
-                            Toast.makeText(getContext(), "点击了图片", Toast.LENGTH_SHORT).show();
+                            Log.d("HtmlTextView", "点击了 富文本 HtmlTextView 里的图片");
 
                             ArticleImageSingleton mArticleImageSingleton; // 存放图片网址的 单例类
                             mArticleImageSingleton = ArticleImageSingleton.getInstance();
-                            ArrayList<String> arrayList = new ArrayList<String>();
+                            ArrayList<String> arrayList;
 
+                            // 在这里 可以获取到单例类里已经存放的 集合数据
                             arrayList = mArticleImageSingleton.getImageUrlArrayList();
-                            Log.d("HtmlTextView", "arrayList.size():" + arrayList.size());
+                            Log.d("HtmlTextView", "在 HtmlTextView 里获取到单例类里的集合长度" + arrayList.size());
 
-                            // TODO 点击图片后 将集合进行 轮播显示
                             Intent intent = new Intent(getContext(), ArticleBannerActivity.class);
                             intent.putExtra("ArrayList", arrayList);
                             intent.putExtra("String", ((ImageSpan) span).getSource());
 
                             getContext().startActivity(intent);
+
                         }
                     }
                 }

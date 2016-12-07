@@ -153,7 +153,7 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.article_detail_top_author_rl:
 
-                Toast.makeText(this, "跳转", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "跳转到轩轩的三级界面", Toast.LENGTH_SHORT).show();
                 // TODO 跳转到 轩轩的三级界面
 
                 break;

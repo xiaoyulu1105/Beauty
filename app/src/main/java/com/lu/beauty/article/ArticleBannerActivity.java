@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
@@ -21,9 +20,9 @@ import java.util.ArrayList;
  */
 
 public class ArticleBannerActivity extends BaseActivity implements View.OnClickListener {
-    private ViewPager mPopViewPager;
-    private LinearLayout mPopPointsLl;
-    private RelativeLayout mPopRl;
+    private ViewPager mBannerViewPager;
+    private LinearLayout mBannerPointsLl;
+    private RelativeLayout mBannerRl;
 
     private ArticleBannerVPAdapter mBannerVPAdapter;
 
@@ -34,10 +33,10 @@ public class ArticleBannerActivity extends BaseActivity implements View.OnClickL
 
     @Override
     protected void initViews() {
-        mPopViewPager = (ViewPager) findViewById(R.id.article_banner_images_vp);
-        mPopPointsLl = (LinearLayout) findViewById(R.id.article_banner_points_ll);
-        mPopRl = (RelativeLayout) findViewById(R.id.article_banner_rl);
-        mPopRl.setOnClickListener(this);
+        mBannerViewPager = (ViewPager) findViewById(R.id.article_banner_images_vp);
+        mBannerPointsLl = (LinearLayout) findViewById(R.id.article_banner_points_ll);
+        mBannerRl = (RelativeLayout) findViewById(R.id.article_banner_rl);
+        mBannerRl.setOnClickListener(this);
     }
 
     @Override
@@ -67,13 +66,18 @@ public class ArticleBannerActivity extends BaseActivity implements View.OnClickL
      * 在 showBannerImage 方法里 实现图片的 popUpWindow 里的 轮播图 的展示
      *
      * @param imageUrlList 图片的 网址的集合
-     * @param getImageUrl
+     * @param getImageUrl 点击的图片的网址
      */
     public void showBannerImage(ArrayList<String> imageUrlList, String getImageUrl) {
 
         mBannerVPAdapter = new ArticleBannerVPAdapter();
         mBannerVPAdapter.setImageUrlList(imageUrlList);
-        mPopViewPager.setAdapter(mBannerVPAdapter);
+
+        // 获取当前的图片的下标, 然后setCurrentItem(clickItem).
+        int clickItem =  mBannerVPAdapter.getItemPosition(getImageUrl);
+        // 下面两行代码 顺序不能变, 变了就又是从第一个图片开始轮播了.
+        mBannerViewPager.setAdapter(mBannerVPAdapter);
+        mBannerViewPager.setCurrentItem(clickItem);
 
         // 在点击事件 初始化菱形的点点 是因为点击后才知道图片的总数
         initBannerPoints(imageUrlList, getImageUrl);
@@ -87,24 +91,24 @@ public class ArticleBannerActivity extends BaseActivity implements View.OnClickL
      */
     private void initBannerPoints(ArrayList<String> imageUrlList, String getImageUrl) {
         // 需要先把 之前的点点 都删掉
-        mPopPointsLl.removeAllViews();
+        mBannerPointsLl.removeAllViews();
 
         final ArrayList<PointImageView> pointImageViews = new ArrayList<>();
-        int index = 0; // 点击的图片 对应于所在集合的下标值
+//        int index = 0; // 点击的图片 对应于所在集合的下标值
 
         for (int i = 0; i < imageUrlList.size(); i++) {
             PointImageView pointImageView = new PointImageView(ArticleBannerActivity.this);
             pointImageViews.add(pointImageView);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
-            mPopPointsLl.addView(pointImageView, layoutParams);
+            mBannerPointsLl.addView(pointImageView, layoutParams);
 
-            if (getImageUrl.equals(imageUrlList.get(i))) {
-                index = i;
-            }
+//            if (getImageUrl.equals(imageUrlList.get(i))) {
+//                index = i;
+//            }
         }
 
-        mPopViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mBannerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
