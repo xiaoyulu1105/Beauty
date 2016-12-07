@@ -2,6 +2,7 @@ package com.lu.beauty.designer;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.lu.beauty.R;
@@ -17,10 +18,10 @@ import java.util.ArrayList;
 
 public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     private ArrayList<DesignerRecommendBean.DataBean.DesignersBean> arrayList;
-    private Context context;
+    private DesignerClickListner designerClickListner;
 
-    public DesignerAllAdapter(Context context) {
-        this.context = context;
+    public DesignerAllAdapter(DesignerClickListner designerClickListner) {
+        this.designerClickListner = designerClickListner;
     }
 
     public void setArrayList(ArrayList<DesignerRecommendBean.DataBean.DesignersBean> arrayList) {
@@ -34,7 +35,7 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(CommonViewHolder holder, int position) {
+    public void onBindViewHolder(CommonViewHolder holder, final int position) {
         holder.setText(R.id.design_item_name,arrayList.get(position).getName());
         holder.setText(R.id.design_item_label,arrayList.get(position).getLabel());
         holder.setCircleImage(R.id.design_item_avatar,arrayList.get(position).getAvatar_url());
@@ -43,6 +44,12 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
             holder.setTextVisibale(R.id.design_item_follow);
             holder.setText(R.id.design_item_follow, arrayList.get(position).getFollow_num() + " 关注");
         }
+        holder.setItemClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                designerClickListner.allAdapterItemClick(arrayList.get(position).getId());
+            }
+        });
     }
 
     @Override

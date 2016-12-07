@@ -44,6 +44,7 @@ public class ProductFragment extends BaseFragment {
         productTabLayout.setupWithViewPager(productViewPager);
         productTabLayout.setSelectedTabIndicatorColor(Color.WHITE);
         productTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
         HttpUtil.getProductTitleBean(new ResponseCallBack<ProductTitleBean>() {
             @Override
             public void onResponse(ProductTitleBean productTitleBean) {

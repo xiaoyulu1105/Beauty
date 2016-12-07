@@ -8,6 +8,7 @@
     <color name="colorSelectedTabberText">#ff000000</color>
     <color name="colorUnselectedTabberText">#f5a19d9d</color>
 
+    <!-- 灰色还用在 画报详情页的 编辑者的信息的 背景色 -->
     <color name="colorArticleAuthorText">#f5e9e4e4</color>
 
 </resources>

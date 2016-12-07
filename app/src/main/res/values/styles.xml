@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- 没有内容的theme -->
+    <!-- 没有内容的theme, 没有用到 -->
     <style name="MyNullAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -22,12 +22,13 @@
     <style name="MyTabLayoutTextAppearanceInverse" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
         <item name="android:textSize">20sp</item>
     </style>
+
     <!-- 首页（第一级页面不让Activity透明） -->
     <style name="mainPageStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">false</item>
     </style>
 
-    <!-- 非首页（非第一级页面让Activity透明） -->
+    <!-- 非首页（非第一级页面让Activity透明) 用于侧滑效果 -->
     <style name="otherPageStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
     </style>
