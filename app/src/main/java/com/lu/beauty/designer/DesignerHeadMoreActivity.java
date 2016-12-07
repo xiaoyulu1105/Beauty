@@ -146,6 +146,8 @@ public class DesignerHeadMoreActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void allAdapterItemClick(int id) {
-
+        Intent intent = new Intent(DesignerHeadMoreActivity.this,DesignerItemActivity.class);
+        intent.putExtra("id",id + "");
+        startActivity(intent);
     }
 }

@@ -77,16 +77,19 @@ public class HttpUtil {
                 DesignerSecondBasicBean.class,responseCallBack);
     }
 
+    // 产品
     public static void getDesignerSecondProducts(String id, ResponseCallBack<DesignerSecondProductsBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_SECOND_DESIGHNERHEAD+UrlValues.DESIGNER_SECOND_PRODUCTS+
                 id+UrlValues.DESIGNER_SECOND_DESIGHNERLAST,DesignerSecondProductsBean.class,responseCallBack);
     }
 
+    // 画报
     public static void getDesignerSecondArticles(String id, ResponseCallBack<DesignerSecondArticlesBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_SECOND_DESIGHNERHEAD+UrlValues.DESIGNER_SECOND_ARTICLES+
                 id+UrlValues.DESIGNER_SECOND_DESIGHNERLAST,DesignerSecondArticlesBean.class,responseCallBack);
     }
 
+    // 旗舰店 店铺
     public static void getDesignerSecondShops(String id, ResponseCallBack<DesignerSecondShopsBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_SECOND_DESIGHNERHEAD+UrlValues.DESIGNER_SECOND_SHOPS+
                 id+UrlValues.DESIGNER_SECOND_DESIGHNERLAST,DesignerSecondShopsBean.class,responseCallBack);

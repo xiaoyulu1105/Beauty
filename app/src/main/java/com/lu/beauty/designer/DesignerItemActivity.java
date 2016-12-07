@@ -1,19 +1,29 @@
 package com.lu.beauty.designer;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
 import com.lu.beauty.bean.DesignerSecondBasicBean;
+import com.lu.beauty.designer.threadactivity.DesignerItemBottomAdapter;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
+import com.lu.beauty.tools.CircleDrawable;
+import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 import java.util.ArrayList;
 
@@ -36,6 +46,15 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
     private DesignerItemPagerAdapter pagerAdapter;
     private LinearLayout ll;
     private ArrayList<PointImageView> pointImageViews;
+    private ImageView circle;
+    private TextView name;
+    private TextView label;
+    private TextView follow;
+    private ExpandableTextView expandTV;
+    private TextView concept;
+    private TabLayout tab;
+    private ViewPager viewPager;
+    private String[] s = {"作品","画报","线上购买"};
 
     @Override
     protected int getLayout() {
@@ -48,6 +67,14 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
         mViewPager = bindView(R.id.activity_designer_item_vp);
         ll = bindView(R.id.activity_designer_item_ll);
         setClick(this,back);
+        circle = bindView(R.id.activity_designer_item_circle);
+        name = bindView(R.id.activity_designer_item_name);
+        label = bindView(R.id.activity_designer_item_label);
+        follow = bindView(R.id.activity_designer_item_follow);
+        expandTV = bindView(R.id.expand_text_view);
+        concept = bindView(R.id.activity_designer_item_concept);
+        tab = bindView(R.id.activity_designer_item_tab);
+        viewPager = bindView(R.id.activity_designer_item_viewpage);
     }
 
     @Override
@@ -59,6 +86,12 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
         swipeBackActivityHelper.onActivityCreate();
         pagerAdapter = new DesignerItemPagerAdapter();
         setBasicMessage();
+        DesignerItemBottomAdapter adapter = new DesignerItemBottomAdapter(getSupportFragmentManager(), s,id);
+        viewPager.setAdapter(adapter);
+        tab.setupWithViewPager(viewPager);
+        tab.setSelectedTabIndicatorColor(Color.WHITE);
+        tab.setTabMode(TabLayout.MODE_SCROLLABLE);
+
     }
 
     @Override
@@ -83,6 +116,19 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
                 pagerAdapter.setUrls(picture);
                 mViewPager.setAdapter(pagerAdapter);
                 initPoints();
+                Glide.with(DesignerItemActivity.this).load(designerSecondBasicBean.getData().getAvatar_url()).
+                        asBitmap().into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        CircleDrawable drawable = new CircleDrawable(resource);
+                        circle.setImageDrawable(drawable);
+                    }
+                });
+                name.setText(designerSecondBasicBean.getData().getName());
+                label.setText(designerSecondBasicBean.getData().getLabel());
+                follow.setText(designerSecondBasicBean.getData().getFollow_num()+"关注者");
+                expandTV.setText(designerSecondBasicBean.getData().getDescription());
+                concept.setText(designerSecondBasicBean.getData().getConcept());
             }
 
             @Override
