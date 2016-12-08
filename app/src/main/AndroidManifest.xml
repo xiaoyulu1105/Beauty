@@ -70,7 +70,7 @@
         </activity>
 
 
-        <activity android:name=".my.FavorateDesignerActivity"/>
+        <activity android:name=".my.FavoriteDesignerActivity"/>
         <activity
             android:name=".designer.DesignerHeadMoreActivity"
             android:theme="@style/otherPageStyle"/>

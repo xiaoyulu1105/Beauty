@@ -128,6 +128,8 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
                         } else {
                             arrayList = designerAttentionUser.getAttentionList();
                         }
+                        arrayList.add(collectionsData);
+                        designerAttentionUser.setAttentionList(arrayList);
 
                         //判断是否关注
                         //关注
@@ -136,14 +138,25 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
 //                            if (collectionsData.equals(arrayList.get(i))) {
 //                                holder.setButtonText(R.id.design_item_button, "已关注");
 //                                holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
+
 //                            } else {
 //
+
+//
+//                            } else {
+//                                arrayList.add(collectionsData);
+//                                designerAttentionUser.setAttentionList(arrayList);
+
 //
 //                            }
 //
 //                        }
+
                         arrayList.add(collectionsData);
                         designerAttentionUser.setAttentionList(arrayList);
+
+
+
 
                         designerAttentionUser.update(new UpdateListener() {
                             @Override
