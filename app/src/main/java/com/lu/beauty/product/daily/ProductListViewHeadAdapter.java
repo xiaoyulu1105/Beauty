@@ -87,6 +87,7 @@ public class ProductListViewHeadAdapter extends BaseAdapter implements StickyLis
         @Override
         public void onError(Exception e) {
             Log.d("ProductListViewHeadAdap", "网络请求失败");
+
         }
     }
 

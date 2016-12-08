@@ -44,7 +44,4 @@
             android:id="@+id/designer_headmore_rv"
             ></android.support.v7.widget.RecyclerView>
     </LinearLayout>
-    <com.ms.square.android.expandabletextview.ExpandableTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></com.ms.square.android.expandabletextview.ExpandableTextView>
 </RelativeLayout>

@@ -4,14 +4,6 @@
               android:layout_height="match_parent"
     >
 
-    <!-- 让 展示图片的 popupWindow 在这条线之下 -->
-    <LinearLayout
-        android:id="@+id/article_detail_up_pop_ll"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="horizontal" />
-
-
     <!-- 最下面的评论栏 -->
     <!--<LinearLayout-->
         <!--android:id="@+id/article_detail_evaluate_ll"-->

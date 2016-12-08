@@ -63,7 +63,7 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
     private HtmlTextView mHtmlTextView;
     private ScrollView mScrollView;
     private SwipeBackActivityHelper swipeBackActivityHelper; // 侧滑退出所用
-    private MyArticleGestureDetectorListener mGestureDetectorListener;
+    private ArticleGestureDetectorListener mGestureDetectorListener;
     private GestureDetector mGestureDetector;
     private RelativeLayout mTopDesignerRl;
 
@@ -122,7 +122,7 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         swipeBackActivityHelper.onActivityCreate();
 
         // 初始化 自定义的 GestureDetectorListener 监听接口的对象, 实现 top栏 的隐藏和显示
-        mGestureDetectorListener = new MyArticleGestureDetectorListener(mTopRl);
+        mGestureDetectorListener = new ArticleGestureDetectorListener(mTopRl);
         mGestureDetector = new GestureDetector(ArticleDetailActivity.this, mGestureDetectorListener);
 
         // 单例类的 图片集合 的初始化
@@ -154,6 +154,7 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
             case R.id.article_detail_top_author_rl:
 
                 Toast.makeText(this, "跳转到轩轩的三级界面", Toast.LENGTH_SHORT).show();
+
                 // TODO 跳转到 轩轩的三级界面
 
                 break;

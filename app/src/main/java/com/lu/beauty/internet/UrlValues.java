@@ -23,9 +23,9 @@ public class UrlValues {
     public static final String PRODUCT_COMMON_URL_CENTER = "?page=";
     public static final String PRODUCT_COMMON_URL_END = "&page_size=30";
     // 例:                                               拼接的我也不知道是什么玩意
-    // http://design.zuimeia.com/api/v1/products/category/**1**/?page=1&page_size=30
-    // &device_id=864895024466920&platform=android&lang=zh&appVersion=1.2.4&appVersionCode=10240
-    // &systemVersion=17&countryCode=CN&user_id=86035&token=4h8-a4e2a822e31549c512fe&package_name=com.zuiapps.zuiworld
+//     http://design.zuimeia.com/api/v1/products/category/**1**/?page=1&page_size=30
+//     &device_id=864895024466920&platform=android&lang=zh&appVersion=1.2.4&appVersionCode=10240
+//     &systemVersion=17&countryCode=CN&user_id=86035&token=4h8-a4e2a822e31549c512fe&package_name=com.zuiapps.zuiworld
     // product页通用二级url
     public static final String PRODUCT_COMMON_SECOND = "http://design.zuimeia.com/api/v1/product/";
     // 例:                                      拼接id
