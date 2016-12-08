@@ -25,7 +25,7 @@ import cn.bmob.v3.BmobUser;
  * OLiGei  what is your name
  * 轻松拿下一个类 属实有牌面
  */
-public class FavorateAdapter extends BaseAdapter {
+public class FavoriteAdapter extends BaseAdapter {
 
  private ArrayList<AttentionUser> mAttentionUsers;
 

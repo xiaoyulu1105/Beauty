@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -17,23 +16,12 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
-import com.lu.beauty.bean.event.EventQQ;
 import com.lu.beauty.tools.CircleDrawable;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.HashMap;
-
-import cn.bmob.v3.BmobUser;
 import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.tencent.qq.QQ;
-
-import static android.R.attr.data;
 
 /**
  * Created by XiaoyuLu on 16/11/23.
@@ -148,7 +136,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 startActivityForResult(intent1,1);
                 break;
             case R.id.ll_my_favorate:
-                Intent intent2 = new Intent(getActivity(),FavorateDesignerActivity.class);
+                Intent intent2 = new Intent(getActivity(),FavoriteDesignerActivity.class);
                 startActivity(intent2);
                 break;
 

@@ -126,21 +126,24 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
                         } else {
                             arrayList = designerAttentionUser.getAttentionList();
                         }
+                        arrayList.add(collectionsData);
+                        designerAttentionUser.setAttentionList(arrayList);
 
                         //判断是否关注
                         //关注
                         //
-                        for (int i = 0; i < arrayList.size(); i++) {
-                            if (collectionsData.equals(arrayList.get(i))) {
-                                holder.setButtonText(R.id.design_item_button, "已关注");
-                                holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
-                            } else {
-                                arrayList.add(collectionsData);
-                                designerAttentionUser.setAttentionList(arrayList);
-
-                            }
-
-                        }
+//                        for (int i = 0; i < arrayList.size(); i++) {
+//                            if (collectionsData.equals(arrayList.get(i))) {
+//                                holder.setButtonText(R.id.design_item_button, "已关注");
+//                                holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
+//
+//                            } else {
+//                                arrayList.add(collectionsData);
+//                                designerAttentionUser.setAttentionList(arrayList);
+//
+//                            }
+//
+//                        }
 
 
                         designerAttentionUser.update(new UpdateListener() {
