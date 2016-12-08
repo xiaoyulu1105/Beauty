@@ -92,7 +92,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
         masterArrayList = new ArrayList<>();
         favorArrayList = new ArrayList<>();
         headArrayList = new ArrayList<DesignerRecommendBean.DataBean.CategoriesBeanX>();
-        allAdapter = new DesignerAllAdapter(this);
+        allAdapter = new DesignerAllAdapter(this, mContext);
         headItemAdapter = new HeadItemAdapter(this);
 
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());

@@ -35,10 +35,11 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     // by 小玉
     private static int attentionCount = 0;
 
-    private DesignerClickListener designerClickListner;
+    private DesignerClickListener designerClickListener;
 
-    public DesignerAllAdapter(DesignerClickListener designerClickListner) {
-        this.designerClickListner = designerClickListner;
+    public DesignerAllAdapter(DesignerClickListener designerClickListener, Context context) {
+        this.designerClickListener = designerClickListener;
+        this.context = context;
     }
 
     public void setArrayList(ArrayList<DesignerRecommendBean.DataBean.DesignersBean> arrayList) {
@@ -53,12 +54,11 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     }
 
 
-
     public void onBindViewHolder(final CommonViewHolder holder, final int position) {
-        holder.setText(R.id.design_item_name,arrayList.get(position).getName());
-        holder.setText(R.id.design_item_label,arrayList.get(position).getLabel());
-        holder.setCircleImage(R.id.design_item_avatar,arrayList.get(position).getAvatar_url());
-        holder.setImage(R.id.design_item_images,arrayList.get(position).getRecommend_images().get(0));
+        holder.setText(R.id.design_item_name, arrayList.get(position).getName());
+        holder.setText(R.id.design_item_label, arrayList.get(position).getLabel());
+        holder.setCircleImage(R.id.design_item_avatar, arrayList.get(position).getAvatar_url());
+        holder.setImage(R.id.design_item_images, arrayList.get(position).getRecommend_images().get(0));
 
         if (arrayList.get(position).getType() == 1) {
             holder.setTextVisibale(R.id.design_item_follow);
@@ -68,10 +68,10 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
         holder.setItemClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                designerClickListner.allAdapterItemClick(arrayList.get(position).getId());
+                designerClickListener.allAdapterItemClick(arrayList.get(position).getId());
 
             }
-      });
+        });
 
 
         // TODO  周云霄
@@ -110,29 +110,6 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
                     //判断是否登录
                     AttentionUser designerAttentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
 //                     BmobUser bmobUser = BmobUser.getCurrentUser();
-//                    if (designerAttentionUser != null) {
-//
-//                        //判断是否关注
-//                        //关注
-//                        if (collectionsData.equals(designerAttentionUser.getAttentionName())){
-//
-//                        }else {
-//                            designerAttentionUser.setAttentionName(collectionsData);
-//
-//                            designerAttentionUser.update(new UpdateListener() {
-//                                @Override
-//                                public void done(BmobException e) {
-//                                    if (e == null) {
-//                                        Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
-//                                    } else {
-//                                        Toast.makeText(context, "上传失败", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                            });
-//                        }
-//
-//                    }
-
 
                     // !!!
                     // 将 数据存入 Bmob 的attentionList集合
@@ -152,16 +129,27 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
 
                         //判断是否关注
                         //关注
-                        arrayList.add(collectionsData);
-                        designerAttentionUser.setAttentionList(arrayList);
+                        //
+                        for (int i = 0; i < arrayList.size(); i++) {
+                            if (collectionsData.equals(arrayList.get(i))) {
+                                holder.setButtonText(R.id.design_item_button, "已关注");
+                                holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
+                            } else {
+                                arrayList.add(collectionsData);
+                                designerAttentionUser.setAttentionList(arrayList);
+
+                            }
+
+                        }
+
 
                         designerAttentionUser.update(new UpdateListener() {
                             @Override
                             public void done(BmobException e) {
                                 if (e == null) {
-                                   // Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
                                 } else {
-                                  //  Toast.makeText(context, "上传失败", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "上传失败", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -189,17 +177,15 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
 
                 }
             }
-       });
-
+        });
 
     }
 
+    @Override
+    public int getItemCount() {
 
-                @Override
-                public int getItemCount () {
-
-                    return arrayList == null ? 0 : arrayList.size();
+        return arrayList == null ? 0 : arrayList.size();
 
 
-                }
-            }
+    }
+}

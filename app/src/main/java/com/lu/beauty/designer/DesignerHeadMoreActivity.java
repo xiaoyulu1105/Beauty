@@ -59,7 +59,7 @@ public class DesignerHeadMoreActivity extends BaseActivity implements View.OnCli
         type = intent.getStringExtra("id");
         Log.d("DesignerHeadMoreActivit", "type:" + type);
         arrayList = new ArrayList<>();
-        allAdapter = new DesignerAllAdapter(this);
+        allAdapter = new DesignerAllAdapter(this, DesignerHeadMoreActivity.this);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rv.setLayoutManager(manager);
         headConmmendMore(type,page);
