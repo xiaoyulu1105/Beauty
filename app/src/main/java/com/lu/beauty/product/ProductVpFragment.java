@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
-import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.bean.DesignerHeadlineBean;
 import com.lu.beauty.bean.DesignerRecommendBean;
 import com.lu.beauty.bean.ProductCommonBean;
@@ -30,7 +29,6 @@ import com.lu.beauty.designer.PopAdapter;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
 import com.lu.beauty.product.daily.ProductListViewHeadAdapter;
-import com.lu.beauty.tools.EndLessOnScrollListener;
 import com.lu.beauty.ui.RefreshLayout;
 
 import java.util.ArrayList;
@@ -306,7 +304,7 @@ public class ProductVpFragment extends BaseFragment implements DesignerClickList
         popTextValue = bean.getName();
         popText.setText(popTextValue);
         independenceType = String.valueOf(bean.getId());
-        headConmmendMore(independenceType,1);
+        headCommendMore(independenceType,1);
         independencePage = 1;
         popupWindow.dismiss();
         changePopItemBackground(popTextValue,bean.getId());
@@ -316,8 +314,8 @@ public class ProductVpFragment extends BaseFragment implements DesignerClickList
     public void allAdapterItemClick(int id) {
 
     }
-
-    public void headConmmendMore(String type,int page){
+    
+    public void headCommendMore(String type, int page){
         okHttp(type, page);
     }
 }
