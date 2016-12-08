@@ -44,6 +44,7 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
 
     public DesignerAllAdapter(DesignerClickListner designerClickListner) {
         this.designerClickListner = designerClickListner;
+
     }
 
     public void setArrayList(ArrayList<DesignerRecommendBean.DataBean.DesignersBean> arrayList) {
