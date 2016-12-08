@@ -24,13 +24,15 @@ import java.util.Scanner;
 /**
  * Created by XiaoyuLu on 16/12/1.
  *
- * 在这个类书写点击图片后的操作
+ * 在这个类 书写 点击图片后的操作
  */
 
 public class HtmlTextView extends TextView{
 
+    // 用于跳转时到轮播Activity的 key值
     public static final String INTENT_ARRAY_LIST_KEY = "ArrayList";
     public static final String INTENT_SOUR_URL_KEY = "String";
+    public static final int MESSAGE_WHAT = 200;
 
     // 选择了复写两个构造方法
     public HtmlTextView(Context context) {
@@ -39,11 +41,6 @@ public class HtmlTextView extends TextView{
 
     public HtmlTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-    }
-
-    private static String convertStreamToString(InputStream is) {
-        Scanner s = new Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
     }
 
     public void setHtmlFromString(String html) {
@@ -55,11 +52,12 @@ public class HtmlTextView extends TextView{
             @Override
             public void handleMessage(Message msg) {
                 int what = msg.what;
-                if (what == 200) {
+                if (what == MESSAGE_WHAT) {
                     MessageSpan ms = (MessageSpan)msg.obj;
                     Object[] spans = (Object[]) ms.getObject();
                     for (Object span : spans) {
                         if (span instanceof ImageSpan) {
+                            // instanceof: 判断左边对象 是不是 右边类的实例
 
                             Log.d("HtmlTextView", "点击了 富文本 HtmlTextView 里的图片");
 
@@ -72,8 +70,8 @@ public class HtmlTextView extends TextView{
                             Log.d("HtmlTextView", "在 HtmlTextView 里获取到单例类里的集合长度" + arrayList.size());
 
                             Intent intent = new Intent(getContext(), ArticleBannerActivity.class);
-                            intent.putExtra("ArrayList", arrayList);
-                            intent.putExtra("String", ((ImageSpan) span).getSource());
+                            intent.putExtra(INTENT_ARRAY_LIST_KEY, arrayList);
+                            intent.putExtra(INTENT_SOUR_URL_KEY, ((ImageSpan) span).getSource());
 
                             getContext().startActivity(intent);
 
@@ -83,14 +81,6 @@ public class HtmlTextView extends TextView{
             }
         };
         setMovementMethod(LinkMovementMethodExt.getInstance(handler, ImageSpan.class));
-    }
-
-    /**
-     * 通过接口回调 实现将点击的富文本的 图片的网址在 ArticleDetailActivity 里实现回调
-     * 没有用到 该接口
-     */
-    interface OnRichTextImageClickListener {
-        void onImageClick(String image_url);
     }
 
 }

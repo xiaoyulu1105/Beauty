@@ -163,7 +163,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-
     private void articleDetailDataRequest() {
         HttpUtil.getArticleDetailBean(mGetId, new ResponseCallBack<ArticleDetailBean>() {
             @Override
@@ -201,8 +200,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         String content = dataBean.getContent();
         // 显示 富文本数据
         mHtmlTextView.setHtmlFromString(content);
-
-
     }
 
     /**
@@ -245,12 +242,15 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 显示 标题信息
         mTitleTV.setText(title);
         mSubTitleTV.setText(subTitle);
-        Glide.with(ArticleDetailActivity.this).load(mTitleImageUrl).into(mTitleImageIV);
+        Glide.with(ArticleDetailActivity.this)
+                .load(mTitleImageUrl)
+                .placeholder(R.mipmap.loading)
+                .into(mTitleImageIV);
 
     }
 
     /**
-     * 显示画报二级顶端Top 的数据
+     * 显示 画报二级顶端Top 的数据
      * @param dataBean 传递过来的数据: articleDetailBean.getData()
      */
     private void showTopData(ArticleDetailBean.DataBean dataBean) {
@@ -262,7 +262,9 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 显示 top 栏设计师的信息
         mTopUsernameTV.setText(designerName);
         mTopWhereTV.setText(designerCity);
-        Glide.with(ArticleDetailActivity.this).load(designerIcon).asBitmap().into(new SimpleTarget<Bitmap>() {
+        Glide.with(ArticleDetailActivity.this)
+                .load(designerIcon).asBitmap()
+                .into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 CircleDrawable drawable = new CircleDrawable(resource);
@@ -270,7 +272,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
             }
         });
     }
-
 
     /**
      * 复写 SwipeBackActivityBase接口的三个抽象方法:
