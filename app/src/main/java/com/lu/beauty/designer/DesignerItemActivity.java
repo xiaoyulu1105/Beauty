@@ -130,7 +130,7 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
                 name.setText(designerSecondBasicBean.getData().getName());
                 label.setText(designerSecondBasicBean.getData().getLabel());
                 follow.setText(designerSecondBasicBean.getData().getFollow_num()+"关注者");
-                expandTV.setText(designerSecondBasicBean.getData().getDescription());
+                expandTV. setText(designerSecondBasicBean.getData().getDescription());
                 concept.setText(designerSecondBasicBean.getData().getConcept());
             }
 

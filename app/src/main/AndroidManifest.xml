@@ -71,6 +71,7 @@
 
 
         <activity android:name=".my.FavorateDesignerActivity"/>
+        <activity android:name=".product.ProductItemActivity"/>
         <activity
             android:name=".designer.DesignerHeadMoreActivity"
             android:theme="@style/otherPageStyle"/>
