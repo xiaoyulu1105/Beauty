@@ -66,9 +66,9 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
 
     // 对象 mSmileFaceView 的set方法
     public void setSmileFaceView(SmileFaceView smileFaceView) {
-        Log.d("CryFaceView", "setSmileFaceView---参数的smile对象" + smileFaceView); // 有打印
+        Log.d("CryFaceViewSet", "setSmileFaceView---参数的smile对象" + smileFaceView);
         mSmileFaceView = smileFaceView;
-        Log.d("CryFaceView", "setSmileFaceView---哭脸类中的smile对象");
+        Log.d("CryFaceViewSet", "setSmileFaceView---哭脸类中的smile对象" + mSmileFaceView);
     }
 
     public boolean isChange() {
@@ -141,19 +141,17 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
     @Override
     public void onClick(View v) {
 
-        Log.d("CryFaceView", "点击了哭脸");
+        Log.d("CryFaceViewOnclick", "点击了哭脸");
 
         // 如果笑脸是选中状态
-        if (mSmileFaceView.getIsSelected()) {
-
-            Log.d("CryFaceView", "笑脸被选择过了" + mSmileFaceView); // 有打印
-            // 将笑脸变成白色
-            // TODO 想在这里设置笑脸的 背景drawable, 但是 new一个新的笑脸对象没有用
-            // TODO 主要是现在在 ProductListViewAdapter 里不能监听到 哭脸的点击事件, why?
-            // TODO 想要能监听到点击事件该怎么办?
-            mSmileFaceView.setMyBackgroundDrawable(R.drawable.shap); // new的没用,不能对应
-            mSmileFaceView.setIsSelected(false);
-        }
+//        if (mSmileFaceView.getIsSelected()) {
+//
+//            Log.d("CryFaceView", "笑脸被选择过了" + mSmileFaceView); // 有打印
+//            // 将笑脸变成白色
+//            // TODO 在 ProductListViewAdapter 里不能监听到 哭脸的点击事件, why?
+//            mSmileFaceView.setMyBackgroundDrawable(R.drawable.shap); // new的没用,不能对应
+//            mSmileFaceView.setIsSelected(false);
+//        }
         isSelected = true;
 
         //获取到组件的高

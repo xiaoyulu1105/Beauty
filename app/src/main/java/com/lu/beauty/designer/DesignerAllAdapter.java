@@ -70,6 +70,12 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
             public void onClick(View v) {
                 designerClickListener.allAdapterItemClick(arrayList.get(position).getId());
 
+//                // TODO 修改 by 小玉
+//                // 选用 直接跳转
+//                String stringId = String.valueOf(arrayList.get(position).getId());
+//                Intent intent = new Intent(context, DesignerItemActivity.class);
+//                intent.putExtra(DesignerItemActivity.INTENT_ID_KEY, stringId);
+//                context.startActivity(intent);
             }
         });
 

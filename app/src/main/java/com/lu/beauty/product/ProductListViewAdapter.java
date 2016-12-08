@@ -81,24 +81,12 @@ public class ProductListViewAdapter extends BaseAdapter implements StickyListHea
         SmileFaceView smileFaceView = viewHolder.getView(R.id.daily_item_laugh);
         cryFaceView.setDP2PX_final((int) dislikeHeight);
         smileFaceView.setDP2PX_FINAL((int) likeHeight);
-        //
+        // 将表情对象 进行关联
         cryFaceView.setSmileFaceView(smileFaceView);
         smileFaceView.setCryFaceView(cryFaceView);
 
-//        // TODO 判断当点击笑脸时 哭脸是白色的, 点击哭脸时同理
+        // TODO 判断当点击笑脸时 哭脸是白色的, 点击哭脸时同理
         // 在这里监听点击无响应
-//        smileFaceView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context, "点击了笑脸", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        smileFaceView.addOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context, "点击了笑脸", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         return viewHolder.getItemView();
     }

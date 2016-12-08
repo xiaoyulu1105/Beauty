@@ -3,7 +3,6 @@ package com.lu.beauty.ui;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.os.Looper;
@@ -13,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.lu.beauty.R;
-import com.lu.beauty.product.TestListener;
 import com.lu.beauty.tools.DensityTool;
 
 /**
@@ -66,7 +63,7 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
 
         Log.d("SmileFaceView", "setCryFaceView---参数的 cry 对象" + cryFaceView);
         this.mCryFaceView = cryFaceView;
-        Log.d("SmileFaceView", "setCryFaceView---笑脸类中的 cry 对象");
+        Log.d("SmileFaceView", "setCryFaceView---笑脸类中的 cry 对象" + cryFaceView);
     }
 
     // 为最终的高度设置set方法, 添加 by 小玉 已实现
@@ -137,16 +134,13 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
         // 如果点击笑脸了
 
         // 如果哭脸是选中状态
-        if (mCryFaceView.getIsSelected()) {
-            Log.d("SmileFaceView", "哭脸被选择过了");
-            // 将哭脸变成白色
-            // TODO 想在这里设置哭脸的 背景drawable, 但是 new一个新的哭脸对象没有用
-            // TODO 主要是在 ProductListViewAdapter 里不能监听到 哭脸的点击事件, why?
-            // TODO 想要能监听到点击事件该怎么办?
-
-            mCryFaceView.setMyBackgroundDrawable(R.drawable.shap);
-            mCryFaceView.setIsSelected(false);
-        }
+//        if (mCryFaceView.getIsSelected()) {
+//            Log.d("SmileFaceView", "哭脸被选择过了");
+//            // 将哭脸变成白色
+//            // TODO 在 ProductListViewAdapter 里不能监听到 哭脸的点击事件, why?
+//            mCryFaceView.setMyBackgroundDrawable(R.drawable.shap);
+//            mCryFaceView.setIsSelected(false);
+//        }
         isSelected = true;
 
         //动画

@@ -43,6 +43,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="3dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/icon_nice"
         />
 </RelativeLayout>

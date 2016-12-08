@@ -17,8 +17,8 @@ public class CommendHeadAdapter extends RecyclerView.Adapter {
     private static  final  int BASE_TYPE = 100000;
     private SparseArray<View> headViews;
 
-    public CommendHeadAdapter(RecyclerView.Adapter inerAdapter) {
-        this.innerAdapter = inerAdapter;
+    public CommendHeadAdapter(RecyclerView.Adapter innerAdapter) {
+        this.innerAdapter = innerAdapter;
         headViews = new SparseArray<>();
     }
 
