@@ -14,14 +14,14 @@ import android.widget.RelativeLayout;
  * 需要在其构造方法里 传入一个 RelativeLayout 的对象
  */
 
-public class MyArticleGestureDetectorListener implements GestureDetector.OnGestureListener{
+public class ArticleGestureDetectorListener implements GestureDetector.OnGestureListener{
 
     private VelocityTracker mVelocityTracker;
     private boolean mIsShowing = true;
     private View mRelativeLayout;
 
 
-    public MyArticleGestureDetectorListener(View relativeLayout) {
+    public ArticleGestureDetectorListener(View relativeLayout) {
         mRelativeLayout = relativeLayout;
     }
 
