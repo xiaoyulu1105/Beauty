@@ -7,6 +7,8 @@ import com.lu.beauty.MainActivity;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
 
+import cn.bmob.v3.Bmob;
+
 /**
  * Created by  AngleXiao on 16/11/24.
  * OLiGei  what is your name
@@ -22,7 +24,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void initViews() {
 
-    }
+}
 
     @Override
     protected void initData() {
