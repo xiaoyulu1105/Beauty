@@ -125,9 +125,6 @@ public class ArticleFragment extends BaseFragment {
 
             @Override
             public void onItemClick(Datum item) {
-//                Toast.makeText(mContext,
-//                        "Item with title: '" + item.headerTitle + "' clicked",
-//                        Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, ArticleDetailActivity.class);
                 intent.putExtra(INTENT_ID_KEY, item.id);
