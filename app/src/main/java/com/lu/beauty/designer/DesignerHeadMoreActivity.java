@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
+import com.lu.beauty.bean.DesignerHeadlineBean;
 import com.lu.beauty.bean.DesignerRecommendBean;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
@@ -27,7 +28,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
  * Created by GuoXuanYu on 16/11/26.
  */
 
-public class DesignerHeadMoreActivity extends BaseActivity implements View.OnClickListener,SwipeBackActivityBase {
+public class DesignerHeadMoreActivity extends BaseActivity implements View.OnClickListener,SwipeBackActivityBase,DesignerClickListner {
 
     private ImageView back;
     private TextView title;
@@ -131,5 +132,22 @@ public class DesignerHeadMoreActivity extends BaseActivity implements View.OnCli
     public void scrollToFinishActivity() {
         Utils.convertActivityToTranslucent(this);
         getSwipeBackLayout().scrollToFinishActivity();
+    }
+
+    @Override
+    public void headItemClick(DesignerRecommendBean.DataBean.CategoriesBeanX beanX) {
+
+    }
+
+    @Override
+    public void popItemClick(DesignerHeadlineBean.DataBean.CategoriesBean.SubCategoriesBean bean) {
+
+    }
+
+    @Override
+    public void allAdapterItemClick(int id) {
+        Intent intent = new Intent(DesignerHeadMoreActivity.this,DesignerItemActivity.class);
+        intent.putExtra("id",id + "");
+        startActivity(intent);
     }
 }

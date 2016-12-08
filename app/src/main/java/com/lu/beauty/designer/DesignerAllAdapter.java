@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -31,13 +33,17 @@ import cn.bmob.v3.listener.UpdateListener;
 
 public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     private ArrayList<DesignerRecommendBean.DataBean.DesignersBean> arrayList;
+
     private Context context;
     private boolean isClick;
     // by 小玉
     private static int attentionCount = 0;
 
-    public DesignerAllAdapter(Context context) {
-        this.context = context;
+    private DesignerClickListner designerClickListner;
+
+
+    public DesignerAllAdapter(DesignerClickListner designerClickListner) {
+        this.designerClickListner = designerClickListner;
     }
 
     public void setArrayList(ArrayList<DesignerRecommendBean.DataBean.DesignersBean> arrayList) {
@@ -51,14 +57,27 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
 
     }
 
-    @Override
-    public void onBindViewHolder(final CommonViewHolder holder, final int position) {
 
-        holder.setText(R.id.design_item_name, arrayList.get(position).getName());
-        holder.setText(R.id.design_item_label, arrayList.get(position).getLabel());
-        holder.setCircleImage(R.id.design_item_avatar, arrayList.get(position).getAvatar_url());
-        holder.setImage(R.id.design_item_images, arrayList.get(position).getRecommend_images().get(0));
-        // TODO  周云霄
+
+    public void onBindViewHolder(final CommonViewHolder holder, final int position) {
+        holder.setText(R.id.design_item_name,arrayList.get(position).getName());
+        holder.setText(R.id.design_item_label,arrayList.get(position).getLabel());
+        holder.setCircleImage(R.id.design_item_avatar,arrayList.get(position).getAvatar_url());
+        holder.setImage(R.id.design_item_images,arrayList.get(position).getRecommend_images().get(0));
+        if (arrayList.get(position).getType() == 1) {
+            holder.setTextVisibale(R.id.design_item_follow);
+            holder.setText(R.id.design_item_follow, arrayList.get(position).getFollow_num() + " 关注");
+        }
+        holder.setItemClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                designerClickListner.allAdapterItemClick(arrayList.get(position).getId());
+
+            }
+      });
+
+
+//        //        // TODO  周云霄
         holder.setViewClick(R.id.design_item_button, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +145,7 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
 
                         ArrayList<String> arrayList = new ArrayList<String>();
 
-                        if (attentionCount == 0){
+                        if (attentionCount == 0) {
                             // 第一次关注, 不用获取集合数据
                             attentionCount++;
 
@@ -173,12 +192,17 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
 
                 }
             }
-        });
+       });
+
+
     }
 
 
-    @Override
-    public int getItemCount() {
-        return arrayList == null ? 0 : arrayList.size();
-    }
-}
+                @Override
+                public int getItemCount () {
+
+                    return arrayList == null ? 0 : arrayList.size();
+
+
+                }
+            }

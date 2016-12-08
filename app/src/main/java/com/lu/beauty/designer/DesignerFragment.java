@@ -1,6 +1,7 @@
 package com.lu.beauty.designer;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 
 import android.support.v4.view.ViewPager;
@@ -36,6 +37,14 @@ public class DesignerFragment extends BaseFragment {
         designerTabLayout.setupWithViewPager(designerViewPager);
         designerTabLayout.setSelectedTabIndicatorColor(Color.WHITE);
         designerTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
+//        Fragment fragment = new Fragment();
+//        //Obj
+//        Object data = new Object();
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable("dsf",data);
+//        fragment.setArguments(bundle);
+
 
     }
 }

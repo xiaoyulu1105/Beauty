@@ -44,16 +44,18 @@ public class ProductFragment extends BaseFragment {
         productTabLayout.setupWithViewPager(productViewPager);
         productTabLayout.setSelectedTabIndicatorColor(Color.WHITE);
         productTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
         HttpUtil.getProductTitleBean(new ResponseCallBack<ProductTitleBean>() {
             @Override
             public void onResponse(ProductTitleBean productTitleBean) {
                 Log.d("打印这个", "productTitleBean.getData().getCategories().size():" + productTitleBean.getData().getCategories().size());
                 for (int i = 0; i < productTitleBean.getData().getCategories().size(); i++) {
+
                     arrayList.add(productTitleBean.getData().getCategories().get(i).getName());
-                    adapter.setS(arrayList);
-                    productViewPager.setAdapter(adapter);
-                    Log.d("打印这个", productTitleBean.getData().getCategories().get(i).getName());
                 }
+                    adapter.setBeanArrayList(arrayList);
+                    productViewPager.setAdapter(adapter);
+
             }
 
             @Override
@@ -62,7 +64,7 @@ public class ProductFragment extends BaseFragment {
             }
         });
         arrayList.add(0, "Daily");
-        adapter.setS(arrayList);
+//        adapter.setS(arrayList);
         adapter.notifyDataSetChanged();
 
 

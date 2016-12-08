@@ -3,12 +3,39 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
+    android:id="@+id/vp_designer_layout"
     >
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/designer_tv"/>
+        android:id="@+id/designer_popcoords"
+        ></LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#2C2C2C"
+        android:id="@+id/designer_pop"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+            android:padding="10dp"
+            android:id="@+id/designer_poptext"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/icon_category_unfold"
+            android:paddingTop="15dp"
+            android:paddingRight="10dp"
+            />
+    </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

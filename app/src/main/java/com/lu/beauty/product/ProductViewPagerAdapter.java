@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
+import com.lu.beauty.bean.ProductTitleBean;
+
 import java.util.ArrayList;
 
 
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 
 public class ProductViewPagerAdapter extends FragmentPagerAdapter{
     private SparseArray<Fragment> arrayList;
-    private ArrayList<String> title;
+    private ArrayList<String> beanArrayList;
 
 
     public ProductViewPagerAdapter(FragmentManager fm) {
@@ -23,8 +25,8 @@ public class ProductViewPagerAdapter extends FragmentPagerAdapter{
         arrayList = new SparseArray<>();
     }
 
-    public void setS(ArrayList<String> s) {
-        this.title = s;
+    public void setBeanArrayList(ArrayList<String> beanArrayList) {
+        this.beanArrayList = beanArrayList;
     }
 
     @Override
@@ -37,11 +39,11 @@ public class ProductViewPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public int getCount() {
-        return title == null ? 0: title.size();
+        return beanArrayList == null ? 0: beanArrayList.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return title.get(position);
+        return beanArrayList.get(position);
     }
 }

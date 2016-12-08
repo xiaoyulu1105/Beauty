@@ -23,9 +23,9 @@ public class UrlValues {
     public static final String PRODUCT_COMMON_URL_CENTER = "?page=";
     public static final String PRODUCT_COMMON_URL_END = "&page_size=30";
     // 例:                                               拼接的我也不知道是什么玩意
-    // http://design.zuimeia.com/api/v1/products/category/**1**/?page=1&page_size=30
-    // &device_id=864895024466920&platform=android&lang=zh&appVersion=1.2.4&appVersionCode=10240
-    // &systemVersion=17&countryCode=CN&user_id=86035&token=4h8-a4e2a822e31549c512fe&package_name=com.zuiapps.zuiworld
+//     http://design.zuimeia.com/api/v1/products/category/**1**/?page=1&page_size=30
+//     &device_id=864895024466920&platform=android&lang=zh&appVersion=1.2.4&appVersionCode=10240
+//     &systemVersion=17&countryCode=CN&user_id=86035&token=4h8-a4e2a822e31549c512fe&package_name=com.zuiapps.zuiworld
     // product页通用二级url
     public static final String PRODUCT_COMMON_SECOND = "http://design.zuimeia.com/api/v1/product/";
     // 例:                                      拼接id
@@ -49,6 +49,13 @@ public class UrlValues {
     // 推荐 第一级 点击头布局
     public static final String DESIGNER_RECOMMEND_LEFTHEAD ="http://design.zuimeia.com/api/v1/designers/category/";
     public static final String DESIGNER_RECOMMEND_RIGHTHEAD = "/?page_size=30&page=";
+
+    // 第二级页面  信息获取
+    public static final String DESIGNER_SECOND_DESIGHNERHEAD = "http://design.zuimeia.com/api/v1/";
+    public static final String DESIGNER_SECOND_DESIGHNERLAST = "/?page=1&page_size=30";
+    public static final String DESIGNER_SECOND_PRODUCTS = "products/designer/";
+    public static final String DESIGNER_SECOND_ARTICLES = "articles/designer/";
+    public static final String DESIGNER_SECOND_SHOPS = "shops/designer/";
 
     // 第二级
     public static final String DESIGNER_DETAIL_URL = "http://design.zuimeia.com/api/v1/designer/145/";
