@@ -1,0 +1,11 @@
+
+article包下的 类的清单说明:
+
+1. ArticleFragment: 画报第一级Fragment
+2. ArticleDetailActivity: 画报第二级的Activity
+3. ArticleGestureDetectorListener: 画报二级, 手势的滑动监听
+
+4. ArticleImageSingleton: 用于存放画报第二级的 富文本和Title的图片的单例类
+5. ArticleBannerActivity: 实现图片轮播的Activity
+6. ArticleBannerVPAdapter: 实现图片轮播 的VIewPager的适配器
+
