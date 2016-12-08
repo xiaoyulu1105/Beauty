@@ -23,7 +23,7 @@ import com.lu.beauty.bean.DesignerHeadlineBean;
 import com.lu.beauty.bean.DesignerRecommendBean;
 import com.lu.beauty.bean.ProductCommonBean;
 import com.lu.beauty.designer.DesignerAllAdapter;
-import com.lu.beauty.designer.DesignerClickListner;
+import com.lu.beauty.designer.DesignerClickListener;
 import com.lu.beauty.designer.DesignerHeadMoreActivity;
 import com.lu.beauty.designer.PopAdapter;
 import com.lu.beauty.internet.HttpUtil;
@@ -40,7 +40,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * , otherwise it is written by zhouyunxiao
  * 有物Fragment
  */
-public class ProductVpFragment extends BaseFragment implements DesignerClickListner, View.OnClickListener{
+public class ProductVpFragment extends BaseFragment implements DesignerClickListener, View.OnClickListener{
     private static final String KEY = "position";
     private static final String JEWELRY = "3";
     private static final String BAG = "1";

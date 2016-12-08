@@ -1,12 +1,9 @@
 package com.lu.beauty.designer;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
@@ -20,9 +17,9 @@ import java.util.ArrayList;
 
 public class HeadItemAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     private ArrayList<DesignerRecommendBean.DataBean.CategoriesBeanX> arrayList;
-    private DesignerClickListner designerClickListner;
+    private DesignerClickListener designerClickListner;
 
-    public HeadItemAdapter(DesignerClickListner designerClickListner) {
+    public HeadItemAdapter(DesignerClickListener designerClickListner) {
         this.designerClickListner = designerClickListner;
     }
 

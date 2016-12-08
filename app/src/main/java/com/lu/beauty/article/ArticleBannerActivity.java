@@ -94,7 +94,6 @@ public class ArticleBannerActivity extends BaseActivity implements View.OnClickL
         mBannerPointsLl.removeAllViews();
 
         final ArrayList<PointImageView> pointImageViews = new ArrayList<>();
-//        int index = 0; // 点击的图片 对应于所在集合的下标值
 
         for (int i = 0; i < imageUrlList.size(); i++) {
             PointImageView pointImageView = new PointImageView(ArticleBannerActivity.this);
@@ -103,9 +102,6 @@ public class ArticleBannerActivity extends BaseActivity implements View.OnClickL
                     0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
             mBannerPointsLl.addView(pointImageView, layoutParams);
 
-//            if (getImageUrl.equals(imageUrlList.get(i))) {
-//                index = i;
-//            }
         }
 
         mBannerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

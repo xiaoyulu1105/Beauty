@@ -28,7 +28,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
  * Created by GuoXuanYu on 16/11/26.
  */
 
-public class DesignerHeadMoreActivity extends BaseActivity implements View.OnClickListener,SwipeBackActivityBase,DesignerClickListner {
+public class DesignerHeadMoreActivity extends BaseActivity implements View.OnClickListener,SwipeBackActivityBase,DesignerClickListener {
 
     private ImageView back;
     private TextView title;
@@ -59,7 +59,7 @@ public class DesignerHeadMoreActivity extends BaseActivity implements View.OnCli
         type = intent.getStringExtra("id");
         Log.d("DesignerHeadMoreActivit", "type:" + type);
         arrayList = new ArrayList<>();
-        allAdapter = new DesignerAllAdapter(this);
+        allAdapter = new DesignerAllAdapter(this, DesignerHeadMoreActivity.this);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rv.setLayoutManager(manager);
         headConmmendMore(type,page);
