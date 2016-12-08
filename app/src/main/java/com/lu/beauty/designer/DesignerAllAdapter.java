@@ -18,12 +18,8 @@ import com.lu.beauty.bean.DesignerRecommendBean;
 import com.lu.beauty.my.LoginActivity;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 
-import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 
@@ -39,10 +35,9 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     // by 小玉
     private static int attentionCount = 0;
 
-    private DesignerClickListner designerClickListner;
+    private DesignerClickListener designerClickListner;
 
-
-    public DesignerAllAdapter(DesignerClickListner designerClickListner) {
+    public DesignerAllAdapter(DesignerClickListener designerClickListner) {
         this.designerClickListner = designerClickListner;
     }
 
@@ -79,7 +74,7 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
       });
 
 
-//        //        // TODO  周云霄
+        // TODO  周云霄
         holder.setViewClick(R.id.design_item_button, new View.OnClickListener() {
             @Override
             public void onClick(View v) {

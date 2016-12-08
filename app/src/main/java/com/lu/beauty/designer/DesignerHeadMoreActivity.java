@@ -28,7 +28,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
  * Created by GuoXuanYu on 16/11/26.
  */
 
-public class DesignerHeadMoreActivity extends BaseActivity implements View.OnClickListener,SwipeBackActivityBase,DesignerClickListner {
+public class DesignerHeadMoreActivity extends BaseActivity implements View.OnClickListener,SwipeBackActivityBase,DesignerClickListener {
 
     private ImageView back;
     private TextView title;

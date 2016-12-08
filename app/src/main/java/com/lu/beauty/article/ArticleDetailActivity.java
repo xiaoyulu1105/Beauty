@@ -113,9 +113,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 获取界面跳转时的id值
         Intent intent = getIntent();
         mGetId = intent.getIntExtra(ArticleFragment.INTENT_ID_KEY, 117);
-        //
-        //
-        Toast.makeText(this, "mGetId:" + mGetId, Toast.LENGTH_SHORT).show();
 
         // 使用OkHTTP 请求画报的二级数据
         articleDetailDataRequest();
@@ -143,22 +140,19 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.article_detail_title_image_iv:
 
-                // TODO 将该图片作为轮播图的第一张图片, 富文本的图片顺序不对
-
+                // 将该title图片作为轮播图的第一张图片
+                // TODO 富文本的图片顺序不对
                 mImageUrlList = mImageSingleton.getImageUrlArrayList();
-                Log.d("ArticleDetailActivity", "mImageUrlList.size():" + mImageUrlList.size());
+                Log.d("ArticleDetailActivity", "轮播图片的数目:" + mImageUrlList.size());
 
                 Intent intent = new Intent(ArticleDetailActivity.this, ArticleBannerActivity.class);
-                intent.putExtra("ArrayList", mImageUrlList);
-                intent.putExtra("String", mTitleImageUrl);
+                intent.putExtra(HtmlTextView.INTENT_ARRAY_LIST_KEY, mImageUrlList); // "ArrayList"
+                intent.putExtra(HtmlTextView.INTENT_SOUR_URL_KEY, mTitleImageUrl); // "String"
                 startActivity(intent);
 
                 break;
             case R.id.article_detail_top_author_rl:
-
-                Toast.makeText(this, "mGetId:" + mGetId, Toast.LENGTH_SHORT).show();
-
-                // TODO 跳转到 轩轩的三级界面
+                // 跳转到 轩轩的二级界面
                 Intent intent1 = new Intent(ArticleDetailActivity.this, DesignerItemActivity.class);
                 intent1.putExtra(DesignerItemActivity.INTENT_ID_KEY, mDesignerId);
                 startActivity(intent1);
