@@ -312,6 +312,11 @@ public class ProductVpFragment extends BaseFragment implements DesignerClickList
         changePopItemBackground(popTextValue,bean.getId());
     }
 
+    @Override
+    public void allAdapterItemClick(int id) {
+
+    }
+
     public void headConmmendMore(String type,int page){
         okHttp(type, page);
     }
