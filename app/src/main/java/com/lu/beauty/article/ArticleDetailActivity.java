@@ -45,7 +45,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
     private int mGetId;
 
-    private LinearLayout mUpPopLl; // 让 展示图片的 popupWindow 在这条线之下
     private RelativeLayout mTopRl; // 显示和隐藏的相对布局
     private Button mTopReturnBtn;   // 返回
     private TextView mTopUsernameTV; // 显示的设计师名字
@@ -80,7 +79,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void initViews() {
 
-        mUpPopLl = bindView(R.id.article_detail_up_pop_ll);
         mTopRl = (RelativeLayout) findViewById(R.id.article_detail_top_rl);
         mTopReturnBtn = bindView(R.id.article_detail_top_return_btn);
         mTopDesignerRl = bindView(R.id.article_detail_top_author_rl);

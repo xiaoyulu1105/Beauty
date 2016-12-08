@@ -162,9 +162,9 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
                             @Override
                             public void done(BmobException e) {
                                 if (e == null) {
-                                    Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(context, "上传失败", Toast.LENGTH_SHORT).show();
+                                  //  Toast.makeText(context, "上传失败", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

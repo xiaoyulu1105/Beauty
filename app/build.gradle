@@ -47,7 +47,8 @@ dependencies {
     //compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.android.support:design:24.2.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile files('libs/lite-orm-1.9.2.jar')
+    //libs 下 没有jar包
+    //compile files('libs/lite-orm-1.9.2.jar')
 
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
     compile 'com.android.support:recyclerview-v7:24.2.1'
