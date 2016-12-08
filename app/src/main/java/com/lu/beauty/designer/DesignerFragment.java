@@ -3,7 +3,7 @@ package com.lu.beauty.designer;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.view.ViewPager;
 
 import com.lu.beauty.R;
@@ -27,6 +27,7 @@ public class DesignerFragment extends BaseFragment {
     protected void initView() {
         designerTabLayout = bindView(R.id.designer_tab_layout);
         designerViewPager = bindView(R.id.designer_view_pager);
+
     }
 
     @Override
@@ -47,3 +48,18 @@ public class DesignerFragment extends BaseFragment {
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

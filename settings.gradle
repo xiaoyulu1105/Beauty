@@ -1,1 +1,1 @@
-include ':app','deckview'
+include ':app',':deckview'
