@@ -42,8 +42,9 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     private DesignerClickListner designerClickListner;
 
 
-    public DesignerAllAdapter(DesignerClickListner designerClickListner) {
+    public DesignerAllAdapter(DesignerClickListner designerClickListner, Context context) {
         this.designerClickListner = designerClickListner;
+        this.context = context;
     }
 
     public void setArrayList(ArrayList<DesignerRecommendBean.DataBean.DesignersBean> arrayList) {
@@ -115,29 +116,6 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
                     //判断是否登录
                     AttentionUser designerAttentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
 //                     BmobUser bmobUser = BmobUser.getCurrentUser();
-//                    if (designerAttentionUser != null) {
-//
-//                        //判断是否关注
-//                        //关注
-//                        if (collectionsData.equals(designerAttentionUser.getAttentionName())){
-//
-//                        }else {
-//                            designerAttentionUser.setAttentionName(collectionsData);
-//
-//                            designerAttentionUser.update(new UpdateListener() {
-//                                @Override
-//                                public void done(BmobException e) {
-//                                    if (e == null) {
-//                                        Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
-//                                    } else {
-//                                        Toast.makeText(context, "上传失败", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                            });
-//                        }
-//
-//                    }
-
 
                     // !!!
                     // 将 数据存入 Bmob 的attentionList集合
@@ -157,16 +135,27 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
 
                         //判断是否关注
                         //关注
-                        arrayList.add(collectionsData);
-                        designerAttentionUser.setAttentionList(arrayList);
+                        //
+                        for (int i = 0; i < arrayList.size(); i++) {
+                            if (collectionsData.equals(arrayList.get(i))){
+                                holder.setButtonText(R.id.design_item_button, "已关注");
+                                holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
+                            }else {
+                                arrayList.add(collectionsData);
+                                designerAttentionUser.setAttentionList(arrayList);
+
+                            }
+
+                        }
+
 
                         designerAttentionUser.update(new UpdateListener() {
                             @Override
                             public void done(BmobException e) {
                                 if (e == null) {
-                                   // Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
                                 } else {
-                                  //  Toast.makeText(context, "上传失败", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "上传失败", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
