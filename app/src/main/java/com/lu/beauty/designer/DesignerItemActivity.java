@@ -56,6 +56,9 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
     private ViewPager viewPager;
     private String[] s = {"作品","画报","线上购买"};
 
+    // by 小玉
+    public static final String INTENT_ID_KEY = "id"; // 跳转时传递过来的id
+
     @Override
     protected int getLayout() {
         return R.layout.activity_designer_item;
@@ -80,7 +83,7 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        id = intent.getStringExtra("id");
+        id = intent.getStringExtra(INTENT_ID_KEY);
         Log.d("DesignerItemActivity", id);
         swipeBackActivityHelper = new SwipeBackActivityHelper(this);
         swipeBackActivityHelper.onActivityCreate();
