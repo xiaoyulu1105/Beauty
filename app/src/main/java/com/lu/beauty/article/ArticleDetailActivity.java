@@ -23,6 +23,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
 import com.lu.beauty.bean.ArticleDetailBean;
+import com.lu.beauty.designer.DesignerItemActivity;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
 import com.lu.beauty.richtext.HtmlTextView;
@@ -45,7 +46,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
     private int mGetId;
 
-    private LinearLayout mUpPopLl; // 让 展示图片的 popupWindow 在这条线之下
     private RelativeLayout mTopRl; // 显示和隐藏的相对布局
     private Button mTopReturnBtn;   // 返回
     private TextView mTopUsernameTV; // 显示的设计师名字
@@ -80,7 +80,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void initViews() {
 
-        mUpPopLl = bindView(R.id.article_detail_up_pop_ll);
         mTopRl = (RelativeLayout) findViewById(R.id.article_detail_top_rl);
         mTopReturnBtn = bindView(R.id.article_detail_top_return_btn);
         mTopDesignerRl = bindView(R.id.article_detail_top_author_rl);
@@ -113,6 +112,9 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 获取界面跳转时的id值
         Intent intent = getIntent();
         mGetId = intent.getIntExtra(ArticleFragment.INTENT_ID_KEY, 117);
+        //
+        //
+        Toast.makeText(this, "mGetId:" + mGetId, Toast.LENGTH_SHORT).show();
 
         // 使用OkHTTP 请求画报的二级数据
         articleDetailDataRequest();
@@ -153,9 +155,12 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.article_detail_top_author_rl:
 
-                Toast.makeText(this, "跳转到轩轩的三级界面", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "mGetId:" + mGetId, Toast.LENGTH_SHORT).show();
 
                 // TODO 跳转到 轩轩的三级界面
+                Intent intent1 = new Intent(ArticleDetailActivity.this, DesignerItemActivity.class);
+                intent1.putExtra(DesignerItemActivity.INTENT_ID_KEY, mGetId);
+                startActivity(intent1);
 
                 break;
             default:
@@ -163,7 +168,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
                 break;
         }
     }
-
 
     private void articleDetailDataRequest() {
         HttpUtil.getArticleDetailBean(mGetId, new ResponseCallBack<ArticleDetailBean>() {
@@ -202,8 +206,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         String content = dataBean.getContent();
         // 显示 富文本数据
         mHtmlTextView.setHtmlFromString(content);
-
-
     }
 
     /**
@@ -246,12 +248,15 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 显示 标题信息
         mTitleTV.setText(title);
         mSubTitleTV.setText(subTitle);
-        Glide.with(ArticleDetailActivity.this).load(mTitleImageUrl).into(mTitleImageIV);
+        Glide.with(ArticleDetailActivity.this)
+                .load(mTitleImageUrl)
+                .placeholder(R.mipmap.loading)
+                .into(mTitleImageIV);
 
     }
 
     /**
-     * 显示画报二级顶端Top 的数据
+     * 显示 画报二级顶端Top 的数据
      * @param dataBean 传递过来的数据: articleDetailBean.getData()
      */
     private void showTopData(ArticleDetailBean.DataBean dataBean) {
@@ -263,7 +268,9 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 显示 top 栏设计师的信息
         mTopUsernameTV.setText(designerName);
         mTopWhereTV.setText(designerCity);
-        Glide.with(ArticleDetailActivity.this).load(designerIcon).asBitmap().into(new SimpleTarget<Bitmap>() {
+        Glide.with(ArticleDetailActivity.this)
+                .load(designerIcon).asBitmap()
+                .into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 CircleDrawable drawable = new CircleDrawable(resource);
@@ -271,7 +278,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
             }
         });
     }
-
 
     /**
      * 复写 SwipeBackActivityBase接口的三个抽象方法:

@@ -24,6 +24,7 @@ public class UrlImageGetter implements Html.ImageGetter {
     private TextView mTextView;
     private int width;
 
+    // 将 富文本的图片 存入单例类
     private ArticleImageSingleton singleton = ArticleImageSingleton.getInstance();
     private ArrayList<String> mArrayList = new ArrayList<>();
 
@@ -36,26 +37,29 @@ public class UrlImageGetter implements Html.ImageGetter {
 
 
     @Override
-    public Drawable getDrawable(String source) {
+    public Drawable getDrawable(final String source) {
         final UrlDrawable urlDrawable = new UrlDrawable();
-        //
-        final String source1 = source;
+
         Glide.with(mContext).load(source).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 if (resource != null) {
                     urlDrawable.mBitmap = resource;
                     urlDrawable.setBounds(0, 0, resource.getWidth(), resource.getHeight());
+
+                    // Android中实现view的更新有两组方法，一组是invalidate，另一组是postInvalidate，
+                    // 其中前者是在UI线程自身中使用，而后者在非UI线程中使用。
+                    // http://www.cnblogs.com/rayray/p/3437048.html
+
                     mTextView.invalidate();
                     mTextView.setText(mTextView.getText());
 
                     // 获取 画报二级的 图片网址
                     // 先获取在 ArticleDetailActivity 中的showTitleData 方法中存入单例类 的第一张图片
                     mArrayList = singleton.getImageUrlArrayList();
-                    mArrayList.add(source1);
+                    mArrayList.add(source);
                     singleton.setImageUrlArrayList(mArrayList);
                 }
-
             }
         });
 

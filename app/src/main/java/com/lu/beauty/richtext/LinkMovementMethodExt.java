@@ -23,8 +23,9 @@ public class LinkMovementMethodExt extends LinkMovementMethod{
     private int y1;
     private int y2;
 
+    // AtomicReference: 这是何种引用方式?
     private static final AtomicReference<LinkMovementMethodExt> INSTANCE =
-            new AtomicReference<LinkMovementMethodExt>();
+            new AtomicReference<>();
 
     public LinkMovementMethodExt(Handler handler, Class spanClass) {
         mHandler = handler;
@@ -67,13 +68,19 @@ public class LinkMovementMethodExt extends LinkMovementMethod{
                     Selection.setSelection(buffer,
                             buffer.getSpanStart(spans[0]),
                             buffer.getSpanEnd(spans[0]));
+
                     MessageSpan obj = new MessageSpan();
                     obj.setObject(spans);
                     obj.setTextView(widget);
+
                     Message message = mHandler.obtainMessage();
                     message.obj = obj;
-                    message.what = 200;
-                    message.sendToTarget();
+                    message.what = HtmlTextView.MESSAGE_WHAT; // 200
+                    // message.sendToTarget();
+
+                    // 常用的的 发送message的方式
+                    mHandler.sendMessage(message);
+
                     return true;
                 }
             }
