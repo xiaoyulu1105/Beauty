@@ -64,8 +64,10 @@ public class DesignerHeadMoreActivity extends BaseActivity implements View.OnCli
         rv.setLayoutManager(manager);
         headConmmendMore(type,page);
         rv.setAdapter(allAdapter);
+
         swipeBackActivityHelper = new SwipeBackActivityHelper(this);
         swipeBackActivityHelper.onActivityCreate();
+
         rv.setOnScrollListener(new EndLessOnScrollListener(manager) {
             @Override
             protected void onLoadMore(int curentPage) {

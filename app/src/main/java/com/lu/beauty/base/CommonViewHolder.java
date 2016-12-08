@@ -185,7 +185,11 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
         textView.setVisibility(View.VISIBLE); // 设置为可见
         return this;
     }
-
+    public CommonViewHolder setButtonInvisibale(int id){
+        Button button = getView(id);
+        button.setVisibility(View.INVISIBLE); // 设置为不可见
+        return this;
+    }
 
 //    public void setBanner(int sale_rv_banner, int center, int i, int circleIndicator, List<String> imgUrls) {
 //
