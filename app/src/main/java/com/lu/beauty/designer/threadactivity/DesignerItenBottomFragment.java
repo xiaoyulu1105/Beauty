@@ -120,6 +120,9 @@ public class DesignerItenBottomFragment extends BaseFragment {
         HttpUtil.getDesignerSecondArticles(id, new ResponseCallBack<DesignerSecondArticlesBean>() {
             @Override
             public void onResponse(DesignerSecondArticlesBean designerSecondArticlesBean) {
+
+                Log.d("DesignerItenBottomFragm", id); // 201
+
                 title.setText(designerSecondArticlesBean.getData().getArticles().get(0).getTitle());
                 subtitle.setText(designerSecondArticlesBean.getData().getArticles().get(0).getSub_title());
                 Glide.with(mContext).load(designerSecondArticlesBean.getData().getArticles().get(0).getImage_url()).into(iv);

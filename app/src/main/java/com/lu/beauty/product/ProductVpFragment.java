@@ -38,7 +38,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 /**
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
- * 有物Fragment
+ * 有物显示数据的 Fragment
  */
 public class ProductVpFragment extends BaseFragment implements DesignerClickListener, View.OnClickListener{
     private static final String KEY = "position";

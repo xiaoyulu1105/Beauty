@@ -27,6 +27,7 @@ public class ProductViewPagerAdapter extends FragmentPagerAdapter{
 
     public void setBeanArrayList(ArrayList<String> beanArrayList) {
         this.beanArrayList = beanArrayList;
+        notifyDataSetChanged();
     }
 
     @Override

@@ -5,8 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
-import com.lu.beauty.product.ProductVpFragment;
-
 /**
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
@@ -14,12 +12,12 @@ import com.lu.beauty.product.ProductVpFragment;
 
 public class DesignerVpAdapter extends FragmentPagerAdapter{
     private SparseArray<Fragment> sparseArray;
-    private String [] s;
+    private String [] designersArray;
 
     public DesignerVpAdapter(FragmentManager fm, String[] strings) {
         super(fm);
         sparseArray = new SparseArray<>();
-        s = strings;
+        designersArray = strings;
     }
 
     @Override
@@ -32,11 +30,11 @@ public class DesignerVpAdapter extends FragmentPagerAdapter{
 
     @Override
     public int getCount() {
-        return s.length;
+        return designersArray.length;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return s[position];
+        return designersArray[position];
     }
 }

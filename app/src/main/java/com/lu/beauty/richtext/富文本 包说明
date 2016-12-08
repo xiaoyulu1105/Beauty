@@ -1,4 +1,6 @@
 
+richText文件说明:
+
 实现富文本的 自定义的TextView
 实现其中的 图片 的点击事件
 参考 丰神的github 的代码

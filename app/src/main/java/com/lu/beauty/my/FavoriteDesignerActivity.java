@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class FavoriteDesignerActivity extends BaseActivity implements View.OnClickListener {
 
-    private List<Collections> mCollectionses;
+    private List<Collections> mCollections;
     private ArrayList<AttentionUser> mAttentionUsers;
 
     private String mAttentionName;
@@ -44,7 +44,7 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
     protected void initViews() {
         mLvFavorite = bindView(R.id.lv_favorate);
         mIvBack = bindView(R.id.favorate_back);
-        mCollectionses = new ArrayList<>();
+        mCollections = new ArrayList<>();
         mAttentionUsers = new ArrayList<>();
 
 
@@ -54,7 +54,7 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
 
 //
 //
-// favorateAdapter.setAttentionUsers(mCollectionses);
+// favorateAdapter.setAttentionUsers(mCollections);
 //        lvFavorate.setAdapter(favorateAdapter);
 
     }
@@ -107,8 +107,6 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
                     }
                 }
             }
-
-
             // !!!
 
 

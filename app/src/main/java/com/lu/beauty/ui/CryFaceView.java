@@ -3,14 +3,18 @@ package com.lu.beauty.ui;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.tools.DensityTool;
@@ -29,10 +33,43 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
     private int mHeight;
     private int tempHeight;
     private View.OnClickListener mOnClickListener;
+    //
     private int mDP2PX_first; // 最初的高度
     private int mDP2PX_final = -1; // 最终的高度
+    private int mDP_first = 30;  // 表情的高度
+    private int mDP_default = 150; // 默认高度
 
     private boolean isChange = false; // 判断表情是否处于变化状态, 默认不是
+
+    // by 小玉
+    private  boolean isSelected = false; // 用一个静态变量来判断是否选择了 哭脸
+    private int myBackgroundDrawable = R.drawable.shap;  // 哭脸的默认背景色为白色
+    private SmileFaceView mSmileFaceView;
+
+    // 设置 isSelected 的 set get方法
+    public  boolean getIsSelected() {
+        return isSelected;
+    }
+    public  void setIsSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
+    // 设置 myBackgroundDrawable 的 set get 方法
+    public  int getMyBackgroundDrawable() {
+        return myBackgroundDrawable;
+    }
+    public void setMyBackgroundDrawable(int myBackgroundDrawable) {
+        this.myBackgroundDrawable = myBackgroundDrawable;
+        // 刷新 UI
+        this.invalidate();
+    }
+
+    // 对象 mSmileFaceView 的set方法
+    public void setSmileFaceView(SmileFaceView smileFaceView) {
+        Log.d("CryFaceView", "setSmileFaceView---参数的smile对象" + smileFaceView); // 有打印
+        mSmileFaceView = smileFaceView;
+        Log.d("CryFaceView", "setSmileFaceView---哭脸类中的smile对象");
+    }
 
     public boolean isChange() {
         return isChange;
@@ -66,13 +103,14 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
         super(context, attrs);
         mContext = context;
 
-
         //初始化方法
         init();
     }
 
     private void init() {
-        setBackground(getResources().getDrawable(R.drawable.shap));
+        //
+        setBackground(getResources().getDrawable(myBackgroundDrawable));
+
         //初始化
         mHandler = new Handler();
         mButton = new Button(mContext);
@@ -80,11 +118,10 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
 
         // DensityTool的方法把DP转换PX
 
-        mDP2PX_first = DensityTool.dip2px(mContext, 30);
-//        mDP2PX_final = DensityTool.dip2px(mContext, 150);
+        mDP2PX_first = DensityTool.dip2px(mContext, mDP_first);
         if (mDP2PX_final == -1) {
             // 当未动态设置高度成功, 默认高度为150
-            mDP2PX_final = DensityTool.dip2px(mContext, 150);
+            mDP2PX_final = DensityTool.dip2px(mContext, mDP_default);
         }
 
 
@@ -103,6 +140,21 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
+
+        Log.d("CryFaceView", "点击了哭脸");
+
+        // 如果笑脸是选中状态
+        if (mSmileFaceView.getIsSelected()) {
+
+            Log.d("CryFaceView", "笑脸被选择过了" + mSmileFaceView); // 有打印
+            // 将笑脸变成白色
+            // TODO 想在这里设置笑脸的 背景drawable, 但是 new一个新的笑脸对象没有用
+            // TODO 主要是现在在 ProductListViewAdapter 里不能监听到 哭脸的点击事件, why?
+            // TODO 想要能监听到点击事件该怎么办?
+            mSmileFaceView.setMyBackgroundDrawable(R.drawable.shap); // new的没用,不能对应
+            mSmileFaceView.setIsSelected(false);
+        }
+        isSelected = true;
 
         //获取到组件的高
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
@@ -145,6 +197,7 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
         //点击判断
         if (mOnClickListener != null) {
             mOnClickListener.onClick(v);
+
         }
     }
 
@@ -159,6 +212,8 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
 
         // 动画结束, 布尔值为false
         isChange = false;
+
+        //
     }
 
     // 开始

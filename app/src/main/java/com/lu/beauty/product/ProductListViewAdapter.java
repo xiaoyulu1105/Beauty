@@ -1,9 +1,11 @@
 package com.lu.beauty.product;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
@@ -19,6 +21,8 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 /**
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
+ *
+ * 显示有物数据的ListView的适配器, 也是在这里显示笑脸
  */
 
 public class ProductListViewAdapter extends BaseAdapter implements StickyListHeadersAdapter{
@@ -51,6 +55,7 @@ public class ProductListViewAdapter extends BaseAdapter implements StickyListHea
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final Context context = parent.getContext();
 
         CommonViewHolder viewHolder = CommonViewHolder.getViewHolder(convertView, parent, R.layout.item_product_body);
         Log.d("ProductListViewAdapter", "arrayList:" + arrayList);
@@ -72,10 +77,29 @@ public class ProductListViewAdapter extends BaseAdapter implements StickyListHea
         int likePercent = (int) GetPercent.getLikePercent(likeCount, disLikeCount);
         int dislikePercent = 100 - likePercent; // 100% 的值 为100
         // 找到两个表情, 设置高度
-        final CryFaceView cryFaceView = viewHolder.getView(R.id.daily_item_cry);
+        CryFaceView cryFaceView = viewHolder.getView(R.id.daily_item_cry);
         SmileFaceView smileFaceView = viewHolder.getView(R.id.daily_item_laugh);
         cryFaceView.setDP2PX_final((int) dislikeHeight);
         smileFaceView.setDP2PX_FINAL((int) likeHeight);
+        //
+        cryFaceView.setSmileFaceView(smileFaceView);
+        smileFaceView.setCryFaceView(cryFaceView);
+
+//        // TODO 判断当点击笑脸时 哭脸是白色的, 点击哭脸时同理
+        // 在这里监听点击无响应
+//        smileFaceView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(context, "点击了笑脸", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        smileFaceView.addOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(context, "点击了笑脸", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
         return viewHolder.getItemView();
     }
 
