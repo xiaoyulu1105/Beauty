@@ -51,6 +51,7 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
     private TextView mTopUsernameTV; // 显示的设计师名字
     private TextView mTopWhereTV;   // 设计师来自的地方
     private ImageView mTopDesignerIconIV; // 设计师头像
+    private String mDesignerId; // 设计师的Id
 
     private TextView mTitleTV; // title相关的组件
     private TextView mSubTitleTV;
@@ -159,7 +160,7 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
                 // TODO 跳转到 轩轩的三级界面
                 Intent intent1 = new Intent(ArticleDetailActivity.this, DesignerItemActivity.class);
-                intent1.putExtra(DesignerItemActivity.INTENT_ID_KEY, mGetId);
+                intent1.putExtra(DesignerItemActivity.INTENT_ID_KEY, mDesignerId);
                 startActivity(intent1);
 
                 break;
@@ -264,6 +265,9 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         String designerName = dataBean.getDesigners().get(0).getName();
         String designerCity = dataBean.getDesigners().get(0).getCity();
         String designerIcon = dataBean.getDesigners().get(0).getAvatar_url();
+
+        // 获取设计师Id 将其传递到 DesignerItemActivity类中
+        mDesignerId = String.valueOf(dataBean.getDesigners().get(0).getId());
 
         // 显示 top 栏设计师的信息
         mTopUsernameTV.setText(designerName);
