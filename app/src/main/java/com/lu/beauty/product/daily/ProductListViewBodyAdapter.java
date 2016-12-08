@@ -1,5 +1,8 @@
 package com.lu.beauty.product.daily;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -7,9 +10,14 @@ import android.widget.BaseAdapter;
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.bean.ProductDailyBean;
+import com.lu.beauty.designer.DesignerItemActivity;
+import com.lu.beauty.product.ProductItemActivity;
 import com.lu.beauty.tools.GetPercent;
 import com.lu.beauty.ui.CryFaceView;
 import com.lu.beauty.ui.SmileFaceView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -59,6 +67,13 @@ public class ProductListViewBodyAdapter extends BaseAdapter{
                 .setCircleImage(R.id.daily_item_user_icon, bean.getData()
                         .getProducts().get(position).getDesigner().getAvatar_url());
 
+       ArrayList<String> picRUrls = new ArrayList<>();
+        picRUrls.addAll(bean.getData().getProducts().get(position).getCover_images());
+//                bean.getData().getProducts().get(position).getCover_images();
+//        for (int i = 0; i < bean.getData().getProducts().get(position).getCover_images().size(); i++) {
+//            picRUrls.add(bean.getData().getProducts().get(position).getCover_images().get(i));
+//        }
+
         // 喜欢和不喜欢的值
         int likeCount, disLikeCount;
         likeCount = bean.getData().getProducts().get(position).getLike_user_num();
@@ -101,6 +116,52 @@ public class ProductListViewBodyAdapter extends BaseAdapter{
 
 
 
+        viewHolder.getView(R.id.daily_item_user_icon).setOnClickListener(new MyListener(bean.getData().getProducts().get(position).getDesigner().getId() + "", parent.getContext()));
+        viewHolder.getView(R.id.daily_item_img).setOnClickListener(new ProductListener(bean.getData().getProducts().get(position).getId() + "", parent.getContext(),picRUrls));
         return viewHolder.getItemView();
+
+
+
     }
+
+
+    class MyListener implements View.OnClickListener{
+        String id;
+        Context context;
+
+        public MyListener(String id, Context context) {
+            this.id = id;
+            this.context = context;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(context, DesignerItemActivity.class);
+            intent.putExtra("id", id);
+            context.startActivity(intent);
+        }
+    }
+
+    class ProductListener implements View.OnClickListener{
+        String id;
+        Context context;
+        ArrayList<String> urlList;
+
+        public ProductListener(String id, Context context,ArrayList<String> urlList) {
+            this.id = id;
+            this.context = context;
+            this.urlList = urlList;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(context, ProductItemActivity.class);
+            intent.putExtra("id", id);
+//            Log.d("ProductListener11", "picRUrls:" + picRUrls);
+            Log.d("ProductListener", "urlList:" + urlList);
+            intent.putStringArrayListExtra("pics", urlList);
+            context.startActivity(intent);
+        }
+    }
+
 }
