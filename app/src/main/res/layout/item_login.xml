@@ -20,10 +20,10 @@
             android:id="@+id/btn_login_back"
             />
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:text="登录"
-            android:textSize = "30dp"
+            android:textSize = "20dp"
             android:gravity="center_vertical"
             />
 
@@ -98,7 +98,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="30dp"
-            android:background="#29e710"
+            android:background="#ede0e6"
             android:text="登录"
             android:id="@+id/btn_login_login"
             android:textColor="#d70d0d" />
@@ -136,43 +136,8 @@
                 android:text="QQ"
                 />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <!--<ImageView-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@mipmap/ic_login_wechat"-->
-                <!--/>-->
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="微信"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!--<ImageView-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@mipmap/ic_login_weibo"-->
-                <!--/>-->
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="微博"
-                />
-        </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"

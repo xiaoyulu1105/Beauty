@@ -47,6 +47,7 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
     }
 
     private void signIn() {
+
         BmobUser bmobUser = new BmobUser();
         String id = mEtId.getText().toString();
         String psw = mEtPsw.getText().toString();

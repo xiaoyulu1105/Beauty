@@ -75,4 +75,6 @@ public class LoginPresenter implements LoginContract.Presenter {
      mModel.qqLogin();
 
     }
+
+
 }

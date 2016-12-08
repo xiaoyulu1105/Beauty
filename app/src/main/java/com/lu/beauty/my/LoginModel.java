@@ -33,6 +33,7 @@ public class LoginModel implements LoginContract.Model {
     private LoginContract.Presenter mPresenter;
     private Handler mHandler;
     private Context mContext;
+    private Platform mQq;
 
     public void setContext(Context context) {
         mContext = context;
@@ -88,18 +89,41 @@ public class LoginModel implements LoginContract.Model {
 
     @Override
     public void qqLogin() {
-        Platform qq = ShareSDK.getPlatform(QQ.NAME);
-        qq.authorize();
+        mQq = ShareSDK.getPlatform(QQ.NAME);
 
-        qq.setPlatformActionListener(new PlatformActionListener() {
+        mQq.authorize();
+
+        mQq.setPlatformActionListener(new PlatformActionListener() {
             @Override
             public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                PlatformDb platformDb = mQq.getDb();
 
-                PlatformDb platformDb = platform.getDb();
-                String name = platformDb.getUserName();
+                BmobUser bmobUser = new BmobUser();
+                String id = platformDb.getUserId().toString();
+                String psw = "000000";
+
+                bmobUser.setUsername(id);
+                bmobUser.setPassword(psw);
 
 
-              //   EventBus.getDefault().post(new EventQQ(name));
+                bmobUser.signUp(new SaveListener<BmobUser>() {
+                    @Override
+                    public void done(BmobUser bmobUser, BmobException e) {
+                        if (e != null){
+
+
+                        }else {
+
+
+                        }
+                    }
+                });
+                bmobUser.login(new SaveListener<BmobUser>() {
+                    @Override
+                    public void done(BmobUser bmobUser, BmobException e) {
+
+                    }
+                });
 
             }
 
@@ -113,8 +137,13 @@ public class LoginModel implements LoginContract.Model {
 
             }
         });
+        
 
     }
+
+
+        
+
 
 
 }

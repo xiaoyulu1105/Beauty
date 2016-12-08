@@ -1,15 +1,23 @@
 package com.lu.beauty.my;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Icon;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
+import com.lu.beauty.tools.CircleDrawable;
 
 
 import java.util.HashMap;
@@ -37,7 +45,10 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
 
     private LinearLayout mLlLogOut;
     private ImageButton mBtnBack;
+    private String mIcon;
+
     private PlatformActionListener mPlatformActionListener;
+    private ImageView mIvIcon;
 
     @Override
     protected int getLayout() {
@@ -48,18 +59,28 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
     protected void initViews() {
         mLlLogOut = bindView(R.id.ll_set_logout);
         mBtnBack = bindView(R.id.btn_set_back);
+        mIvIcon = bindView(R.id.iv_set_icon);
         setClick(this, mLlLogOut, mBtnBack);
-
+        Glide.with(this).load(mIcon).asBitmap().into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                CircleDrawable circleDrawable = new CircleDrawable(resource);
+                mIvIcon.setImageDrawable(circleDrawable);
+            }
+        });
     }
-
     @Override
     protected void initData() {
 //输出所有授权信息
         mPlatformActionListener = new PlatformActionListener() {
-             @Override
+
+
+            @Override
              public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
                  //输出所有授权信息
                  platform.getDb().exportData();
+                mIcon = platform.getDb().getUserIcon();
+
 
              }
 
@@ -84,7 +105,8 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
                 if (qq.isAuthValid()) {
                     qq.removeAccount(true);
                 }
-                qq.setPlatformActionListener(mPlatformActionListener);
+                BmobUser.logOut();
+              //  qq.setPlatformActionListener(mPlatformActionListener);
 //authorize与showUser单独调用一个即可
 //               qq.authorize();//单独授权，OnComplete返回的hashmap是空的
 //                qq.showUser(null);//授权并获取用户信息
@@ -96,7 +118,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
 
                 break;
             case R.id.btn_set_back:
-                finish();
+                onBackPressed();
                 break;
         }
 

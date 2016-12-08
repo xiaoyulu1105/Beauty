@@ -81,48 +81,45 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
 
                 break;
             case R.id.ll_login_qq:
-//   mPresenter.qqLogin();
+                mPresenter.qqLogin();
+                //mPresenter.signBmob();
+                getActivity().onBackPressed();
 
-                Platform qq = ShareSDK.getPlatform(QQ.NAME);
 
-                qq.authorize();//授权
+                //   qq.showUser(null);
 
-             //   qq.showUser(null);
-                Toast.makeText(mContext, "aaa", Toast.LENGTH_SHORT).show();
-
-                qq.setPlatformActionListener(new PlatformActionListener() {
-                    @Override
-                    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-                        Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
-                        PlatformDb platformDb = platform.getDb();
-                        String name = platformDb.getUserName();
-                        Log.d("LoginFragment", name);
-                        Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
-                        String icon = platformDb.getUserIcon();
-                        Intent intent = new Intent();
-                        intent.putExtra("name", name);
-                        intent.putExtra("icon", icon);
-                        getActivity().setResult(0, intent);
-                        getActivity().finish();
-
-                 //   EventBus.getDefault().post(new EventQQ(name));
-
-                    }
-
-                    @Override
-                    public void onError(Platform platform, int i, Throwable throwable) {
-                        Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancel(Platform platform, int i) {
-                        Toast.makeText(mContext, "取消", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                Log.d("LoginFragment", "aaaa");
-
-                break;
-
+//                qq.setPlatformActionListener(new PlatformActionListener() {
+//                    @Override
+//                    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+//                        Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
+//                        PlatformDb platformDb = platform.getDb();
+//                        String name = platformDb.getUserId();
+//
+//                        Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
+//                        String icon = platformDb.getUserIcon();
+//                        Toast.makeText(mContext, platformDb.getUserId(), Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent();
+//                        intent.putExtra("name", name);
+//                        intent.putExtra("icon", icon);
+//                        getActivity().setResult(0, intent);
+//                    EventBus.getDefault().post(new EventQQ(name));
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Platform platform, int i, Throwable throwable) {
+//                        Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onCancel(Platform platform, int i) {
+//                        Toast.makeText(mContext, "取消", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//                Log.d("LoginFragment", "aaaa");
+//
+//                break;
+//
         }
 
 

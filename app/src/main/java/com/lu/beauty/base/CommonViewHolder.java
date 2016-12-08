@@ -2,6 +2,7 @@ package com.lu.beauty.base;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -90,12 +91,27 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
         textView.setText(text);
         return this;
     }
+    //给Button设置背景 zyx
+    public CommonViewHolder setBackGround(int id, int  bitmap){
+        Button btn = getView(id);
+        btn.setBackgroundResource(bitmap);
+        return this;
+    }
+    //背景颜色和字迹颜色
+    public CommonViewHolder setBackColor(int id, int  color,int colour){
+        Button btn = getView(id);
+        btn.setBackgroundColor(color);
+        btn.setTextColor(colour);
+        return this;
+    }
 
     public CommonViewHolder setButtonText(int id,String text){
         Button btn = getView(id);
         btn.setText(text);
         return this;
     }
+    //
+
 
     public CommonViewHolder setImage(int id, int imgId) {
         ImageView imageView = getView(id);
@@ -143,6 +159,9 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
 
         return this;
     }
+
+
+
 
 //    public void setBanner(int sale_rv_banner, int center, int i, int circleIndicator, List<String> imgUrls) {
 //

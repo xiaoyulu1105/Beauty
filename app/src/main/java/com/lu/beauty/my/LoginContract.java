@@ -74,6 +74,11 @@ public interface LoginContract {
          */
         void qqLogin();
 
+              /**
+                  * 登录三方的时候直接注册一个Bmob账号
+                  */
+
+
     }
 
 
@@ -95,6 +100,7 @@ public interface LoginContract {
 
 
         void  qqLogin ();
+
 
 
     }

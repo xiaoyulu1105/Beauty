@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -23,8 +24,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.HashMap;
+
 import cn.bmob.v3.BmobUser;
 import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.tencent.qq.QQ;
@@ -43,6 +47,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     private String mNameQQ;
 
     private ImageView mIvHeadIcon;
+    private Platform mQq;
+    private LinearLayout mLlFavorate;
     // private ImageView mIvIcon;
 
 
@@ -56,6 +62,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         mBtnLogin = bindView(R.id.btn_my_login);
         mBtnSet = bindView(R.id.btn_my_set);
         mTvName = bindView(R.id.tv_my_name);
+        mLlFavorate = bindView(R.id.ll_my_favorate);
       //  mIvIcon = bindView(R.id.iv_head_icon);
 
 
@@ -67,21 +74,44 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
         mIvHeadIcon.setImageDrawable(circleByZYXDrawable);
 
-        setClick(this, mBtnLogin, mBtnSet);
+        setClick(this, mBtnLogin, mBtnSet,mLlFavorate);
+
 ////注册EventBus
      //  EventBus.getDefault().register(this);
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
 
+    }
     @Override
     protected void initData() {
-        Platform qq = ShareSDK.getPlatform(QQ.NAME);
+        mQq = ShareSDK.getPlatform(QQ.NAME);
         try {
-
-            PlatformDb platformDb = qq.getDb();
+            PlatformDb platformDb = mQq.getDb();
            String name = platformDb.getUserName();
            String  icon = platformDb.getUserIcon();
+
+
+
+            if (TextUtils.isEmpty(name)) {
+                //退出登录
+                mBtnLogin.setVisibility(View.VISIBLE);
+                mTvName.setVisibility(View.INVISIBLE);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mine_portrait);
+
+                CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
+
+                mIvHeadIcon.setImageDrawable(circleByZYXDrawable);
+                return;
+            }
+
+//           String id =  platformDb.getUserId();
+//            Log.d("MyFragment", id);
+
 
             if (!TextUtils.isEmpty(name)) {
                 mBtnLogin.setVisibility(View.GONE);
@@ -98,6 +128,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 });
 
             }
+
         } catch (NullPointerException e) {
 
         }
@@ -115,6 +146,10 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             case R.id.btn_my_set:
                 Intent intent1 = new Intent(getActivity(), SetActivity.class);
                 startActivityForResult(intent1,1);
+                break;
+            case R.id.ll_my_favorate:
+                Intent intent2 = new Intent(getActivity(),FavorateDesignerActivity.class);
+                startActivity(intent2);
                 break;
 
         }
@@ -146,43 +181,44 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 //
 // }
 
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
 //
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+//        if (data == null) {
+//            //退出登录
+//            mBtnLogin.setVisibility(View.VISIBLE);
+//            mTvName.setVisibility(View.INVISIBLE);
+//            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mine_portrait);
+//
+//            CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
+//
+//            mIvHeadIcon.setImageDrawable(circleByZYXDrawable);
+//            return;
+//        }
+//
+//        if (requestCode == 1 && 0 == resultCode && data != null) {
+//
+//            mNameQQ= data.getStringExtra("name");
+//            String iconQQ = data.getStringExtra("icon");
+//            Log.d("MyFragment123", mNameQQ);
+//            mBtnLogin.setVisibility(View.GONE);
+//            mTvName.setVisibility(View.VISIBLE);
+//          //  mBtnLogin.setVisibility(View.VISIBLE);
+//            mTvName.setText(mNameQQ);
+//           // VolleySingleton.getInstance().getImage(icon, myIv);
+//
+//            Glide.with(this).load(iconQQ).asBitmap().into(new SimpleTarget<Bitmap>() {
+//                @Override
+//                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+//                  CircleDrawable circleDrawable = new CircleDrawable(resource);
+//                    mIvHeadIcon.setImageDrawable(circleDrawable);
+//                }
+//            });
+//
+//        }
+//    }
 
-        if (data == null) {
-            //退出登录
-            mBtnLogin.setVisibility(View.VISIBLE);
-            mTvName.setVisibility(View.INVISIBLE);
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mine_portrait);
 
-            CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
-
-            mIvHeadIcon.setImageDrawable(circleByZYXDrawable);
-            return;
-        }
-
-        if (requestCode == 1 && 0 == resultCode && data != null) {
-
-            mNameQQ= data.getStringExtra("name");
-            String iconQQ = data.getStringExtra("icon");
-            Log.d("MyFragment123", mNameQQ);
-            mBtnLogin.setVisibility(View.GONE);
-            mTvName.setVisibility(View.VISIBLE);
-          //  mBtnLogin.setVisibility(View.VISIBLE);
-            mTvName.setText(mNameQQ);
-           // VolleySingleton.getInstance().getImage(icon, myIv);
-
-            Glide.with(this).load(iconQQ).asBitmap().into(new SimpleTarget<Bitmap>() {
-                @Override
-                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                  CircleDrawable circleDrawable = new CircleDrawable(resource);
-                    mIvHeadIcon.setImageDrawable(circleDrawable);
-                }
-            });
-
-
-        }
-    }
 }
