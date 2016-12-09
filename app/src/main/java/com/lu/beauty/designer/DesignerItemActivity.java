@@ -54,7 +54,7 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
     private TextView concept;
     private TabLayout tab;
     private ViewPager viewPager;
-    private String[] s = {"作品","画报","线上购买"};
+    private String[] s ;
 
     @Override
     protected int getLayout() {
@@ -129,6 +129,9 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
                 follow.setText(designerSecondBasicBean.getData().getFollow_num()+"关注者");
                 expandTV.setText(designerSecondBasicBean.getData().getDescription());
                 concept.setText(designerSecondBasicBean.getData().getConcept());
+                if (designerSecondBasicBean.getData().getArticle_num() != 0){
+
+                }
             }
 
             @Override
