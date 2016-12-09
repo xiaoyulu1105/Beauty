@@ -120,7 +120,7 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
                         e.printStackTrace();
                     }
                 }
-            }
+           }
 
         }
 

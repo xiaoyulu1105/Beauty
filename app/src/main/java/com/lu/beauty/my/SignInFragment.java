@@ -26,6 +26,7 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
     private EditText mEtId;
     private EditText mEtPsw;
     private Button mBtnSignIn;
+    private Button mButton;
 
     @Override
     protected int getLayout() {
@@ -37,7 +38,9 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
         mEtId = bindView(R.id.et_signin_id);
         mEtPsw = bindView(R.id.et_signin_password);
         mBtnSignIn = bindView(R.id.btn_signin_signin);
-        setClick(this,mBtnSignIn);
+        mButton = bindView(R.id.btn_signin_back);
+
+        setClick(this,mBtnSignIn,mButton);
 
     }
 
@@ -96,7 +99,16 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        signIn();
+        switch (v.getId()){
+            case R.id.btn_signin_back:
+                getActivity().onBackPressed();
+
+                break;
+            case R.id.btn_signin_signin:
+                signIn();
+                break;
+        }
+
 
     }
 }

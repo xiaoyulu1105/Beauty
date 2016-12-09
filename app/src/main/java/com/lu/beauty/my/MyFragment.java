@@ -73,19 +73,18 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        initData();
+
+
                 BmobUser bmobUser = BmobUser.getCurrentUser();
         if (bmobUser != null) {
             mBtnLogin.setVisibility(View.INVISIBLE);
             mTvName.setVisibility(View.VISIBLE);
             mTvName.setText(bmobUser.getUsername());
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_news_keep_heighlight);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.pig);
 
             CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
 
             mIvHeadIcon.setImageDrawable(circleByZYXDrawable);
-
-
 
         } else {
 
@@ -93,8 +92,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             mTvName.setVisibility(View.INVISIBLE);
 
         }
-
-
+       // initData();
     }
     @Override
     protected void initData() {
