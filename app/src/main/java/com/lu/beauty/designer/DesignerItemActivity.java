@@ -56,6 +56,9 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
     private ViewPager viewPager;
     private String[] s ;
 
+    // by 小玉
+    public static final String INTENT_ID_KEY = "id"; // 跳转时传递过来的id
+
     @Override
     protected int getLayout() {
         return R.layout.activity_designer_item;
@@ -80,7 +83,7 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        id = intent.getStringExtra("id");
+        id = intent.getStringExtra(INTENT_ID_KEY);
         Log.d("DesignerItemActivity", id);
         swipeBackActivityHelper = new SwipeBackActivityHelper(this);
         swipeBackActivityHelper.onActivityCreate();
@@ -127,7 +130,7 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
                 name.setText(designerSecondBasicBean.getData().getName());
                 label.setText(designerSecondBasicBean.getData().getLabel());
                 follow.setText(designerSecondBasicBean.getData().getFollow_num()+"关注者");
-                expandTV.setText(designerSecondBasicBean.getData().getDescription());
+                expandTV. setText(designerSecondBasicBean.getData().getDescription());
                 concept.setText(designerSecondBasicBean.getData().getConcept());
                 if (designerSecondBasicBean.getData().getArticle_num() != 0){
 
@@ -140,6 +143,7 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
             }
         });
     }
+
     // 初始化点
     public void initPoints(){
         pointImageViews = new ArrayList<>();

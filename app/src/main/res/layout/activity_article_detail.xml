@@ -5,22 +5,22 @@
     >
 
     <!-- 最下面的评论栏 -->
-    <LinearLayout
-        android:id="@+id/article_detail_evaluate_ll"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:background="@color/article_evaluate_background_color"
-        >
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/article_detail_evaluate_ll"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="46dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="@color/article_evaluate_background_color"-->
+        <!--&gt;-->
+    <!--</LinearLayout>-->
 
 
     <!-- 评论栏之上的布局 -->
     <ScrollView
+        android:id="@+id/article_detail_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/article_detail_evaluate_ll"
         android:scrollbars="none"
         android:background="#ffffff"
         >
@@ -60,7 +60,7 @@
                     android:id="@+id/article_detail_title_image_iv"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:src="@mipmap/a479c8bae"
+                    android:src="@mipmap/loading"
                     />
             </LinearLayout>
 
@@ -127,7 +127,7 @@
             <!-- 富文本下面的内容: 设计师和作品 -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="100dp"
                 android:orientation="vertical"
                 android:background="#000000"
                 android:layout_below="@id/article_detail_html_tv"
@@ -152,49 +152,12 @@
             android:layout_height= "@dimen/circle_return_button_height"
             android:background="@mipmap/ic_circle_back_normal"
             android:alpha="0.9"
-            android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/article_detail_top_author_rl"/>
+            android:layout_alignParentStart="true"/>
 
-        <RelativeLayout
-            android:id="@+id/article_detail_top_author_rl"
-            android:layout_width="120dp"
-            android:layout_height="@dimen/circle_return_button_height"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/shape_text_view"
-            android:alpha="0.9"
-            >
-            <TextView
-                android:id="@+id/article_detail_top_username_tv"
-                android:layout_width="70dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text="username"
-                android:textColor="@color/colorArticleAuthorText"
-                android:gravity="center"
-                />
-            <TextView
-                android:id="@+id/article_detail_top_where_tv"
-                android:layout_width="70dp"
-                android:layout_height="18dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text="where"
-                android:textSize="14px"
-                android:gravity="center"
-                android:textColor="@color/colorArticleAuthorText"
-                android:layout_below="@id/article_detail_top_username_tv"
-                />
-            <ImageView
-                android:id="@+id/article_detail_top_icon_img"
-                android:layout_width="@dimen/article_author_circle_icon_height"
-                android:layout_height="@dimen/article_author_circle_icon_height"
-                android:layout_alignParentRight="true"
-                android:src="@mipmap/ic_launcher"
-                android:layout_marginRight="3dp"
-                android:layout_centerVertical="true"
-                />
-        </RelativeLayout>
+        <!-- 顶端进行显示和隐藏的相对布局 -->
+        <include layout="@layout/article_detail_top_relative_layout"/>
+
+
     </RelativeLayout>
 
 </RelativeLayout>

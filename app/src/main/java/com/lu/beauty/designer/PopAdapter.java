@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 public class PopAdapter  extends RecyclerView.Adapter<CommonViewHolder>{
     private ArrayList<DesignerHeadlineBean.DataBean.CategoriesBean.SubCategoriesBean> arrayList;
-    private DesignerClickListner designerClickListner;
+    private DesignerClickListener designerClickListner;
 
-    public PopAdapter(DesignerClickListner designerClickListner) {
+    public PopAdapter(DesignerClickListener designerClickListner) {
         this.designerClickListner = designerClickListner;
     }
 

@@ -46,6 +46,9 @@ public abstract class BaseActivity extends AppCompatActivity{
     protected void setClick(View.OnClickListener clickListener, View ... views){
         for (View view : views) {
             view.setOnClickListener(clickListener);
+
+
+
         }
     }
 

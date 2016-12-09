@@ -2,7 +2,10 @@ package com.lu.beauty.base;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+
 import android.graphics.Color;
+
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
@@ -92,6 +95,19 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
         textView.setText(text);
         return this;
     }
+    //给Button设置背景 zyx
+    public CommonViewHolder setBackGround(int id, int  bitmap){
+        Button btn = getView(id);
+        btn.setBackgroundResource(bitmap);
+        return this;
+    }
+    //背景颜色和字迹颜色
+    public CommonViewHolder setBackColor(int id, int  color,int colour){
+        Button btn = getView(id);
+        btn.setBackgroundColor(color);
+        btn.setTextColor(colour);
+        return this;
+    }
 
     // 设置PopupWindow中选中状态时Text的背景
     public CommonViewHolder setTextBackground(int id, int type){
@@ -111,6 +127,8 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
         btn.setText(text);
         return this;
     }
+    //
+
 
     public CommonViewHolder setImage(int id, int imgId) {
         ImageView imageView = getView(id);
@@ -159,9 +177,17 @@ public class CommonViewHolder extends RecyclerView.ViewHolder{
         return this;
     }
 
+
+
+
     public CommonViewHolder setTextVisibale(int id){
         TextView textView = getView(id);
         textView.setVisibility(View.VISIBLE); // 设置为可见
+        return this;
+    }
+    public CommonViewHolder setButtonInvisibale(int id){
+        Button button = getView(id);
+        button.setVisibility(View.INVISIBLE); // 设置为不可见
         return this;
     }
 

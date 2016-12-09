@@ -7,6 +7,8 @@ import com.lu.beauty.R;
 
 /**
  * Created by GuoXuanYu on 16/12/5.
+ *
+ * 轮播图中的 小菱形
  */
 
 public class PointImageView extends ImageView {

@@ -55,6 +55,9 @@ public class HttpUtil {
     public static void getDesignerCategories(ResponseCallBack<DesignerHeadlineBean> responseCallBack){
         OkHttpManager.getInstance().get(UrlValues.DESIGNER_CATEGORIES_URL,DesignerHeadlineBean.class,responseCallBack);
     }
+    public static void getProductCategories(ResponseCallBack<DesignerHeadlineBean> responseCallBack){
+        OkHttpManager.getInstance().get(UrlValues.PRODUCT_CATEGORIES_URL,DesignerHeadlineBean.class,responseCallBack);
+    }
 
     // 获取画报的第一级数据
     public static void getArticleBean(int page, ResponseCallBack<ArticleBean> responseCallBack) {

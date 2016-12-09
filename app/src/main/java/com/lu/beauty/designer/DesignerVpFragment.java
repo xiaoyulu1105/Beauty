@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
  */
-public class DesignerVpFragment extends BaseFragment implements DesignerClickListner, View.OnClickListener {
+public class DesignerVpFragment extends BaseFragment implements DesignerClickListener, View.OnClickListener {
     private static final String KEY = "pos";
 //    private TextView textView;
     private RecyclerView recyclerView;
@@ -92,7 +92,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
         masterArrayList = new ArrayList<>();
         favorArrayList = new ArrayList<>();
         headArrayList = new ArrayList<DesignerRecommendBean.DataBean.CategoriesBeanX>();
-        allAdapter = new DesignerAllAdapter(this);
+        allAdapter = new DesignerAllAdapter(this, mContext);
         headItemAdapter = new HeadItemAdapter(this);
 
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());

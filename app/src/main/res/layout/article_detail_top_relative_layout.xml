@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/article_detail_top_author_rl"
+    android:layout_width="120dp"
+    android:layout_height="@dimen/circle_return_button_height"
+    android:layout_alignParentRight="true"
+    android:alpha="0.9"
+    android:background="@drawable/shape_text_view"
+    android:clickable="true"
+    tools:showIn="@layout/activity_article_detail">
+
+    <!-- 顶端进行显示和隐藏的相对布局 -->
+    <TextView
+        android:id="@+id/article_detail_top_username_tv"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="right"
+        android:text="username"
+        android:textColor="@color/colorArticleAuthorText"
+        />
+
+    <TextView
+        android:id="@+id/article_detail_top_where_tv"
+        android:layout_width="70dp"
+        android:layout_height="18dp"
+        android:layout_below="@id/article_detail_top_username_tv"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="right"
+        android:text="where"
+        android:textColor="@color/colorArticleAuthorText"
+        android:textSize="15px"
+        />
+
+    <ImageView
+        android:id="@+id/article_detail_top_icon_img"
+        android:layout_width="@dimen/article_author_circle_icon_height"
+        android:layout_height="@dimen/article_author_circle_icon_height"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="3dp"
+        android:src="@mipmap/ic_launcher"
+        />
+</RelativeLayout>

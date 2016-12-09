@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.lu.beauty.article.ArticleFragment;
 import com.lu.beauty.base.BaseActivity;
@@ -30,6 +32,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public static final String BUNDLE_TITLES_KEY = "titles";
     public static final String BUNDLE_IMAGE_URLS_KEY = "imageUrls";
     private ArticleFragment mFragment;
+
+    private long firstTime=0;
+
 
 
     @Override
@@ -55,6 +60,21 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mRadioButton.setChecked(true);
         ArticleDateRequest();
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN){
+            if (System.currentTimeMillis()-firstTime>2000){
+                Toast.makeText(MainActivity.this,"啊啊啊  你不要离开我",Toast.LENGTH_SHORT).show();
+                firstTime=System.currentTimeMillis();
+            }else{
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

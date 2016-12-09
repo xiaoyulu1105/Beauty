@@ -6,6 +6,7 @@ import android.widget.TextView;
  * Created by XiaoyuLu on 16/12/1.
  */
 public class MessageSpan {
+
     private Object mObject;
     private TextView mTextView;
 

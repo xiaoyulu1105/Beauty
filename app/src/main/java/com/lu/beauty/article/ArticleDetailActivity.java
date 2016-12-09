@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +23,13 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
 import com.lu.beauty.bean.ArticleDetailBean;
+import com.lu.beauty.designer.DesignerItemActivity;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
 import com.lu.beauty.richtext.HtmlTextView;
 import com.lu.beauty.tools.CircleDrawable;
+
+import java.util.ArrayList;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
@@ -31,11 +38,11 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 
 /**
  * Created by XiaoyuLu on 16/11/29.
- * 显示 画报详细信息 的Activity
+ * 显示 画报第二级 详细信息 的Activity
  * 实现了侧滑退出
+ * 图片的轮播图 在ArticleBannerActivity 中实现的
  */
-public class ArticleDetailActivity extends BaseActivity implements View.OnClickListener, SwipeBackActivityBase {
-
+public class ArticleDetailActivity extends BaseActivity implements View.OnClickListener, SwipeBackActivityBase, View.OnTouchListener {
 
     private int mGetId;
 
@@ -44,6 +51,7 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
     private TextView mTopUsernameTV; // 显示的设计师名字
     private TextView mTopWhereTV;   // 设计师来自的地方
     private ImageView mTopDesignerIconIV; // 设计师头像
+    private String mDesignerId; // 设计师的Id
 
     private TextView mTitleTV; // title相关的组件
     private TextView mSubTitleTV;
@@ -54,7 +62,15 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
     private TextView mAuthorSignTV;
 
     private HtmlTextView mHtmlTextView;
+    private ScrollView mScrollView;
     private SwipeBackActivityHelper swipeBackActivityHelper; // 侧滑退出所用
+    private ArticleGestureDetectorListener mGestureDetectorListener;
+    private GestureDetector mGestureDetector;
+    private RelativeLayout mTopDesignerRl;
+
+    private ArticleImageSingleton mImageSingleton; // 存放图片的单例类
+    private ArrayList<String> mImageUrlList; // 存放所有图片的 数据类
+    private String mTitleImageUrl;
 
 
     @Override
@@ -67,6 +83,8 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
         mTopRl = (RelativeLayout) findViewById(R.id.article_detail_top_rl);
         mTopReturnBtn = bindView(R.id.article_detail_top_return_btn);
+        mTopDesignerRl = bindView(R.id.article_detail_top_author_rl);
+
         mTopUsernameTV = bindView(R.id.article_detail_top_username_tv);
         mTopWhereTV = bindView(R.id.article_detail_top_where_tv);
         mTopDesignerIconIV = bindView(R.id.article_detail_top_icon_img);
@@ -81,15 +99,18 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         mAuthorNameTV = bindView(R.id.article_detail_author_username_tv);
         mAuthorSignTV = bindView(R.id.article_detail_author_sign_tv);
 
+        // 富文本 和 滚动条
         mHtmlTextView = (HtmlTextView) findViewById(R.id.article_detail_html_tv);
+        mScrollView = (ScrollView) findViewById(R.id.article_detail_scroll_view);
 
-        setClick(this, mTopReturnBtn, mTitleImageIV);
-
+        setClick(this, mTopReturnBtn, mTopDesignerRl, mTitleImageIV);
+        mScrollView.setOnTouchListener(this);
     }
 
     @Override
     protected void initData() {
 
+        // 获取界面跳转时的id值
         Intent intent = getIntent();
         mGetId = intent.getIntExtra(ArticleFragment.INTENT_ID_KEY, 117);
 
@@ -99,6 +120,15 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 实现侧滑 需要绑定 activity
         swipeBackActivityHelper = new SwipeBackActivityHelper(this);
         swipeBackActivityHelper.onActivityCreate();
+
+        // 初始化 自定义的 GestureDetectorListener 监听接口的对象, 实现 top栏 的隐藏和显示
+        mGestureDetectorListener = new ArticleGestureDetectorListener(mTopRl);
+        mGestureDetector = new GestureDetector(ArticleDetailActivity.this, mGestureDetectorListener);
+
+        // 单例类的 图片集合 的初始化
+        mImageSingleton = ArticleImageSingleton.getInstance();
+        mImageUrlList = new ArrayList<>();
+
     }
 
     @Override
@@ -109,8 +139,23 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
 
                 break;
             case R.id.article_detail_title_image_iv:
-                Toast.makeText(this, "点击了图片", Toast.LENGTH_SHORT).show();
-                Log.d("ArticleDetailActivity", "点击了图片");
+
+                // 将该title图片作为轮播图的第一张图片
+                // TODO 富文本的图片顺序不对
+                mImageUrlList = mImageSingleton.getImageUrlArrayList();
+                Log.d("ArticleDetailActivity", "轮播图片的数目:" + mImageUrlList.size());
+
+                Intent intent = new Intent(ArticleDetailActivity.this, ArticleBannerActivity.class);
+                intent.putExtra(HtmlTextView.INTENT_ARRAY_LIST_KEY, mImageUrlList); // "ArrayList"
+                intent.putExtra(HtmlTextView.INTENT_SOUR_URL_KEY, mTitleImageUrl); // "String"
+                startActivity(intent);
+
+                break;
+            case R.id.article_detail_top_author_rl:
+                // 跳转到 轩轩的二级界面
+                Intent intent1 = new Intent(ArticleDetailActivity.this, DesignerItemActivity.class);
+                intent1.putExtra(DesignerItemActivity.INTENT_ID_KEY, mDesignerId);
+                startActivity(intent1);
 
                 break;
             default:
@@ -118,7 +163,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
                 break;
         }
     }
-
 
     private void articleDetailDataRequest() {
         HttpUtil.getArticleDetailBean(mGetId, new ResponseCallBack<ArticleDetailBean>() {
@@ -157,9 +201,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         String content = dataBean.getContent();
         // 显示 富文本数据
         mHtmlTextView.setHtmlFromString(content);
-
-
-
     }
 
     /**
@@ -175,7 +216,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 显示 作者信息
         mAuthorNameTV.setText(authorName);
         mAuthorSignTV.setText(authorSign);
-//        Glide.with(ArticleDetailActivity.this).load(authorIcon).into(mAuthorIconIV);
         Glide.with(ArticleDetailActivity.this).load(authorIcon).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -193,17 +233,25 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         // 获得 大标题, 副标题, 图片
         String title = dataBean.getTitle();
         String subTitle = dataBean.getSub_title();
-        String image_url = dataBean.getImage_url();
+        mTitleImageUrl = dataBean.getImage_url();
+
+        // 将第一张图片的网址放入 单例类
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add(0, mTitleImageUrl);
+        mImageSingleton.setImageUrlArrayList(arrayList);
 
         // 显示 标题信息
         mTitleTV.setText(title);
         mSubTitleTV.setText(subTitle);
-        Glide.with(ArticleDetailActivity.this).load(image_url).into(mTitleImageIV);
+        Glide.with(ArticleDetailActivity.this)
+                .load(mTitleImageUrl)
+                .placeholder(R.mipmap.loading)
+                .into(mTitleImageIV);
 
     }
 
     /**
-     * 显示画报二级顶端Top 的数据
+     * 显示 画报二级顶端Top 的数据
      * @param dataBean 传递过来的数据: articleDetailBean.getData()
      */
     private void showTopData(ArticleDetailBean.DataBean dataBean) {
@@ -212,11 +260,15 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         String designerCity = dataBean.getDesigners().get(0).getCity();
         String designerIcon = dataBean.getDesigners().get(0).getAvatar_url();
 
+        // 获取设计师Id 将其传递到 DesignerItemActivity类中
+        mDesignerId = String.valueOf(dataBean.getDesigners().get(0).getId());
+
         // 显示 top 栏设计师的信息
         mTopUsernameTV.setText(designerName);
         mTopWhereTV.setText(designerCity);
-//        Glide.with(ArticleDetailActivity.this).load(designerIcon).into(mTopDesignerIconIV);
-        Glide.with(ArticleDetailActivity.this).load(designerIcon).asBitmap().into(new SimpleTarget<Bitmap>() {
+        Glide.with(ArticleDetailActivity.this)
+                .load(designerIcon).asBitmap()
+                .into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 CircleDrawable drawable = new CircleDrawable(resource);
@@ -224,7 +276,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
             }
         });
     }
-
 
     /**
      * 复写 SwipeBackActivityBase接口的三个抽象方法:
@@ -261,7 +312,15 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
         if (v == null && swipeBackActivityHelper != null) {
             return swipeBackActivityHelper.findViewById(id);
         }
-
         return v;
+    }
+
+    /**
+     * 实现 接口View.OnTouchListener, 需要复写该方法, 实现top栏的 显示和隐藏
+     */
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        // 修改了 返回值
+        return mGestureDetector.onTouchEvent(event);
     }
 }

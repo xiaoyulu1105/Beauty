@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
  * Created by XiaoyuLu on 16/12/1.
  */
 public class UrlDrawable extends BitmapDrawable{
+
     protected Bitmap mBitmap;
 
     @Override
