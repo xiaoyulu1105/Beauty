@@ -21,6 +21,7 @@ import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
 import com.lu.beauty.bean.DesignerHeadlineBean;
 import com.lu.beauty.bean.DesignerRecommendBean;
+import com.lu.beauty.designer.threadactivity.DesignerItemActivity;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
 import com.lu.beauty.tools.EndLessOnScrollListener;
