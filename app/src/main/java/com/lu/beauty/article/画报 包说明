@@ -18,6 +18,8 @@
 4. 点击图片后 图片和点点 正是点击的图片?
    在ArticleBannerVPAdapter 中复写 getItemPosition方法, 在 ArticleBannerActivity 中调用
 
+5. 集合与数组的互换方法:
+  ArrayList arrayList = (ArrayList) Arrays.asList("item1", "item2");
 
 MyArticleDatum类:
 是 参照 Model的Datum类书写的 画报的第一级的数据的 序列化的类

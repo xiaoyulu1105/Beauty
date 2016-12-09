@@ -18,6 +18,7 @@ import com.lu.beauty.bean.DesignerRecommendBean;
 import com.lu.beauty.my.LoginActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
@@ -104,10 +105,15 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
         Gson gson = new Gson();
         mCollectionsData = gson.toJson(collections);
         Log.d("DesignerAllAdapter", "压缩数据后的json数据" + mCollectionsData);
+        String string = "[{\"attentionAvatar\":\"http://dstatic.zuimeia.com/designer/avatar/2016/11/27/2995fdd0-0443-4b45-82fb-f4cfa5784a01.jpg\"" +
+                ",\"attentionId\":\"201\",\"attentionImage\":\"http://dstatic.zuimeia.com/common/image/2016/11/27/11be20be-985b-4625-b036-d73e448ecb35_1000x625.jpeg\"" +
+                ",\"attentionLabel\":\"Klaus Haapaniemi 创始人\"" +
+                ",\"attentionName\":\"Klaus Haapaniemi \\u0026 Mia Wallenius\"}]";
 
 
         //判断登录
         AttentionUser designerAttentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
+        Log.d("DesignerAllAdapter", "用户的信息:" + designerAttentionUser);
 
         // !!!
         //在点击事件之前判断是否登录 如果登录 就判断是否关注过
@@ -156,11 +162,15 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
             public void onClick(View v) {
 
                 AttentionUser designerAttentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
+                Log.d("DesignerAllAdapter", "用户的信息:" + designerAttentionUser);
 
                 if (designerAttentionUser != null) {
                     // 当点击时 处于登录状态
                     Log.d("DesignerAllAdapter", "处于登录状态");
 
+                    String[] array; // 用于存放数据库中的数据
+                    ArrayList arrayList = new ArrayList(); // 将数组转换成集合形式
+                    int getAttentionCount = designerAttentionUser.getAttentionCount();
 
                     if (!isClick) {
                         // 从未关注 状态 变为 已关注状态
@@ -168,22 +178,24 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
                         holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
 
                         // TODO 保存该条数据到bmob
-                        ArrayList<String> arrayList = new ArrayList<>();
-                        int getAttentionCount = designerAttentionUser.getAttentionCount();
-
                         if (getAttentionCount == 0) {
                             // 第一次关注, 不用获取集合数据
                             Log.d("DesignerAllAdapter", "这是第一个关注的设计师");
 
                         } else {
-                            arrayList = designerAttentionUser.getAttentionList();
+                            array = designerAttentionUser.getAttentionList();
+                            // 将数据库的 数组 转换为 集合格式
+                            arrayList = (ArrayList) Arrays.asList(array);
                         }
 
                         // 集合加上新设计师, 关注的数量也加1;
                         arrayList.add(mCollectionsData);
                         getAttentionCount += 1;
 
-                        designerAttentionUser.setAttentionList(arrayList);
+                        // 先将 集合转换为 数组格式
+                        array = (String[]) arrayList.toArray();
+                        // 跟新数据库数据
+                        designerAttentionUser.setAttentionList(array);
                         designerAttentionUser.setAttentionCount(getAttentionCount);
 
                         designerAttentionUser.update(new UpdateListener() {
@@ -206,19 +218,21 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
                         holder.setBackColor(R.id.design_item_button, Color.parseColor("#74D5DA"), Color.BLACK);
 
                         // TODO 将Bmob中的该条数据删除
-                        ArrayList<String> arrayList = new ArrayList<>();
-                        int getAttentionCount = designerAttentionUser.getAttentionCount();
+
+                        array = designerAttentionUser.getAttentionList();
+                        // 将数据库的 数组 转换为 集合格式
+                        arrayList = (ArrayList) Arrays.asList(array);
 
                         for (int i = arrayList.size() - 1; i >= 0; i--) {
                             if (mCollectionsData.equals(arrayList.get(i))) {
                                 arrayList.remove(i);
                                 getAttentionCount--;
 
-                                designerAttentionUser.setAttentionList(arrayList);
+                                array = (String[]) arrayList.toArray();
+                                // 跟新数据库
+                                designerAttentionUser.setAttentionList(array);
                                 designerAttentionUser.setAttentionCount(getAttentionCount);
 
-                                Log.d("DesignerAllAdapter", "for循环里 取消关注成功");
-                                Log.d("DesignerAllAdapter", "arrayList.size():" + arrayList.size());
                             }
                         }
 

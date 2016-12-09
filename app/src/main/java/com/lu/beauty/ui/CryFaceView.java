@@ -36,7 +36,7 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
     //
     private int mDP2PX_first; // 最初的高度
     private int mDP2PX_final = -1; // 最终的高度
-    private int mDP_first = 30;  // 表情的高度
+    private int mDP_first = 30;  // 表情的高度, 单位dp.
     private int mDP_default = 150; // 默认高度
 
     private boolean isChange = false; // 判断表情是否处于变化状态, 默认不是

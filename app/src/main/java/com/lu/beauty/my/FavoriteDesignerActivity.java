@@ -19,6 +19,7 @@ import com.lu.beauty.designer.AttentionUser;
 import com.lu.beauty.designer.Collections;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
@@ -34,7 +35,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 public class FavoriteDesignerActivity extends BaseActivity implements View.OnClickListener, SwipeBackActivityBase {
 
     private List<Collections> mCollections;
-    private ArrayList<AttentionSingleBean> mAttentionSingleBeen;
+    private ArrayList<AttentionSingleBean> mAttentionSingleBeens;
 
     private String mAttentionName;
     private TextView mTextView;
@@ -53,7 +54,7 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
         mLvFavorite = bindView(R.id.lv_favorate);
         mIvBack = bindView(R.id.favorate_back);
         mCollections = new ArrayList<>();
-        mAttentionSingleBeen = new ArrayList<>();
+        mAttentionSingleBeens = new ArrayList<>();
 
         mTextView = bindView(R.id.bmobtest);
         setClick(this, mIvBack);
@@ -67,13 +68,16 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
 
 
         AttentionUser attentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
+
         if (attentionUser != null) {
             Log.d("FavorateDesignerActivit", "已登录状态");
 
+            String[] array;
             ArrayList<String> arrayList = new ArrayList<>();
             int getAttentionCount;
 
-            arrayList = attentionUser.getAttentionList();
+            array = attentionUser.getAttentionList();
+            arrayList = (ArrayList<String>) Arrays.asList(array);
             getAttentionCount = attentionUser.getAttentionCount();
             Log.d("FavoriteDesignerActivit", "关注的设计师个数: " + getAttentionCount);
 
@@ -86,7 +90,7 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
                     String name = arrayList.get(j);
 //                    try {
 //                        JSONObject jsonObject = new JSONObject(name);
-//                        JSONArray jsonArray = jsonObject.getJSONArray("mAttentionSingleBeen");
+//                        JSONArray jsonArray = jsonObject.getJSONArray("mAttentionSingleBeens");
 //                        for (int i = 0; i < jsonArray.length(); i++) {
 //                            JSONObject json = jsonArray.getJSONObject(i);
 //                            mAttentionName = json.getString("attentionName");
@@ -102,12 +106,12 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
 //                            attentionUser1.setAttentionAvatar(attentionAvatar);
 //                            attentionUser1.setAttentionId(attentionId);
 //
-//                            mAttentionSingleBeen.add(attentionUser1);
+//                            mAttentionSingleBeens.add(attentionUser1);
 //
 //                        }
 //                        mFavoriteAdapter = new FavoriteAdapter();
 //
-//                        mFavoriteAdapter.setAttentionUsers(mAttentionSingleBeen);
+//                        mFavoriteAdapter.setAttentionUsers(mAttentionSingleBeens);
 //                        mLvFavorite.setAdapter(mFavoriteAdapter);
 //
 //                    } catch (JSONException e) {
@@ -117,10 +121,10 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
                     // 用 Gson解析
                     Collections collections = new Gson().fromJson(name, Collections.class);
                     AttentionSingleBean attentionSingleBean = collections.getAttentionSingleBeens().get(0);
-                    mAttentionSingleBeen.add(attentionSingleBean);
+                    mAttentionSingleBeens.add(attentionSingleBean);
 
                     mFavoriteAdapter = new FavoriteAdapter();
-                    mFavoriteAdapter.setAttentionSingleBeens(mAttentionSingleBeen);
+                    mFavoriteAdapter.setAttentionSingleBeens(mAttentionSingleBeens);
                     mLvFavorite.setAdapter(mFavoriteAdapter);
 
                 }

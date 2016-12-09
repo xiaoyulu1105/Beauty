@@ -13,7 +13,6 @@ import cn.bmob.v3.BmobUser;
 
 public class AttentionUser extends BmobUser {
 
-
     private String attentionId;
     private String attentionName;
     private String attentionLabel;
@@ -21,7 +20,8 @@ public class AttentionUser extends BmobUser {
     private String attentionImage;
 
     private int attentionCount = 0; // 关注的设计 的总数, 默认为0;
-    private ArrayList<String> attentionList; //关注的集合,每一项是一个 设计师类AttentionSingleBean的 json字符串
+    //关注的数组, 每一项是一个 设计师类AttentionSingleBean 的集合类 Collections,压缩后的 json字符串
+    private String[] attentionList;
 
 
     public String getAttentionId() {
@@ -72,11 +72,11 @@ public class AttentionUser extends BmobUser {
         this.attentionImage = attentionImage;
     }
 
-    public ArrayList<String> getAttentionList() {
+    public String[] getAttentionList() {
         return attentionList;
     }
 
-    public void setAttentionList(ArrayList<String> attentionList) {
+    public void setAttentionList(String[] attentionList) {
         this.attentionList = attentionList;
     }
 }

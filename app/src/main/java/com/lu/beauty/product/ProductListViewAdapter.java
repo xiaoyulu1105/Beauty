@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.bean.ProductCommonBean;
-import com.lu.beauty.designer.DesignerItemActivity;
+import com.lu.beauty.designer.threadactivity.DesignerItemActivity;
 import com.lu.beauty.product.daily.ProductListViewBodyAdapter;
 import com.lu.beauty.product.productitem.ProductItemActivity;
 import com.lu.beauty.tools.GetPercent;
