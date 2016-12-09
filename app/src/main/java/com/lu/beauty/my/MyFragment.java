@@ -78,7 +78,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             mBtnLogin.setVisibility(View.INVISIBLE);
             mTvName.setVisibility(View.VISIBLE);
             mTvName.setText(bmobUser.getUsername());
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_news_keep_heighlight);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.pig);
 
             CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
 
@@ -115,9 +115,6 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 mIvHeadIcon.setImageDrawable(circleByZYXDrawable);
                 return;
             }
-
-//           String id =  platformDb.getUserId();
-//            Log.d("MyFragment", id);
 
 
             if (!TextUtils.isEmpty(name)) {

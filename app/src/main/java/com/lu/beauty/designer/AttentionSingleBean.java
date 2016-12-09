@@ -1,18 +1,10 @@
 package com.lu.beauty.designer;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
-import cn.bmob.v3.BmobUser;
-
 /**
- * Created by  AngleXiao on 16/12/6.
- * OLiGei  what is your name
- * 轻松拿下一个类 属实有牌面
+ * Created by XiaoyuLu on 16/12/9.
  */
 
-public class AttentionUser extends BmobUser {
-
+public class AttentionSingleBean {
 
     private String attentionId;
     private String attentionName;
@@ -20,24 +12,12 @@ public class AttentionUser extends BmobUser {
     private String attentionAvatar;
     private String attentionImage;
 
-    private int attentionCount = 0; // 关注的设计 的总数, 默认为0;
-    private ArrayList<String> attentionList; //关注的集合,每一项是一个 设计师类AttentionSingleBean的 json字符串
-
-
     public String getAttentionId() {
         return attentionId;
     }
 
     public void setAttentionId(String attentionId) {
         this.attentionId = attentionId;
-    }
-
-    public int getAttentionCount() {
-        return attentionCount;
-    }
-
-    public void setAttentionCount(int attentionCount) {
-        this.attentionCount = attentionCount;
     }
 
     public String getAttentionName() {
@@ -70,13 +50,5 @@ public class AttentionUser extends BmobUser {
 
     public void setAttentionImage(String attentionImage) {
         this.attentionImage = attentionImage;
-    }
-
-    public ArrayList<String> getAttentionList() {
-        return attentionList;
-    }
-
-    public void setAttentionList(ArrayList<String> attentionList) {
-        this.attentionList = attentionList;
     }
 }
