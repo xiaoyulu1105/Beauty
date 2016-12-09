@@ -11,6 +11,7 @@ import com.lu.beauty.bean.DesignerSecondProductsBean;
 import com.lu.beauty.bean.DesignerSecondShopsBean;
 import com.lu.beauty.bean.ProductCommonBean;
 import com.lu.beauty.bean.ProductDailyBean;
+import com.lu.beauty.bean.ProductItemBean;
 import com.lu.beauty.bean.ProductTitleBean;
 
 /**
@@ -27,6 +28,10 @@ public class HttpUtil {
     // 网络请求获取daily一级页数据 by wqs
     public static void getProduckDailyBean(String date, ResponseCallBack<ProductDailyBean> responseCallBack) {
         OkHttpManager.getInstance().get(UrlValues.PRODUCT_DAILY_URL + date, ProductDailyBean.class, responseCallBack);
+    }
+
+    public static void getProduckItemBean(String id, ResponseCallBack<ProductItemBean> responseCallBack) {
+        OkHttpManager.getInstance().get(UrlValues.PRODUCT_ITEM_URL + id, ProductItemBean.class, responseCallBack);
     }
 
 
