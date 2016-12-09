@@ -19,6 +19,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
 import com.lu.beauty.bean.DesignerSecondBasicBean;
+import com.lu.beauty.bean.DesignerSecondShopsBean;
 import com.lu.beauty.designer.threadactivity.DesignerItemBottomAdapter;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
@@ -54,7 +55,7 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
     private TextView concept;
     private TabLayout tab;
     private ViewPager viewPager;
-    private String[] s ;
+    private ArrayList<String> s = new ArrayList<>() ;
 
     // by 小玉
     public static final String INTENT_ID_KEY = "id"; // 跳转时传递过来的id
@@ -89,8 +90,7 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
         swipeBackActivityHelper.onActivityCreate();
         pagerAdapter = new DesignerItemPagerAdapter();
         setBasicMessage();
-        DesignerItemBottomAdapter adapter = new DesignerItemBottomAdapter(getSupportFragmentManager(), s,id);
-        viewPager.setAdapter(adapter);
+
         tab.setupWithViewPager(viewPager);
         tab.setSelectedTabIndicatorColor(Color.WHITE);
         tab.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -132,9 +132,37 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
                 follow.setText(designerSecondBasicBean.getData().getFollow_num()+"关注者");
                 expandTV. setText(designerSecondBasicBean.getData().getDescription());
                 concept.setText(designerSecondBasicBean.getData().getConcept());
+                if(designerSecondBasicBean.getData().getProduct_num() != 0){
+                    s.add("作品");
+                }
                 if (designerSecondBasicBean.getData().getArticle_num() != 0){
+                    s.add("画报");
+                }
+                setShopMessage();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+    }
+
+    public void setShopMessage(){
+        HttpUtil.getDesignerSecondShops(id, new ResponseCallBack<DesignerSecondShopsBean>() {
+            @Override
+            public void onResponse(DesignerSecondShopsBean designerSecondShopsBean) {
+                if (designerSecondShopsBean.getData().getShops().size() != 0 ){
+
+                    s.add("旗舰门店");
+                }else {
 
                 }
+                if (designerSecondShopsBean.getData().getOnline_shops() != null){
+                    s.add("线上购买");
+                }
+                DesignerItemBottomAdapter adapter = new DesignerItemBottomAdapter(getSupportFragmentManager(), s,id);
+                viewPager.setAdapter(adapter);
             }
 
             @Override
