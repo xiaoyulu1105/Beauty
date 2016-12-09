@@ -30,7 +30,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
 
     private Button mBtnLogin;
-    private ImageButton mBtnSet;
+    private ImageView mBtnSet;
     private TextView mTvName;
     private String mNameQQ;
 
@@ -50,8 +50,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         mBtnLogin = bindView(R.id.btn_my_login);
         mBtnSet = bindView(R.id.btn_my_set);
         mTvName = bindView(R.id.tv_my_name);
-        mLlFavorate = bindView(R.id.ll_my_favorate);
-      //  mIvIcon = bindView(R.id.iv_head_icon);
+        mLlFavorate = bindView(R.id.ll_my_favorite);
+        //  mIvIcon = bindView(R.id.iv_head_icon);
 
 
 //设置圆形头像
@@ -59,31 +59,23 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mine_portrait);
 
         CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
-
         mIvHeadIcon.setImageDrawable(circleByZYXDrawable);
 
-        setClick(this, mBtnLogin, mBtnSet,mLlFavorate);
+        setClick(this, mBtnLogin, mBtnSet, mLlFavorate);
 
 ////注册EventBus
-     //  EventBus.getDefault().register(this);
+        //  EventBus.getDefault().register(this);
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        initData();
-
-    }
     @Override
     protected void initData() {
+
         mQq = ShareSDK.getPlatform(QQ.NAME);
         try {
             PlatformDb platformDb = mQq.getDb();
-           String name = platformDb.getUserName();
-           String  icon = platformDb.getUserIcon();
-
-
+            String name = platformDb.getUserName();  // QQ 用户名
+            String icon = platformDb.getUserIcon();  // QQ 头像
 
             if (TextUtils.isEmpty(name)) {
                 //退出登录
@@ -104,7 +96,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             if (!TextUtils.isEmpty(name)) {
                 mBtnLogin.setVisibility(View.GONE);
                 mTvName.setVisibility(View.VISIBLE);
-               // myDataBtn.setVisibility(View.VISIBLE);
+                // myDataBtn.setVisibility(View.VISIBLE);
                 mTvName.setText(name);
 
                 Glide.with(this).load(icon).asBitmap().into(new SimpleTarget<Bitmap>() {
@@ -129,14 +121,14 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_my_login:
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.btn_my_set:
                 Intent intent1 = new Intent(getActivity(), SetActivity.class);
-                startActivityForResult(intent1,1);
+                startActivityForResult(intent1, 1);
                 break;
-            case R.id.ll_my_favorate:
-                Intent intent2 = new Intent(getActivity(),FavoriteDesignerActivity.class);
+            case R.id.ll_my_favorite:
+                Intent intent2 = new Intent(getActivity(), FavoriteDesignerActivity.class);
                 startActivity(intent2);
                 break;
 
@@ -160,7 +152,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 //    }
 
 
-  //  }
+    //  }
 //    @Subscribe(threadMode = ThreadMode.MAIN)
 //     public void onEventQQ(EventQQ eventQQ){
 //        mNameQQ = eventQQ.getName();
