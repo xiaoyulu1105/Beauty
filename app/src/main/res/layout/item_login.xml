@@ -143,13 +143,13 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!--<ImageView-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@mipmap/ic_login_boohee"-->
-                <!--android:id="@+id/enter_boohee"-->
-                <!--/>-->
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_news_keep_heighlight"
+                android:id="@+id/enter_boohee"
+                />
             <TextView
                 android:id="@+id/btn_login_signin"
                 android:layout_gravity="center_horizontal"

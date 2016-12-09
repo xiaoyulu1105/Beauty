@@ -18,6 +18,7 @@ import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
 import com.lu.beauty.tools.CircleDrawable;
 
+import cn.bmob.v3.BmobUser;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
@@ -73,6 +74,26 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         initData();
+                BmobUser bmobUser = BmobUser.getCurrentUser();
+        if (bmobUser != null) {
+            mBtnLogin.setVisibility(View.INVISIBLE);
+            mTvName.setVisibility(View.VISIBLE);
+            mTvName.setText(bmobUser.getUsername());
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_news_keep_heighlight);
+
+            CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
+
+            mIvHeadIcon.setImageDrawable(circleByZYXDrawable);
+
+
+
+        } else {
+
+            mBtnLogin.setVisibility(View.VISIBLE);
+            mTvName.setVisibility(View.INVISIBLE);
+
+        }
+
 
     }
     @Override

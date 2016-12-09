@@ -36,7 +36,7 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     private static int attentionCount = 0;
 
     private DesignerClickListener designerClickListener;
-    private ArrayList<String> mArrayList1;
+    private ArrayList<String> mArrayListByGet;
     private String mCollectionsData;
 
 
@@ -100,7 +100,7 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
 
         Gson gson = new Gson();
         mCollectionsData = gson.toJson(collections);
-        mArrayList1 = new ArrayList<String>();
+        mArrayListByGet = new ArrayList<String>();
 
 
         //判断登录
@@ -113,11 +113,11 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
         //在点击事件之前判断是否登录 如果登录就判断是否关注过
         if (designerAttentionUser != null) {
 
-            mArrayList1 = designerAttentionUser.getAttentionList();
+            mArrayListByGet = designerAttentionUser.getAttentionList();
 
 
-            for (int i = 0; i < mArrayList1.size(); i++) {
-                if (mCollectionsData.equals(mArrayList1.get(i))){
+            for (int i = 0; i < mArrayListByGet.size(); i++) {
+                if (mCollectionsData.equals(mArrayListByGet.get(i))){
                     isClick = true; // 关注
                     holder.setButtonText(R.id.design_item_button, "已关注");
                     holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
@@ -162,11 +162,11 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
                             attentionCount++;
 
                         } else {
-                            mArrayList1 = designerAttentionUser.getAttentionList();
+                            mArrayListByGet = designerAttentionUser.getAttentionList();
                         }
 ////插入,mob
-                        mArrayList1.add(mCollectionsData);
-                        designerAttentionUser.setAttentionList(mArrayList1);
+                        mArrayListByGet.add(mCollectionsData);
+                        designerAttentionUser.setAttentionList(mArrayListByGet);
                         designerAttentionUser.update(new UpdateListener() {
                             @Override
                             public void done(BmobException e) {
@@ -202,14 +202,14 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
                     // 从关注 状态 变为 未关注状态
                     if (designerAttentionUser != null) {
 
-                ArrayList<String> mArrayList2 = new ArrayList<String>();
-                        mArrayList2 = designerAttentionUser.getAttentionList();
-                        Log.d("DesignerAllAdapter", "mArrayList2.size():" + mArrayList2.size());
-                        for (int i =  mArrayList2.size()-1; i>=0 ; i--) {
-                            if (mCollectionsData.equals(mArrayList2.get(i))){
-                                mArrayList2.remove(i);
-                                designerAttentionUser.setAttentionList(mArrayList2);
-                                Log.d("DesignerAllAdapter", "mArrayList2.size():" + mArrayList2.size());
+                ArrayList<String> mArrayList = new ArrayList<String>();
+                        mArrayList = designerAttentionUser.getAttentionList();
+                        Log.d("DesignerAllAdapter", "mArrayList2.size():" + mArrayList.size());
+                        for (int i =  mArrayList.size()-1; i>=0 ; i--) {
+                            if (mCollectionsData.equals(mArrayList.get(i))){
+                                mArrayList.remove(i);
+                                designerAttentionUser.setAttentionList(mArrayList);
+                                Log.d("DesignerAllAdapter", "mArrayList2.size():" + mArrayList.size());
                             }
 
                         }

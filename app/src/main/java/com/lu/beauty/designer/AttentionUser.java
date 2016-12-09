@@ -12,8 +12,17 @@ import cn.bmob.v3.BmobUser;
  */
 
 public class AttentionUser extends BmobUser{
+    private int attentionCount ;
 
-private String  attentionId;
+    public int getAttentionCount() {
+        return attentionCount;
+    }
+
+    public void setAttentionCount(int attentionCount) {
+        this.attentionCount = attentionCount;
+    }
+
+    private String  attentionId;
 
     public String getAttentionId() {
         return attentionId;
