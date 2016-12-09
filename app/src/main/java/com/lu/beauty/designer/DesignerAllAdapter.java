@@ -36,7 +36,7 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     private static int attentionCount = 0;
 
     private DesignerClickListener designerClickListener;
-    private ArrayList<String> mArrayList1;
+    private ArrayList<String> mArrayListByGet;
     private String mCollectionsData;
 
 
@@ -103,6 +103,7 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
         Gson gson = new Gson();
         mCollectionsData = gson.toJson(collections);
 
+
         //判断登录
         AttentionUser designerAttentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
 
@@ -110,119 +111,109 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
         //在点击事件之前判断是否登录 如果登录就判断是否关注过
         if (designerAttentionUser != null) {
 
-            if (attentionCount == 0) {
+            int getAttentionCount = designerAttentionUser.getAttentionCount();
+
+            if (getAttentionCount == 0) {
                 Log.d("DesignerAllAdapter", "还没有关注的设计师");
 
             } else {
-
                 // 遍历 bmob 上关注的设计师, 将关注项的文字变为已关注
+
+                ArrayList<String> mArrayList1 = new ArrayList<>();
                 mArrayList1 = new ArrayList<>();
                 mArrayList1 = designerAttentionUser.getAttentionList();
 
                 for (int i = 0; i < mArrayList1.size(); i++) {
                     if (mCollectionsData.equals(mArrayList1.get(i))) {
-                        isClick = true; // 关注
+                        // 如果是关注了的设计师
+                        isClick = true; // 显示关注状态
                         holder.setButtonText(R.id.design_item_button, "已关注");
                         holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
 
                         break;
                     } else {
-                        isClick = false;
+                        isClick = false; // 显示未关注装
                         holder.setButtonText(R.id.design_item_button, "+ 关注");
                         holder.setBackColor(R.id.design_item_button, Color.parseColor("#74D5DA"), Color.BLACK);
                     }
                 }
             }
-
         } else {
             // 非登录状态
             Log.d("DesignerAllAdapter", "未登录, 所以都是未关注");
         }
+
 
         // 点击事件
         holder.setViewClick(R.id.design_item_button, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
                 AttentionUser designerAttentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
 
                 if (designerAttentionUser != null) {
                     // 当点击时 处于登录状态
+
+                    ArrayList<String> arrayList = new ArrayList<>();
+                    int getAttentionCount = designerAttentionUser.getAttentionCount();
 
                     if (!isClick) {
                         // 从未关注 状态 变为 已关注状态
                         holder.setButtonText(R.id.design_item_button, "已关注");
                         holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
 
-
-                        ArrayList<String>  arrayList = new ArrayList<>();
-
                         // TODO 保存该条数据到bmob
-                        if (attentionCount == 0) {
+                        if (getAttentionCount == 0) {
                             // 第一次关注, 不用获取集合数据
-                            attentionCount++;
+                            Log.d("DesignerAllAdapter", "这是第一个关注的设计师");
 
                         } else {
                             arrayList = designerAttentionUser.getAttentionList();
                         }
 
+                        // 集合加上新设计师, 关注的数量也加1;
                         arrayList.add(mCollectionsData);
-                        designerAttentionUser.setAttentionList(arrayList);
-                        designerAttentionUser.update(new UpdateListener() {
-                            @Override
-                            public void done(BmobException e) {
-                                if (e == null) {
-                                    Toast.makeText(context, "关注啦啦啦☺", Toast.LENGTH_SHORT).show();
-                                    isClick = !isClick;
+                        getAttentionCount++;
 
-                                } else {
-                                    Log.d("DesignerAllAdapter", "点击关注 不成功");
-                                }
-                            }
-                        });
+                        designerAttentionUser.setAttentionList(arrayList);
+                        designerAttentionUser.setAttentionCount(getAttentionCount);
 
 
                     } else if (isClick) {
                         // 从关注 状态 变为 未关注状态
+
                         holder.setButtonText(R.id.design_item_button, "+ 关注");
                         holder.setBackColor(R.id.design_item_button, Color.parseColor("#74D5DA"), Color.BLACK);
 
-
                         // TODO 将Bmob中的该条数据删除
-                        if (designerAttentionUser != null) {
 
-                            ArrayList<String> arrayList = new ArrayList<>();
-                            arrayList = designerAttentionUser.getAttentionList();
-                            Log.d("DesignerAllAdapter", "mArrayList2.size():" + arrayList.size());
+                        for (int i = arrayList.size() - 1; i >= 0; i--) {
+                            if (mCollectionsData.equals(arrayList.get(i))) {
+                                arrayList.remove(i);
+                                getAttentionCount--;
 
-                            for (int i = arrayList.size() - 1; i >= 0; i--) {
-                                if (mCollectionsData.equals(arrayList.get(i))) {
-                                    arrayList.remove(i);
+                                designerAttentionUser.setAttentionList(arrayList);
+                                designerAttentionUser.setAttentionCount(getAttentionCount);
 
-                                    designerAttentionUser.setAttentionList(arrayList);
-                                    Log.d("DesignerAllAdapter", "for循环里 取消关注成功");
-                                    Log.d("DesignerAllAdapter", "arrayList.size():" + arrayList.size());
-                                }
-
+                                Log.d("DesignerAllAdapter", "for循环里 取消关注成功");
+                                Log.d("DesignerAllAdapter", "arrayList.size():" + arrayList.size());
                             }
-
-                            designerAttentionUser.update(new UpdateListener() {
-                                @Override
-                                public void done(BmobException e) {
-                                    if (e == null) {
-                                        Log.d("DesignerAllAdapter", "update方法里 取消关注成功");
-                                        Toast.makeText(context, "取消关注", Toast.LENGTH_SHORT).show();
-
-                                        attentionCount--;
-                                        isClick = !isClick;
-                                    }
-                                }
-                            });
-
                         }
 
-                    }
+                        designerAttentionUser.update(new UpdateListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                if (e == null) {
+                                    Log.d("DesignerAllAdapter", "update方法里 取消关注成功");
+                                    Toast.makeText(context, "取消关注", Toast.LENGTH_SHORT).show();
 
+                                    isClick = !isClick;
+                                }
+                            }
+                        });
+
+                    }
 
                 } else {
                     // 当点击时 处于非登录状态 让跳转
@@ -232,9 +223,6 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
                     Intent intent = new Intent(context, LoginActivity.class);
                     context.startActivity(intent);
 
-//                    holder.setButtonText(R.id.design_item_button, "+ 关注");
-//                    holder.setBackColor(R.id.design_item_button, Color.parseColor("#74D5DA"), Color.BLACK);
-//                    isClick = !isClick;
                 }
 
             }

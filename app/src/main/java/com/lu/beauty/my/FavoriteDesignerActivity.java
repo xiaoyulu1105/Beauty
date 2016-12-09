@@ -3,6 +3,7 @@ package com.lu.beauty.my;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -153,9 +154,35 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
         }
 
     }
+    @Override
+    public void onClick(View v) {
+        onBackPressed();
+    }
+    /**
+     * 复写 SwipeBackActivityBase接口的三个抽象方法:
+     * getSwipeBackLayout, setSwipeBackEnable, scrollToFinishActivity.
+     * 此外还需要手动复写另外两个方法: onPostCreate, findViewById
+     */
+    @Override
+    public SwipeBackLayout getSwipeBackLayout() {
+        // 修改了返回值
+        return swipeBackActivityHelper.getSwipeBackLayout();
+    }
 
     @Override
-    public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+    public void setSwipeBackEnable(boolean enable) {
+        // 添加一行代码
+        getSwipeBackLayout().setEnableGesture(enable);
+    }
+
+    @Override
+    public void scrollToFinishActivity() {
+        Utils.convertActivityToTranslucent(this);
+        getSwipeBackLayout().scrollToFinishActivity();
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         swipeBackActivityHelper.onPostCreate();
     }
@@ -163,35 +190,10 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
     @Override
     public View findViewById(@IdRes int id) {
         View v = super.findViewById(id);
-        if(v == null && swipeBackActivityHelper != null){
+        if (v == null && swipeBackActivityHelper != null) {
             return swipeBackActivityHelper.findViewById(id);
         }
         return v;
-    }
-
-    @Override
-    public void onClick(View v) {
-        onBackPressed();
-    }
-
-    @Override
-    public SwipeBackLayout getSwipeBackLayout() {
-        return swipeBackActivityHelper.getSwipeBackLayout();
-    }
-
-    @Override
-    public void setSwipeBackEnable(boolean enable) {
-        getSwipeBackLayout().setEnableGesture(enable);
-    }
-
-
-
-
-
-    @Override
-    public void scrollToFinishActivity() {
-        Utils.convertActivityToTranslucent(this);
-        getSwipeBackLayout().scrollToFinishActivity();
     }
 }
 

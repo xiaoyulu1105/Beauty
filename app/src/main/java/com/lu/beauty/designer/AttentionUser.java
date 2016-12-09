@@ -13,7 +13,17 @@ import cn.bmob.v3.BmobUser;
 
 public class AttentionUser extends BmobUser{
 
-private String  attentionId;
+    private int attentionCount = 0; // 关注的设计 的总数, 默认为0;
+
+    public int getAttentionCount() {
+        return attentionCount;
+    }
+
+    public void setAttentionCount(int attentionCount) {
+        this.attentionCount = attentionCount;
+    }
+
+    private String  attentionId;
 
     public String getAttentionId() {
         return attentionId;

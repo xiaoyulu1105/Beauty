@@ -29,7 +29,7 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_my_signin;
+        return R.layout.signin_signin;
     }
 
     @Override
@@ -84,7 +84,7 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
                       timer.start();
                       Toast.makeText(getActivity(), "注册成功,请返回上级界面登录", Toast.LENGTH_SHORT).show();
                   }else {
-                      Toast.makeText(getActivity(), "注册失败", Toast.LENGTH_SHORT).show();
+                      //Toast.makeText(getActivity(), "注册失败", Toast.LENGTH_SHORT).show();
 
                   }
 

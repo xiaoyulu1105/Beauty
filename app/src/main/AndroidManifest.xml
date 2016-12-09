@@ -69,11 +69,12 @@
             </intent-filter>
         </activity>
 
-        
-        <activity android:name=".my.FavoriteDesignerActivity"/>
 
         <activity android:name=".product.ProductItemActivity"/>
 
+
+        <activity android:name=".my.FavoriteDesignerActivity"
+                  android:theme="@style/otherPageStyle"/>
         <activity
             android:name=".designer.DesignerHeadMoreActivity"
             android:theme="@style/otherPageStyle"/>
