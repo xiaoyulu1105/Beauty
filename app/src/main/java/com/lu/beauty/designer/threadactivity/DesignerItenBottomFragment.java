@@ -39,14 +39,19 @@ public class DesignerItenBottomFragment extends BaseFragment {
     private TextView subtitle;
     private ImageView iv;
     private LinearLayout ll2;
-    private TextView shopName;
+    private TextView onlineShopName;
+    private ImageView onlineShopImage;
+    private LinearLayout ll3;
     private ImageView shopImage;
+    private TextView shopCity;
+    private TextView shopName;
+    private TextView shopAddress;
 
-    public static Fragment getInstance(int position,String id) {
+    public static Fragment getInstance(String position,String id) {
 
         DesignerItenBottomFragment vpFragment = new DesignerItenBottomFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(KEY, position);
+        bundle.putString(KEY, position);
         bundle.putString(ID,id);
         vpFragment.setArguments(bundle);
         return vpFragment;
@@ -64,8 +69,14 @@ public class DesignerItenBottomFragment extends BaseFragment {
         subtitle = bindView(R.id.designer_item_bottom_subtitle);
         iv = bindView(R.id.designer_item_bottom_image);
         ll2 = bindView(R.id.designer_item_bottom_ll2);
-        shopName = bindView(R.id.designer_item_bottom_online_shop_name);
-        shopImage = bindView(R.id.designer_item_bottom_online_shop_image);
+        onlineShopName = bindView(R.id.designer_item_bottom_online_shop_name);
+        onlineShopImage = bindView(R.id.designer_item_bottom_online_shop_image);
+        ll3 = bindView(R.id.designer_item_bottom_ll3);
+        shopImage = bindView(R.id.designer_item_bottom_shops_image);
+        shopCity = bindView(R.id.designer_item_bottom_shops_city);
+        shopName = bindView(R.id.designer_item_bottom_shops_name);
+        shopAddress = bindView(R.id.designer_item_bottom_shops_address);
+
     }
 
     @Override
@@ -76,25 +87,32 @@ public class DesignerItenBottomFragment extends BaseFragment {
         GridLayoutManager manager = new GridLayoutManager(getContext(),2);
         rv.setLayoutManager(manager);
         adapter = new DesignerProductsAdapter();
-        setProductsMessage();
+
         rv.setAdapter(adapter);
-        setArticlesMessage();
-        setShopMessage();
+
+
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getArguments() != null){
-            switch (getArguments().getInt(KEY)){
-                case 0:
+            switch (getArguments().getString(KEY)){
+                case "作品":
                     rv.setVisibility(View.VISIBLE);
+                    setProductsMessage();
                     break;
-                case 1:
+                case "画报":
                     ll.setVisibility(View.VISIBLE);
+                    setArticlesMessage();
                     break;
-                case 2:
+                case "线上购买":
                     ll2.setVisibility(View.VISIBLE);
+                    setOnLineShopMessage();
+                    break;
+                case "旗舰门店":
+                    ll3.setVisibility(View.VISIBLE);
+                    setShopMessage();
                     break;
             }
         }
@@ -134,12 +152,28 @@ public class DesignerItenBottomFragment extends BaseFragment {
             }
         });
     }
+    public void setOnLineShopMessage(){
+        HttpUtil.getDesignerSecondShops(id, new ResponseCallBack<DesignerSecondShopsBean>() {
+            @Override
+            public void onResponse(DesignerSecondShopsBean designerSecondShopsBean) {
+                onlineShopName.setText(designerSecondShopsBean.getData().getOnline_shops().get(0).getName());
+                Glide.with(mContext).load(designerSecondShopsBean.getData().getOnline_shop_image()).into(onlineShopImage);
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+    }
     public void setShopMessage(){
         HttpUtil.getDesignerSecondShops(id, new ResponseCallBack<DesignerSecondShopsBean>() {
             @Override
             public void onResponse(DesignerSecondShopsBean designerSecondShopsBean) {
-                shopName.setText(designerSecondShopsBean.getData().getOnline_shops().get(0).getName());
-                Glide.with(mContext).load(designerSecondShopsBean.getData().getOnline_shop_image()).into(shopImage);
+                Glide.with(mContext).load(designerSecondShopsBean.getData().getShop_image()).into(shopImage);
+                shopName.setText(designerSecondShopsBean.getData().getShops().get(0).getName());
+                shopCity.setText(designerSecondShopsBean.getData().getShops().get(0).getCity());
+                shopAddress.setText(designerSecondShopsBean.getData().getShops().get(0).getAddress());
             }
 
             @Override
