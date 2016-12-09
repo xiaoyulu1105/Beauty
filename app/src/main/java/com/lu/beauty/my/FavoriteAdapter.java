@@ -1,6 +1,7 @@
 package com.lu.beauty.my;
 
-import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,17 +9,10 @@ import android.widget.BaseAdapter;
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.designer.AttentionUser;
-import com.lu.beauty.designer.Collections;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.lu.beauty.designer.DesignerClickListener;
+import com.lu.beauty.designer.threadactivity.DesignerItemActivity;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import cn.bmob.v3.BmobUser;
 
 /**
  * Created by  AngleXiao on 16/12/3.
@@ -28,8 +22,10 @@ import cn.bmob.v3.BmobUser;
 public class FavoriteAdapter extends BaseAdapter {
 
  private ArrayList<AttentionUser> mAttentionUsers;
+    private DesignerClickListener designerClickListener;
 
     public void setAttentionUsers(ArrayList<AttentionUser> attentionUsers) {
+       this.designerClickListener = designerClickListener;
         mAttentionUsers = attentionUsers;
         notifyDataSetChanged();
     }
@@ -51,7 +47,9 @@ public class FavoriteAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
+
+        final Context context = parent.getContext();
         CommonViewHolder viewHolder = CommonViewHolder.getViewHolder(convertView, parent, R.layout.fragment_designer_item);
 
 
@@ -59,7 +57,19 @@ public class FavoriteAdapter extends BaseAdapter {
         viewHolder.setText(R.id.design_item_label, mAttentionUsers.get(position).getAttentionLabel());
         viewHolder.setCircleImage(R.id.design_item_avatar, mAttentionUsers.get(position).getAttentionAvatar());
         viewHolder.setImage(R.id.design_item_images, mAttentionUsers.get(position).getAttentionImage());
+         viewHolder.setButtonInvisibale(R.id.design_item_button);
+        viewHolder.setItemClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //将String 转化成int
+                String id = mAttentionUsers.get(position).getAttentionId();
+                Intent intent = new Intent(context, DesignerItemActivity.class);
+                intent.putExtra(DesignerItemActivity.INTENT_ID_KEY,id);
+                context.startActivity(intent);
 
+
+            }
+        });
         return viewHolder.getItemView();
 
     }

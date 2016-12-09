@@ -31,19 +31,24 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
     private ArrayList<DesignerRecommendBean.DataBean.DesignersBean> arrayList;
 
     private Context context;
-    private boolean isClick;
+    private boolean isClick = false; // true代表关注, 默认未关注
     // by 小玉
     private static int attentionCount = 0;
 
     private DesignerClickListener designerClickListener;
+    private ArrayList<String> mArrayList1;
+    private String mCollectionsData;
+
 
     public DesignerAllAdapter(DesignerClickListener designerClickListener, Context context) {
         this.designerClickListener = designerClickListener;
         this.context = context;
+
     }
 
     public void setArrayList(ArrayList<DesignerRecommendBean.DataBean.DesignersBean> arrayList) {
         this.arrayList = arrayList;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -73,92 +78,107 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
             }
         });
 
-
         // TODO  周云霄
-        holder.setViewClick(R.id.design_item_button, new View.OnClickListener() {
+
+        String attentionName = arrayList.get(position).getName();
+        String attentionLabel = arrayList.get(position).getLabel();
+        String attentionAvatar = arrayList.get(position).getAvatar_url();
+        String attentionImage = arrayList.get(position).getRecommend_images().get(0);
+        String attentionId = String.valueOf(arrayList.get(position).getId());
+
+        ArrayList<AttentionUser> attention = new ArrayList<AttentionUser>();
+        AttentionUser attentionUser = new AttentionUser();
+        attentionUser.setAttentionId(attentionId);
+        attentionUser.setAttentionName(attentionName);
+        attentionUser.setAttentionLabel(attentionLabel);
+        attentionUser.setAttentionAvatar(attentionAvatar);
+        attentionUser.setAttentionImage(attentionImage);
+
+        attention.add(attentionUser);
+        Collections collections = new Collections();//关注的所有的人
+        collections.setAttentionUsers(attention);
+
+        Gson gson = new Gson();
+        mCollectionsData = gson.toJson(collections);
+        mArrayList1 = new ArrayList<String>();
+
+
+        //判断登录
+
+
+        AttentionUser designerAttentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
+
+
+        // !!!
+        //在点击事件之前判断是否登录 如果登录就判断是否关注过
+        if (designerAttentionUser != null) {
+
+            mArrayList1 = designerAttentionUser.getAttentionList();
+
+
+            for (int i = 0; i < mArrayList1.size(); i++) {
+                if (mCollectionsData.equals(mArrayList1.get(i))){
+                    isClick = true; // 关注
+                    holder.setButtonText(R.id.design_item_button, "已关注");
+                    holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
+
+                   break;
+                } else {
+                    isClick = false;
+                    holder.setButtonText(R.id.design_item_button, "+ 关注");
+                    holder.setBackColor(R.id.design_item_button, Color.parseColor("#74D5DA"), Color.BLACK);
+                }
+            }
+        }
+
+        //非登录状态 让跳转
+        else {
+            Log.d("DesignerAllAdapter", "未登录");
+        }
+
+       holder.setViewClick(R.id.design_item_button, new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String attentionName = arrayList.get(position).getName();
-                String attentionLabel = arrayList.get(position).getLabel();
-                String attentionAvatar = arrayList.get(position).getAvatar_url();
-                String attentionImage = arrayList.get(position).getRecommend_images().get(0);
-                String attentionId = String.valueOf(arrayList.get(position).getId());
+           public void onClick(View v) {
 
-                ArrayList<AttentionUser> attention = new ArrayList<AttentionUser>();
-                AttentionUser attentionUser = new AttentionUser();
-                attentionUser.setAttentionId(attentionId);
-                attentionUser.setAttentionName(attentionName);
-                attentionUser.setAttentionLabel(attentionLabel);
-                attentionUser.setAttentionAvatar(attentionAvatar);
-                attentionUser.setAttentionImage(attentionImage);
+                AttentionUser designerAttentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
 
-                attention.add(attentionUser);
-                Collections collections = new Collections();//关注的所有的人
-                collections.setAttentionUsers(attention);
+                // 将 数据存入 Bmob 的attentionList集合
 
-                Gson gson = new Gson();
-                String collectionsData = gson.toJson(collections);
-
-
-                if (!isClick) {
-
+                if (!isClick ) {
+                    // 从未关注 状态 变为 已关注状态
                     holder.setButtonText(R.id.design_item_button, "已关注");
                     holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
                     isClick = !isClick;
 
 
-                    //判断是否登录
-                    AttentionUser designerAttentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
-//                     BmobUser bmobUser = BmobUser.getCurrentUser();
-
-                    // !!!
-                    // 将 数据存入 Bmob 的attentionList集合
+                    // TODO 保存该条数据到bmob
                     if (designerAttentionUser != null) {
-
-                        Log.d("DesignerAllAdapter", "已登录");
-
-                        ArrayList<String> arrayList = new ArrayList<String>();
-
+//                        for (int i = 0; i < mArrayList1.size(); i++) {
+//                            if (mCollectionsData.equals(mArrayList1.get(i))) {
+//                            }
+//                        }
                         if (attentionCount == 0) {
                             // 第一次关注, 不用获取集合数据
                             attentionCount++;
 
                         } else {
-                            arrayList = designerAttentionUser.getAttentionList();
+                            mArrayList1 = designerAttentionUser.getAttentionList();
                         }
-                        arrayList.add(collectionsData);
-                        designerAttentionUser.setAttentionList(arrayList);
-
-                        //判断是否关注
-                        //关注
-                        //
-//                        for (int i = 0; i < arrayList.size(); i++) {
-//                            if (collectionsData.equals(arrayList.get(i))) {
-//                                holder.setButtonText(R.id.design_item_button, "已关注");
-//                                holder.setBackColor(R.id.design_item_button, Color.BLACK, Color.WHITE);
-//
-//                            } else {
-//                                arrayList.add(collectionsData);
-//                                designerAttentionUser.setAttentionList(arrayList);
-//
-//                            }
-//
-//                        }
-
-
+////插入,mob
+                        mArrayList1.add(mCollectionsData);
+                        designerAttentionUser.setAttentionList(mArrayList1);
                         designerAttentionUser.update(new UpdateListener() {
                             @Override
                             public void done(BmobException e) {
                                 if (e == null) {
-                                    Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "关注啦啦啦☺", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(context, "上传失败", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "不成功", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-                    }
-                    // !!!
 
+                    }
                     //非登录状态 让跳转
                     else {
                         Log.d("DesignerAllAdapter", "未登录");
@@ -168,21 +188,60 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
 
                         Toast.makeText(context, "非登录状态", Toast.LENGTH_SHORT).show();
                         holder.setButtonText(R.id.design_item_button, "+ 关注");
-                        isClick = !isClick;
                         holder.setBackColor(R.id.design_item_button, Color.parseColor("#74D5DA"), Color.BLACK);
+                        isClick =! isClick;
                     }
 
 
                 } else {
                     holder.setButtonText(R.id.design_item_button, "+ 关注");
                     holder.setBackColor(R.id.design_item_button, Color.parseColor("#74D5DA"), Color.BLACK);
-                    isClick = !isClick;
+                    isClick =! isClick;
+
+                    // TODO 将Bmob中的该条数据删除
+                    // 从关注 状态 变为 未关注状态
+                    if (designerAttentionUser != null) {
+
+                ArrayList<String> mArrayList2 = new ArrayList<String>();
+                        mArrayList2 = designerAttentionUser.getAttentionList();
+                        Log.d("DesignerAllAdapter", "mArrayList2.size():" + mArrayList2.size());
+                        for (int i =  mArrayList2.size()-1; i>=0 ; i--) {
+                            if (mCollectionsData.equals(mArrayList2.get(i))){
+                                mArrayList2.remove(i);
+                                designerAttentionUser.setAttentionList(mArrayList2);
+                                Log.d("DesignerAllAdapter", "mArrayList2.size():" + mArrayList2.size());
+                            }
+
+                        }
+//                        mArrayList1.remove(mCollectionsData);
+                        //mArrayList2.remove(mCollectionsData);
+                        designerAttentionUser.update(new UpdateListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                Toast.makeText(context, "取消关注", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+
 
                 }
-            }
-        });
+         }
+       });
 
     }
+
+
+    //插入
+
+
+
+
+
+
+
+
+
 
     @Override
     public int getItemCount() {

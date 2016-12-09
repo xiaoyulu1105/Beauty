@@ -1,4 +1,4 @@
-package com.lu.beauty.designer;
+package com.lu.beauty.designer.threadactivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,10 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
 import com.lu.beauty.bean.DesignerSecondBasicBean;
-import com.lu.beauty.designer.threadactivity.DesignerItemBottomAdapter;
+import com.lu.beauty.bean.DesignerSecondShopsBean;
+import com.lu.beauty.designer.DesignerHeadMoreActivity;
+import com.lu.beauty.designer.DesignerItemPagerAdapter;
+import com.lu.beauty.designer.PointImageView;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
 import com.lu.beauty.tools.CircleDrawable;
@@ -36,7 +41,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
  * Created by GuoXuanYu on 16/12/3.
  */
 
-public class DesignerItemActivity extends BaseActivity implements View.OnClickListener,SwipeBackActivityBase {
+public class DesignerItemActivity extends BaseActivity implements View.OnClickListener,SwipeBackActivityBase,DesignerItemListener {
 
     private String id;
     private ImageView back;
@@ -54,10 +59,13 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
     private TextView concept;
     private TabLayout tab;
     private ViewPager viewPager;
-    private String[] s = {"作品","画报","线上购买"};
+    private ArrayList<String> s = new ArrayList<>() ;
+    private ArrayList<DesignerSecondBasicBean.DataBean.CategoriesBean> categoriesBeanArrayList = new ArrayList<>();
 
     // by 小玉
     public static final String INTENT_ID_KEY = "id"; // 跳转时传递过来的id
+    private RecyclerView rv;
+    private DesignerItemAdapter adapter;
 
     @Override
     protected int getLayout() {
@@ -78,6 +86,7 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
         concept = bindView(R.id.activity_designer_item_concept);
         tab = bindView(R.id.activity_designer_item_tab);
         viewPager = bindView(R.id.activity_designer_item_viewpage);
+        rv = bindView(R.id.activity_designer_item_rv);
     }
 
     @Override
@@ -89,11 +98,13 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
         swipeBackActivityHelper.onActivityCreate();
         pagerAdapter = new DesignerItemPagerAdapter();
         setBasicMessage();
-        DesignerItemBottomAdapter adapter = new DesignerItemBottomAdapter(getSupportFragmentManager(), s,id);
-        viewPager.setAdapter(adapter);
+
         tab.setupWithViewPager(viewPager);
         tab.setSelectedTabIndicatorColor(Color.WHITE);
         tab.setTabMode(TabLayout.MODE_SCROLLABLE);
+        GridLayoutManager manager = new GridLayoutManager(this,4);
+        rv.setLayoutManager(manager);
+        adapter = new DesignerItemAdapter(this);
 
     }
 
@@ -132,6 +143,43 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
                 follow.setText(designerSecondBasicBean.getData().getFollow_num()+"关注者");
                 expandTV. setText(designerSecondBasicBean.getData().getDescription());
                 concept.setText(designerSecondBasicBean.getData().getConcept());
+                if(designerSecondBasicBean.getData().getProduct_num() != 0){
+                    s.add("作品");
+                }
+                if (designerSecondBasicBean.getData().getArticle_num() != 0){
+                    s.add("画报");
+                }
+                setShopMessage();
+                for (int i = 0; i < designerSecondBasicBean.getData().getCategories().size(); i++) {
+                    categoriesBeanArrayList.add(designerSecondBasicBean.getData().getCategories().get(i));
+                }
+                adapter.setArrayList(categoriesBeanArrayList);
+                rv.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+    }
+
+    public void setShopMessage(){
+        HttpUtil.getDesignerSecondShops(id, new ResponseCallBack<DesignerSecondShopsBean>() {
+            @Override
+            public void onResponse(DesignerSecondShopsBean designerSecondShopsBean) {
+                if (designerSecondShopsBean.getData().getShops().size() != 0 ){
+
+                    s.add("旗舰门店");
+                }else {
+
+                }
+                if (designerSecondShopsBean.getData().getOnline_shops() != null){
+                    s.add("线上购买");
+                }
+                DesignerItemBottomAdapter adapter = new DesignerItemBottomAdapter(getSupportFragmentManager(), s,id);
+                viewPager.setAdapter(adapter);
             }
 
             @Override
@@ -204,5 +252,13 @@ public class DesignerItemActivity extends BaseActivity implements View.OnClickLi
     public void scrollToFinishActivity() {
         Utils.convertActivityToTranslucent(this);
         getSwipeBackLayout().scrollToFinishActivity();
+    }
+
+    @Override
+    public void typeClick(int id,String title) {
+        Intent intent = new Intent(DesignerItemActivity.this, DesignerHeadMoreActivity.class);
+        intent.putExtra("id",id+"");
+        intent.putExtra("title",title);
+        startActivity(intent);
     }
 }

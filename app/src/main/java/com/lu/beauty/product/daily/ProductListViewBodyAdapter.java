@@ -10,8 +10,9 @@ import android.widget.BaseAdapter;
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.bean.ProductDailyBean;
-import com.lu.beauty.designer.DesignerItemActivity;
+
 import com.lu.beauty.product.productitem.ProductItemActivity;
+import com.lu.beauty.designer.threadactivity.DesignerItemActivity;
 import com.lu.beauty.tools.GetPercent;
 import com.lu.beauty.ui.CryFaceView;
 import com.lu.beauty.ui.SmileFaceView;

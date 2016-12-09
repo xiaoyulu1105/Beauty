@@ -1,5 +1,8 @@
 package com.lu.beauty.my;
 
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.IdRes;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,12 +22,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.Utils;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
+
 /**
  * Created by  AngleXiao on 16/12/3.
  * OLiGei  what is your name
  * 轻松拿下一个类 属实有牌面
  */
-public class FavoriteDesignerActivity extends BaseActivity implements View.OnClickListener {
+public class FavoriteDesignerActivity extends BaseActivity implements View.OnClickListener ,SwipeBackActivityBase {
 
     private List<Collections> mCollectionses;
     private ArrayList<AttentionUser> mAttentionUsers;
@@ -34,6 +42,7 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
     private FavoriteAdapter mFavoriteAdapter;
     private ListView mLvFavorite;
     private ImageView mIvBack;
+    private SwipeBackActivityHelper swipeBackActivityHelper;
 
     @Override
     protected int getLayout() {
@@ -61,6 +70,10 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
 
     @Override
     protected void initData() {
+        swipeBackActivityHelper = new SwipeBackActivityHelper(this);
+        swipeBackActivityHelper.onActivityCreate();
+
+
         AttentionUser attentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
         //BmobUser bmobUser = new BmobUser();
         if (attentionUser != null) {
@@ -141,15 +154,48 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            }
-
         }
 
+    }
 
+    @Override
+    public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onPostCreate(savedInstanceState);
+        swipeBackActivityHelper.onPostCreate();
+    }
+
+    @Override
+    public View findViewById(@IdRes int id) {
+        View v = super.findViewById(id);
+        if(v == null && swipeBackActivityHelper != null){
+            return swipeBackActivityHelper.findViewById(id);
+        }
+        return v;
     }
 
     @Override
     public void onClick(View v) {
         onBackPressed();
+    }
+
+    @Override
+    public SwipeBackLayout getSwipeBackLayout() {
+        return swipeBackActivityHelper.getSwipeBackLayout();
+    }
+
+    @Override
+    public void setSwipeBackEnable(boolean enable) {
+        getSwipeBackLayout().setEnableGesture(enable);
+    }
+
+
+
+
+
+    @Override
+    public void scrollToFinishActivity() {
+        Utils.convertActivityToTranslucent(this);
+        getSwipeBackLayout().scrollToFinishActivity();
     }
 }
 

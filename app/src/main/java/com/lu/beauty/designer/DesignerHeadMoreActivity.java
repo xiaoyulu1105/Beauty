@@ -13,6 +13,7 @@ import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
 import com.lu.beauty.bean.DesignerHeadlineBean;
 import com.lu.beauty.bean.DesignerRecommendBean;
+import com.lu.beauty.designer.threadactivity.DesignerItemActivity;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
 import com.lu.beauty.tools.EndLessOnScrollListener;
@@ -64,8 +65,10 @@ public class DesignerHeadMoreActivity extends BaseActivity implements View.OnCli
         rv.setLayoutManager(manager);
         headConmmendMore(type,page);
         rv.setAdapter(allAdapter);
+
         swipeBackActivityHelper = new SwipeBackActivityHelper(this);
         swipeBackActivityHelper.onActivityCreate();
+
         rv.setOnScrollListener(new EndLessOnScrollListener(manager) {
             @Override
             protected void onLoadMore(int curentPage) {
