@@ -75,9 +75,7 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
 
 
         AttentionUser attentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
-        //BmobUser bmobUser = new BmobUser();
         if (attentionUser != null) {
-//            String name = attentionUser.getAttentionName();
             Log.d("FavorateDesignerActivit", "已登录状态");
 
             ArrayList<String> arrayList = new ArrayList<>();
