@@ -69,8 +69,8 @@
             </intent-filter>
         </activity>
 
-
-        <activity android:name=".product.ProductItemActivity"/>
+        <activity android:name=".product.productitem.ProductItemActivity"
+            android:theme="@style/otherPageStyle"/>
 
 
         <activity android:name=".my.FavoriteDesignerActivity"
@@ -83,7 +83,7 @@
             android:theme="@style/otherPageStyle"/>
         <activity android:name=".article.ArticleBannerActivity"/>
 
-        <activity android:name=".designer.DesignerItemActivity"
+        <activity android:name=".designer.threadactivity.DesignerItemActivity"
                   android:theme="@style/otherPageStyle"/>
 
 

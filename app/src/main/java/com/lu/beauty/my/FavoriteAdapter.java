@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.designer.AttentionSingleBean;
-import com.lu.beauty.designer.DesignerItemActivity;
+import com.lu.beauty.designer.threadactivity.DesignerItemActivity;
 
 import java.util.ArrayList;
 

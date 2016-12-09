@@ -266,6 +266,7 @@ public class ProductVpFragment extends BaseFragment implements DesignerClickList
                     arrayList.add(productCommonBean.getData().getProducts().get(i));
                 }
                 adapter.setArrayList(arrayList);
+
                 adapter.notifyDataSetChanged();
             }
 
