@@ -104,6 +104,7 @@ public class ArticleBannerActivity extends BaseActivity implements View.OnClickL
 
         }
 
+        // 为 ViewPager 添加监听
         mBannerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

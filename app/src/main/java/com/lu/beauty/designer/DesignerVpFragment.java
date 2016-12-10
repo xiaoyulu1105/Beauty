@@ -21,6 +21,7 @@ import com.lu.beauty.R;
 import com.lu.beauty.base.BaseFragment;
 import com.lu.beauty.bean.DesignerHeadlineBean;
 import com.lu.beauty.bean.DesignerRecommendBean;
+import com.lu.beauty.designer.threadactivity.DesignerItemActivity;
 import com.lu.beauty.internet.HttpUtil;
 import com.lu.beauty.internet.ResponseCallBack;
 import com.lu.beauty.tools.EndLessOnScrollListener;
@@ -47,7 +48,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
     private int favorPage = 1;
     private String type = "";
     private EndLessOnScrollListener endLessOnScrollListener;
-    private ConmmendHeadAdapter conmmendHeadAdapter;
+    private CommendHeadAdapter conmmendHeadAdapter;
     private View headView;
     private ArrayList<DesignerRecommendBean.DataBean.CategoriesBeanX> headArrayList;
     private HeadItemAdapter headItemAdapter;
@@ -173,7 +174,7 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
                 }
                 headItemAdapter.setArrayList(headArrayList);
                 allAdapter.setArrayList(recommendArrayList);
-                conmmendHeadAdapter = new ConmmendHeadAdapter(allAdapter);
+                conmmendHeadAdapter = new CommendHeadAdapter(allAdapter);
                 headView = LayoutInflater.from(mContext).inflate(R.layout.activity_designer_header,null);
                 headItemRV = (RecyclerView) headView.findViewById(R.id.activity_designer_headerRV);
                 GridLayoutManager manager = new GridLayoutManager(getContext(),4);
@@ -312,10 +313,12 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
         changePopItemBackground(popTextValue,bean.getId());
     }
 
+    // 修改 by 小玉
     @Override
     public void allAdapterItemClick(int id) {
-        Intent intent = new Intent(getContext(),DesignerItemActivity.class);
-        intent.putExtra("id",id + "");
+        String stringId = String.valueOf(id);
+        Intent intent = new Intent(mContext, DesignerItemActivity.class);
+        intent.putExtra(DesignerItemActivity.INTENT_ID_KEY, id + "");
         startActivity(intent);
     }
 

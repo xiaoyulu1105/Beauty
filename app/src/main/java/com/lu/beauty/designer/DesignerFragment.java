@@ -1,7 +1,6 @@
 package com.lu.beauty.designer;
 
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 
 import android.support.v4.view.ViewPager;
@@ -15,7 +14,7 @@ import com.lu.beauty.base.BaseFragment;
 public class DesignerFragment extends BaseFragment {
     private TabLayout designerTabLayout;
     private ViewPager designerViewPager;
-    private static String s[] = {"推荐", "最受欢迎", "独立设计师", "大牌设计师"};
+    private static String designersArray[] = {"推荐", "最受欢迎", "独立设计师", "大牌设计师"};
 
 
     @Override
@@ -32,7 +31,7 @@ public class DesignerFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        DesignerVpAdapter adapter = new DesignerVpAdapter(getChildFragmentManager(), s);
+        DesignerVpAdapter adapter = new DesignerVpAdapter(getChildFragmentManager(), designersArray);
         designerViewPager.setAdapter(adapter);
         designerTabLayout.setupWithViewPager(designerViewPager);
         designerTabLayout.setSelectedTabIndicatorColor(Color.WHITE);

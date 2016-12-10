@@ -44,16 +44,18 @@ public interface LoginContract {
     interface Presenter {
         /**
          * 接收V层传过来的用户名和密码
+         *
          * @param useName
          * @param psw
          */
-        void login(String useName,String psw);
+        void login(String useName, String psw);
 
 
         /**
          * 检测用户名或者密码是否为空
+         *
          * @param userName 用户名
-         * @param psw 密码
+         * @param psw      密码
          * @return true 为空 , false 不为空
          */
         boolean checkIsEmpty(String userName, String psw);
@@ -65,6 +67,7 @@ public interface LoginContract {
 
         /**
          * 登录失败
+         *
          * @param exception 登录失败的异常信息
          */
         void loginError(Exception exception);
@@ -74,9 +77,9 @@ public interface LoginContract {
          */
         void qqLogin();
 
-              /**
-                  * 登录三方的时候直接注册一个Bmob账号
-                  */
+        /**
+         * 登录三方的时候直接注册一个Bmob账号
+         */
 
 
     }
@@ -93,18 +96,17 @@ public interface LoginContract {
 
         /**
          * 进行登录
+         *
          * @param useName 用户名
-         * @param psw 密码
+         * @param psw     密码
          */
-        void login(String useName , String psw);
+        void login(String useName, String psw);
 
 
-        void  qqLogin ();
-
+        void qqLogin();
 
 
     }
-
 
 
 }

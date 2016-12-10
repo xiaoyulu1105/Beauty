@@ -38,7 +38,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 /**
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
- * 有物Fragment
+ * 有物显示数据的 Fragment
  */
 public class ProductVpFragment extends BaseFragment implements DesignerClickListener, View.OnClickListener{
     private static final String KEY = "position";
@@ -49,10 +49,8 @@ public class ProductVpFragment extends BaseFragment implements DesignerClickList
     private static final String ACCESSORIES = "4";
     private static final String OTHER = "54";
     private int independencePage = 1;
-    private DesignerAllAdapter allAdapter;
     private ArrayList<DesignerRecommendBean.DataBean.DesignersBean> independenceArrayList;
     private int page = 1;
-    private TextView textView;
     private StickyListHeadersListView productLv;
     private ProductListViewHeadAdapter headAdapter;
     private ProductListViewAdapter adapter;
@@ -261,7 +259,6 @@ public class ProductVpFragment extends BaseFragment implements DesignerClickList
     }
 
     private void okHttp(String num, int page) {
-        arrayList = new ArrayList<>();
         HttpUtil.getProduckCommonBean(num,page, new ResponseCallBack<ProductCommonBean>() {
             @Override
             public void onResponse(ProductCommonBean productCommonBean) {
@@ -269,6 +266,7 @@ public class ProductVpFragment extends BaseFragment implements DesignerClickList
                     arrayList.add(productCommonBean.getData().getProducts().get(i));
                 }
                 adapter.setArrayList(arrayList);
+
                 adapter.notifyDataSetChanged();
             }
 
@@ -316,6 +314,27 @@ public class ProductVpFragment extends BaseFragment implements DesignerClickList
     }
     
     public void headCommendMore(String type, int page){
-        okHttp(type, page);
+        headOkHttp(type, page);
+    }
+
+    private void headOkHttp(String num, int page) {
+        arrayList = new ArrayList<>();
+        HttpUtil.getProduckCommonBean(num,page, new ResponseCallBack<ProductCommonBean>() {
+            @Override
+            public void onResponse(ProductCommonBean productCommonBean) {
+                for (int i = 0; i < productCommonBean.getData().getProducts().size(); i++) {
+                    arrayList.add(productCommonBean.getData().getProducts().get(i));
+                }
+                adapter.setArrayList(arrayList);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+                Toast.makeText(getActivity(), "网络请求失败", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 }

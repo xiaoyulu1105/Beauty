@@ -67,5 +67,45 @@
             android:paddingLeft="10dp"
             />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:id="@+id/designer_item_bottom_ll3"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/designer_item_bottom_shops_image"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:id="@+id/designer_item_bottom_shops_city"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+            android:id="@+id/designer_item_bottom_shops_name"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:id="@+id/designer_item_bottom_shops_address"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            />
+    </LinearLayout>
 
 </LinearLayout>

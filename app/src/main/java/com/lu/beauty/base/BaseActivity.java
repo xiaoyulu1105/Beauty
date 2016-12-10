@@ -41,6 +41,9 @@ public abstract class BaseActivity extends AppCompatActivity{
     protected <T extends View> T bindView(int id){
         return (T) findViewById(id);
     }
+    protected <T extends View> T bindView(View view, int id) {
+        return (T) view.findViewById(id);
+    }
 
     // 设置监听
     protected void setClick(View.OnClickListener clickListener, View ... views){

@@ -16,6 +16,8 @@ public class UrlValues {
     public static final String PRODUCT_CATEGORIES_URL = "http://design.zuimeia.com/api/v1/product/categories/";
     // Daily项第一级
     public static final String PRODUCT_DAILY_URL = "http://design.zuimeia.com/api/v1/products/daily/?timestamp=";
+
+    public static final String PRODUCT_ITEM_URL = "http://design.zuimeia.com/api/v1/product/";
     // daily第一级 和 daily第二级 接口
     public static final String PRODUCT_DAILY_URLT = "http://design.zuimeia.com/api/v1/products/category/3/?page=1&page_size=30";
     // product页通用url
@@ -59,5 +61,7 @@ public class UrlValues {
 
     // 第二级
     public static final String DESIGNER_DETAIL_URL = "http://design.zuimeia.com/api/v1/designer/145/";
+
+    String aa = "http://design.zuimeia.com/api/v1/articles/designer/201/?page=1&page_size=30  ";
 
 }

@@ -11,7 +11,7 @@
         android:background="#050505"
         >
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btn_my_set"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,8 +39,8 @@
             android:id="@+id/btn_my_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_head_icon"
-            android:layout_alignLeft="@+id/iv_head_icon"
+            android:layout_below="@id/iv_head_icon"
+            android:layout_alignLeft="@id/iv_head_icon"
             android:paddingLeft="20dp"
             android:text="登录"
             android:background="@null"
@@ -96,7 +96,7 @@
             />
 
         <LinearLayout
-            android:id="@+id/ll_my_favorate"
+            android:id="@+id/ll_my_favorite"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingRight="20dp"

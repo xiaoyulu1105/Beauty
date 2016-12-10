@@ -5,10 +5,10 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 /**
- * Created by dllo on 16/11/9.
+ * Created by wqs on 16/11/9.
+ *
  */
 public class MyListView extends ListView {
-
 
     public MyListView(Context context) {
         super(context);
