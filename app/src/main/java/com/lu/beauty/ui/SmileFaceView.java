@@ -48,19 +48,15 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
         this.isSelected = isSelected;
     }
 
-    // 设置 myBackgroundDrawable 的 set get 方法.
-    public int getMyBackgroundDrawable() {
-        return myBackgroundDrawable;
-    }
-
+    // 设置 myBackgroundDrawable 的 set 方法.
+    // 点击笑脸 哭脸变白的 可行的方式, 丰神指导
     public void setMyBackgroundDrawable(int myBackgroundDrawable) {
         this.myBackgroundDrawable = myBackgroundDrawable;
-        // 刷新 UI
-        this.invalidate();
+        setBackground(getResources().getDrawable(myBackgroundDrawable));
     }
-    //
-    public void setCryFaceView(CryFaceView cryFaceView) {
 
+    // 点击笑脸 哭脸变白的 不可行的方式1
+    public void setCryFaceView(CryFaceView cryFaceView) {
         Log.d("SmileFaceView", "setCryFaceView---参数的 cry 对象" + cryFaceView);
         this.mCryFaceView = cryFaceView;
         Log.d("SmileFaceView", "setCryFaceView---笑脸类中的 cry 对象" + cryFaceView);
@@ -71,8 +67,6 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
     public void setDP2PX_FINAL(int DP2PX_FINAL) {
         mDP2PX_FINAL = DP2PX_FINAL;
     }
-
-
 
     private int getTempHeight() {
         return tempHeight;
@@ -101,7 +95,7 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
     }
 
     private void init() {
-        //
+
         setBackground(getResources().getDrawable(myBackgroundDrawable));
 
         mButton = new Button(mContext);
@@ -128,11 +122,24 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
         mHeight = getHeight();
     }
 
+    // 设置 哭脸的背景为白色
+    private void setCryWhite() {
+        RelativeLayout parent = (RelativeLayout) getParent();
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            if (parent.getChildAt(i) instanceof CryFaceView){
+                CryFaceView cryFaceView = (CryFaceView) parent.getChildAt(i);
+                cryFaceView.setMyBackgroundDrawable(R.drawable.shap);
+            }
+        }
+    }
+
     @Override
     public void onClick(View v) {
         Log.d("SmileFaceView", "点击了笑脸");
-        // 如果点击笑脸了
+        // 哭脸变白
+        setCryWhite();
 
+        // 点击笑脸 哭脸变白的 不可行的 方式1
         // 如果哭脸是选中状态
 //        if (mCryFaceView.getIsSelected()) {
 //            Log.d("SmileFaceView", "哭脸被选择过了");
@@ -141,7 +148,7 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
 //            mCryFaceView.setMyBackgroundDrawable(R.drawable.shap);
 //            mCryFaceView.setIsSelected(false);
 //        }
-        isSelected = true;
+//        isSelected = true;
 
         //动画
         //得到布局的高度,然后修改高度,并且给布局加上颜色

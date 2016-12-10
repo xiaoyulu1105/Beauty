@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:weightSum="8"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@mipmap/splash_bg">
 
-              android:background="@mipmap/splash_bg"
-
-    >
     <LinearLayout
-
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal"
         >
         <Button
+            android:id="@+id/btn_signin_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@mipmap/ic_back_dark"
-            android:id="@+id/btn_signin_back"
+            android:layout_marginRight="10dp"
             />
         <TextView
             android:layout_width="50dp"
@@ -27,16 +26,20 @@
             android:textSize = "20dp"
             android:gravity="center_vertical"
             />
-
-
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
         android:orientation="vertical"
-
         >
 
         <LinearLayout
@@ -61,9 +64,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
-
                 android:hint="用户名/手机号/邮箱" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -89,14 +90,11 @@
                 android:layout_marginLeft="5dp"
                 android:password="true"
                 android:id="@+id/et_signin_password"
-
                 android:hint="密码" />
-
         </LinearLayout>
 
         <Button
             android:id="@+id/btn_signin_signin"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
@@ -105,7 +103,11 @@
             android:background="#f25858"
             android:text="注册"
             android:textColor="#fff" />
-
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"/>
 
 </LinearLayout>

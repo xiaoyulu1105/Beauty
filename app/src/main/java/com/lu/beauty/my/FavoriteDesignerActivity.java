@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
-import com.lu.beauty.designer.Attention;
-import com.lu.beauty.designer.AttentionUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
