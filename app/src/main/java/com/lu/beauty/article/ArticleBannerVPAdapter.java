@@ -43,6 +43,7 @@ public class ArticleBannerVPAdapter extends PagerAdapter {
     }
 
 
+    // 手动复写的 getItemPosition 方法
     @Override
     public int getItemPosition(Object object) {
         for (int i = 0; i < mImageUrlList.size(); i++) {
@@ -73,7 +74,8 @@ public class ArticleBannerVPAdapter extends PagerAdapter {
         return imageView;
     }
 
-    // 手动 复写 destroyItem 方法
+
+    // 手动 复写 destroyItem 方法, 不写 程序就崩
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         if (container.getChildAt(position) == object) {

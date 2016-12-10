@@ -1,4 +1,4 @@
 
 product包 类的清单说明:
 
-ProductListViewAdapter: 显示有物数据的适配器
+1. ProductListViewAdapter: 显示有物数据的适配器

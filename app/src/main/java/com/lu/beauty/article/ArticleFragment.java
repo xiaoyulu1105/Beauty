@@ -198,7 +198,6 @@ public class ArticleFragment extends BaseFragment {
     @Override
     protected void initData() {
 
-
     }
 
 

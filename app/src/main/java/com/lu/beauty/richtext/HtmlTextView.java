@@ -55,6 +55,7 @@ public class HtmlTextView extends TextView{
                 if (what == MESSAGE_WHAT) {
                     MessageSpan ms = (MessageSpan)msg.obj;
                     Object[] spans = (Object[]) ms.getObject();
+
                     for (Object span : spans) {
                         if (span instanceof ImageSpan) {
                             // instanceof: 判断左边对象 是不是 右边类的实例
@@ -67,7 +68,7 @@ public class HtmlTextView extends TextView{
 
                             // 在这里 可以获取到单例类里已经存放的 集合数据
                             arrayList = mArticleImageSingleton.getImageUrlArrayList();
-                            Log.d("HtmlTextView", "在 HtmlTextView 里获取到单例类里的集合长度" + arrayList.size());
+                            Log.d("HtmlTextView", "在 HtmlTextView 里获取到单例类的集合长度" + arrayList.size());
 
                             Intent intent = new Intent(getContext(), ArticleBannerActivity.class);
                             intent.putExtra(INTENT_ARRAY_LIST_KEY, arrayList);

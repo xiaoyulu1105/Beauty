@@ -64,9 +64,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
         if(keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN){
+
             if (System.currentTimeMillis()-firstTime>2000){
-                Toast.makeText(MainActivity.this,"啊啊啊  你不要离开我",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "不要离开我", Toast.LENGTH_SHORT).show();
                 firstTime=System.currentTimeMillis();
             }else{
                 finish();
@@ -74,6 +76,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             }
             return true;
         }
+
         return super.onKeyDown(keyCode, event);
     }
 

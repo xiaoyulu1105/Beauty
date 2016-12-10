@@ -7,8 +7,8 @@ import java.util.ArrayList;
  *
  * 该单例类 的用途
  * 用来 存放 画报详情页 第一张图片 和富文本里面的图片的
- *
- * 出现的问题
+ * set 方法调用类: ArticleDetailActivity(set第一张图片), UrlImageGetter(存入富文本中的图片)
+ * get 方法调用类: ArticleDetailActivity(点击第一张图片), HtmlTextView(点击富文本中的图片)
  *
  */
 public class ArticleImageSingleton {

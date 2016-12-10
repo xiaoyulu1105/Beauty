@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,6 +32,8 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 /**
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
+ *
+ * 显示 有物 的二级界面
  */
 public class ProductItemActivity extends BaseActivity implements SwipeBackActivityBase {
 
@@ -45,6 +48,7 @@ public class ProductItemActivity extends BaseActivity implements SwipeBackActivi
     private ListView productItemImgLv;
     private ImgListViewAdapter adapter;
     private SwipeBackActivityHelper helper;
+    private Button mReturnBtn; // 返回按钮
 
 
     @Override
@@ -61,7 +65,7 @@ public class ProductItemActivity extends BaseActivity implements SwipeBackActivi
         productItemTv = bindView(v, R.id.activity_product_item_tv);
         productItemWeb = bindView(v, R.id.activity_product_item_web);
         productItemImgLv = bindView(R.id.activity_product_item_list_view_img);
-
+        mReturnBtn = bindView(R.id.activity_product_detail_return_btn);
 
         productItemImgLv.addHeaderView(v);
     }
@@ -87,6 +91,14 @@ public class ProductItemActivity extends BaseActivity implements SwipeBackActivi
 
         helper = new SwipeBackActivityHelper(this);
         helper.onActivityCreate();
+
+        // 返回按钮的监听
+        mReturnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void okHttp(String id) {

@@ -139,7 +139,6 @@ public class ArticleDetailActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.article_detail_title_image_iv:
 
-                // 将该title图片作为轮播图的第一张图片
                 // TODO 富文本的图片顺序不对
                 mImageUrlList = mImageSingleton.getImageUrlArrayList();
                 Log.d("ArticleDetailActivity", "轮播图片的数目:" + mImageUrlList.size());

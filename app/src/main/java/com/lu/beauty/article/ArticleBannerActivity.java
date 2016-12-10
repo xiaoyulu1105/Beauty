@@ -73,24 +73,23 @@ public class ArticleBannerActivity extends BaseActivity implements View.OnClickL
         mBannerVPAdapter = new ArticleBannerVPAdapter();
         mBannerVPAdapter.setImageUrlList(imageUrlList);
 
+        mBannerViewPager.setAdapter(mBannerVPAdapter);
+
         // 获取当前的图片的下标, 然后setCurrentItem(clickItem).
         int clickItem =  mBannerVPAdapter.getItemPosition(getImageUrl);
-        // 下面两行代码 顺序不能变, 变了就又是从第一个图片开始轮播了.
-        mBannerViewPager.setAdapter(mBannerVPAdapter);
         mBannerViewPager.setCurrentItem(clickItem);
 
-        // 在点击事件 初始化菱形的点点 是因为点击后才知道图片的总数
-        initBannerPoints(imageUrlList, getImageUrl);
+        //  初始化菱形的点点
+        initBannerPoints(imageUrlList);
 
     }
 
     /**
      * 设置轮播图 小菱形 的点点
      * @param imageUrlList
-     * @param getImageUrl
      */
-    private void initBannerPoints(ArrayList<String> imageUrlList, String getImageUrl) {
-        // 需要先把 之前的点点 都删掉
+    private void initBannerPoints(ArrayList<String> imageUrlList) {
+        // 需要先把 线性布局中 之前的点点 都删掉
         mBannerPointsLl.removeAllViews();
 
         final ArrayList<PointImageView> pointImageViews = new ArrayList<>();
@@ -99,7 +98,7 @@ public class ArticleBannerActivity extends BaseActivity implements View.OnClickL
             PointImageView pointImageView = new PointImageView(ArticleBannerActivity.this);
             pointImageViews.add(pointImageView);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+                    0, ViewGroup.LayoutParams.MATCH_PARENT, 1); // 宽-高-比重
             mBannerPointsLl.addView(pointImageView, layoutParams);
 
         }
@@ -114,11 +113,14 @@ public class ArticleBannerActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onPageSelected(int position) {
 
+                // 将 点点 的选中 和 viewPager 绑定
+                // 直接 用position 即可
                 int current = position % mBannerVPAdapter.getImageUrlList().size();
+
                 for (PointImageView pointImageView : pointImageViews) {
                     pointImageView.setSelected(false);
                 }
-                pointImageViews.get(current).setSelected(true);
+                pointImageViews.get(position).setSelected(true);
             }
 
             @Override

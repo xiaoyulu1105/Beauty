@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 /**
  * Created by XiaoyuLu on 16/12/3.
  * 实现画报的 第二级的 顶端的 相对布局的 显示和隐藏
- * 需要在其构造方法里 传入一个 RelativeLayout 的对象
+ * 需要在其构造方法里 传入一个 RelativeLayout 的对象, 不需要了.
  */
 
 public class ArticleGestureDetectorListener implements GestureDetector.OnGestureListener{
@@ -27,14 +27,6 @@ public class ArticleGestureDetectorListener implements GestureDetector.OnGesture
 
     @Override
     public boolean onDown(MotionEvent e) {
-        Log.d("MyGestureListener", "点击了 画报详情页");
-        if (mVelocityTracker == null) {
-            mVelocityTracker = VelocityTracker.obtain();
-
-        } else {
-            mVelocityTracker.clear();
-        }
-        mVelocityTracker.addMovement(e);
 
         return false;
     }
@@ -51,6 +43,17 @@ public class ArticleGestureDetectorListener implements GestureDetector.OnGesture
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+
+        // 当手向下滑动, 及查看上面的数据时, 显示 顶端的相对布局
+        // 选择 10 是 为了防止 误滑
+
+        if (distanceY > 10 && !mIsShowing) {
+            // 显示 顶端数据
+            mRelativeLayout.animate().translationY(0)
+                    .setInterpolator(new AccelerateDecelerateInterpolator());
+            mIsShowing = true;
+        }
+
         return false;
     }
 
@@ -68,15 +71,12 @@ public class ArticleGestureDetectorListener implements GestureDetector.OnGesture
         // 加上下面这行代码 就报错, NullPointException(空指针异常)
         // mVelocityTracker.computeCurrentVelocity(1000);
 
-        if (velocityY < -45 && mIsShowing) {
+        if (velocityY < -50 && mIsShowing) {
+            // 隐藏 顶端数据
             mRelativeLayout.animate().translationY(-mRelativeLayout.getHeight())
                     .setInterpolator(new AccelerateDecelerateInterpolator());
             mIsShowing = false;
 
-        } else if (velocityY > 0 && !mIsShowing){
-            mRelativeLayout.animate().translationY(0)
-                    .setInterpolator(new AccelerateDecelerateInterpolator());
-            mIsShowing = true;
         }
 
         return false;

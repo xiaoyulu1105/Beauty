@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.lu.beauty.R;
 import com.squareup.picasso.Picasso;
 
 
@@ -38,8 +39,11 @@ public class DesignerItemPagerAdapter  extends PagerAdapter{
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView imageView = new ImageView(container.getContext());
-        Picasso.with(container.getContext()).load(urls[position%urls.length])
-                .fit().into(imageView);
+        Picasso.with(container.getContext())
+                .load(urls[position%urls.length])
+                .fit()
+                .placeholder(R.mipmap.loading)
+                .into(imageView);
         container.addView(imageView, WindowManager.LayoutParams.MATCH_PARENT
                 , WindowManager.LayoutParams.WRAP_CONTENT);
         return imageView;

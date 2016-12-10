@@ -2,6 +2,8 @@ package com.lu.beauty.welcome;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.lu.beauty.MainActivity;
 import com.lu.beauty.R;
@@ -16,6 +18,9 @@ import cn.bmob.v3.Bmob;
  */
 
 public class WelcomeActivity extends BaseActivity {
+
+    private LinearLayout mLinearLayout;
+
     @Override
     protected int getLayout() {
         return R.layout.activity_welcome;
@@ -23,12 +28,13 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-
-}
+        mLinearLayout = bindView(R.id.welcome_ll);
+    }
 
     @Override
     protected void initData() {
-        CountDownTimer timer = new CountDownTimer(2000,1000) {
+        // 一定时间自动跳转
+        final CountDownTimer timer = new CountDownTimer(3000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -41,6 +47,17 @@ public class WelcomeActivity extends BaseActivity {
                 finish();
             }
         }.start();
+
+        // 点击界面, 手动跳转
+        mLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                timer.cancel();
+            }
+        });
 
     }
 }

@@ -56,7 +56,7 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_signin_back:
-                getActivity().onBackPressed();
+                getActivity().finish();
 
                 break;
             case R.id.btn_signin_signin:

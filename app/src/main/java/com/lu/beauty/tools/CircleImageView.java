@@ -19,25 +19,25 @@ import com.lu.beauty.R;
 /**
  * Created by dllo on 16/9/27.
  */
-public class CirclemageView extends ImageView {
+public class CircleImageView extends ImageView {
 
     private boolean isCircle;
 
     // 在代码里初始化组件的时候执行这个构造方法
-    public CirclemageView(Context context) {
+    public CircleImageView(Context context) {
         super(context);
     }
     // xml布局这个组件的时候执行这个构造方法
-    public CirclemageView(Context context, AttributeSet attrs) {
+    public CircleImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         // 获取xml布局里设置的自定义组件属性值
         // 找到attrs.xml中自定义组件设置的属性
-        TypedArray array = context.obtainStyledAttributes(attrs,R.styleable.CirclemageView);
-        isCircle = array.getBoolean(R.styleable.CirclemageView_isCircle,false);
+        TypedArray array = context.obtainStyledAttributes(attrs,R.styleable.CircleImageView);
+        isCircle = array.getBoolean(R.styleable.CircleImageView_isCircle,false);
         Log.d("CirclemageView", "isCircle:" + isCircle);
     }
     // 自定义组件的style的时候会执行这个构造方法
-    public CirclemageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CircleImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

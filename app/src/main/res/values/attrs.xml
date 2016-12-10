@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CirclemageView" >
+    <declare-styleable name="CircleImageView" >
         <attr name="isCircle" format="boolean"/>
     </declare-styleable>
 </resources>

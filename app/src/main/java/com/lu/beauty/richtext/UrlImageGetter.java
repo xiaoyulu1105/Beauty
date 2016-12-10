@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by XiaoyuLu on 16/12/1.
  * <p>
- * 在这里 可以实现 图片网址 的获取
+ * 在这里 可以实现 富文本 中 图片网址 的获取
  */
 public class UrlImageGetter implements Html.ImageGetter {
     private Context mContext;

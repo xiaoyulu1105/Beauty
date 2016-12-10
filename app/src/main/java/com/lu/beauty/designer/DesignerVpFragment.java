@@ -133,7 +133,6 @@ public class DesignerVpFragment extends BaseFragment implements DesignerClickLis
 
                     setRecommendRV(1);
 
-
                     break;
                 case 1:
 //                    textView.setText("最受欢迎");

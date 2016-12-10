@@ -13,7 +13,7 @@ import com.lu.beauty.bean.ProductDailyBean;
 
 import com.lu.beauty.product.productitem.ProductItemActivity;
 import com.lu.beauty.designer.threadactivity.DesignerItemActivity;
-import com.lu.beauty.tools.GetPercent;
+import com.lu.beauty.ui.GetPercent;
 import com.lu.beauty.ui.CryFaceView;
 import com.lu.beauty.ui.SmileFaceView;
 

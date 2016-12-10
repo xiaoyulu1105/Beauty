@@ -6,13 +6,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Toast;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.bean.ProductCommonBean;
 import com.lu.beauty.product.productitem.ProductItemActivity;
-import com.lu.beauty.tools.GetPercent;
+import com.lu.beauty.ui.GetPercent;
 import com.lu.beauty.ui.CryFaceView;
 import com.lu.beauty.ui.SmileFaceView;
 
@@ -24,7 +23,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
  * If the operation is no problem, it is written by wangqiaosheng
  * , otherwise it is written by zhouyunxiao
  *
- * 显示有物数据的ListView的适配器, 也是在这里显示笑脸
+ * 显示有物数据的 ListView 的适配器, 也是在这里显示笑脸
  */
 
 public class ProductListViewAdapter extends BaseAdapter implements StickyListHeadersAdapter{
@@ -93,9 +92,9 @@ public class ProductListViewAdapter extends BaseAdapter implements StickyListHea
 
         // 在这里监听点击无响应
 
-        // 老师加的??
-//        viewHolder.getView(R.id.daily_item_user_icon).setOnClickListener(new MyListener(arrayList.get(position).getDesigner().getId() + "", parent.getContext()));
-//        viewHolder.getView(R.id.daily_item_img).setOnClickListener(new ProductListener(arrayList.get(position).getId() + "", parent.getContext(),picRUrls));
+        // 老师加的 ??
+        viewHolder.getView(R.id.daily_item_user_icon).setOnClickListener(new MyListener(arrayList.get(position).getDesigner().getId() + "", parent.getContext()));
+        viewHolder.getView(R.id.daily_item_img).setOnClickListener(new ProductListener(arrayList.get(position).getId() + "", parent.getContext(),picRUrls));
 
 
         return viewHolder.getItemView();
@@ -144,7 +143,6 @@ public class ProductListViewAdapter extends BaseAdapter implements StickyListHea
         public void onClick(View view) {
             Intent intent = new Intent(context, ProductItemActivity.class);
             intent.putExtra("id", id);
-//            Log.d("ProductListener11", "picRUrls:" + picRUrls);
             Log.d("ProductListener", "urlList:" + urlList);
             intent.putStringArrayListExtra("pics", urlList);
             context.startActivity(intent);

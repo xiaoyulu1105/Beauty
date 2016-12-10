@@ -1,4 +1,6 @@
 
 这是 最美有物 第二项 有物 的包
 
-GetPercent类 是用来计算笑脸的高度的
+1. ProductListViewAdapter: 显示有物数据的 ListView 的适配器, 也是在这里显示笑脸
+2. ProductItemActivity: 显示 有物 的二级界面
+
