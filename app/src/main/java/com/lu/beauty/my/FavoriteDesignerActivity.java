@@ -11,18 +11,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
 import com.lu.beauty.designer.Attention;
 import com.lu.beauty.designer.AttentionUser;
-<<<<<<< HEAD
-import com.lu.beauty.designer.MyUser;
-=======
->>>>>>> develop
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
