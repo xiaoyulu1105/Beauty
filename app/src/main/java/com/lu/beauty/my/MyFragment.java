@@ -51,7 +51,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         mBtnLogin = bindView(R.id.btn_my_login);
         mBtnSet = bindView(R.id.btn_my_set);
         mTvName = bindView(R.id.tv_my_name);
-        mLlFavorate = bindView(R.id.ll_my_favorate);
+        mLlFavorate = bindView(R.id.ll_my_favorite);
 
 
 //设置圆形头像
@@ -73,24 +73,28 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         super.onResume();
 
 
-                BmobUser bmobUser = BmobUser.getCurrentUser();
+        BmobUser bmobUser = BmobUser.getCurrentUser();
         if (bmobUser != null) {
             mBtnLogin.setVisibility(View.INVISIBLE);
             mTvName.setVisibility(View.VISIBLE);
             mTvName.setText(bmobUser.getUsername());
 
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_circle_back_normal);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.pig);
             CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
-
             mIvHeadIcon.setImageDrawable(circleByZYXDrawable);
 
         } else {
+
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mine_portrait);
+            CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
+            mIvHeadIcon.setImageDrawable(circleByZYXDrawable);
 
             mBtnLogin.setVisibility(View.VISIBLE);
             mTvName.setVisibility(View.INVISIBLE);
 
         }
     }
+
     @Override
     protected void initData() {
 
@@ -147,7 +151,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 Intent intent1 = new Intent(getActivity(), SetActivity.class);
                 startActivityForResult(intent1, 1);
                 break;
-            case R.id.ll_my_favorate:
+            case R.id.ll_my_favorite:
                 Intent intent2 = new Intent(getActivity(), FavoriteDesignerActivity.class);
                 startActivity(intent2);
                 break;
