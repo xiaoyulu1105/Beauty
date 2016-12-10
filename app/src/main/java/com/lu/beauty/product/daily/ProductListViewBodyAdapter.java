@@ -77,8 +77,7 @@ public class ProductListViewBodyAdapter extends BaseAdapter{
         // 喜欢和不喜欢的值
         int likeCount, disLikeCount;
         likeCount = bean.getData().getProducts().get(position).getLike_user_num();
-        disLikeCount = bean.getData().getProducts().get(position).getUnlike_user_num();
-
+        disLikeCount = bean.getData().getProducts().get(position).getUnlike_user_num(); 
         // 喜欢和不喜欢的高度
         double likeHeight = GetPercent.getLikeHigh(likeCount, disLikeCount);
         double dislikeHeight = GetPercent.getDislikeHigh(likeCount, disLikeCount);
