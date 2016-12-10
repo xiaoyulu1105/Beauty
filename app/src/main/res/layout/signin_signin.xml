@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-
               android:background="@mipmap/splash_bg"
+              android:paddingTop="0dp"
+
+              android:orientation="vertical"
 
     >
+
     <LinearLayout
 
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
 
         android:orientation="horizontal"
         >
+
         <Button
+            android:id="@+id/btn_signin_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@mipmap/ic_back_dark"
-            android:id="@+id/btn_signin_back"
             />
+
         <TextView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:text="注册"
-            android:textSize = "20dp"
             android:gravity="center_vertical"
+            android:text="注册"
+            android:textSize="20dp"
             />
-
-
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,12 +60,12 @@
             <EditText
                 android:id="@+id/et_signin_id"
                 android:layout_width="match_parent"
-                android:background="@null"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
+                android:background="@null"
 
-                android:hint="用户名/手机号/邮箱" />
+                android:hint="用户名/手机号/邮箱"/>
 
         </LinearLayout>
 
@@ -82,15 +85,15 @@
             />
 
             <EditText
+                android:id="@+id/et_signin_password"
                 android:layout_width="match_parent"
-                android:background="@null"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
-                android:password="true"
-                android:id="@+id/et_signin_password"
+                android:background="@null"
+                android:hint="密码"
 
-                android:hint="密码" />
+                android:password="true"/>
 
         </LinearLayout>
 
@@ -104,7 +107,7 @@
             android:layout_marginTop="30dp"
             android:background="#f25858"
             android:text="注册"
-            android:textColor="#fff" />
+            android:textColor="#fff"/>
 
     </LinearLayout>
 

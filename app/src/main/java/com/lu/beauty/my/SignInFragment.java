@@ -90,7 +90,6 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
                       //Toast.makeText(getActivity(), "注册失败", Toast.LENGTH_SHORT).show();
 
                   }
-
                 }
             });
         }
