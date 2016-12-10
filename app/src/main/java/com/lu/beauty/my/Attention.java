@@ -1,11 +1,13 @@
-package com.lu.beauty.designer;
+package com.lu.beauty.my;
+
+import com.lu.beauty.my.AttentionUser;
 
 import cn.bmob.v3.BmobObject;
 
 /**
  * Created by XiaoyuLu on 16/12/9.
  *
- * 这个类是 存放设计师信息的 数据表类
+ * 这个类是 存放 用户 关注的 设计师信息的 数据表类
  */
 
 public class Attention extends BmobObject {
@@ -16,7 +18,6 @@ public class Attention extends BmobObject {
     private String attentionAvatar;
     private String attentionImage;
 
-    // 才用一对一, 或一对多的方式
     private AttentionUser myUser;
 
     public String getAttentionId() {

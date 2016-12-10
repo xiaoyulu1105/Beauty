@@ -4,10 +4,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:id="@+id/layout"
+              android:background="@mipmap/splash_bg"
     >
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -26,19 +26,15 @@
             android:textSize = "20dp"
             android:gravity="center_vertical"
             />
-
-
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="4"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
         android:orientation="vertical"
-
         >
 
         <LinearLayout
@@ -103,78 +99,67 @@
             android:id="@+id/btn_login_login"
             android:textColor="#d70d0d" />
 
-    </LinearLayout>
-
-
-
-
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:orientation="horizontal"
-        >
         <LinearLayout
-            android:layout_width="0dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/ll_login_qq"
+            android:orientation="horizontal"
             >
-            <ImageView
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/ic_login_qq"
-                />
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="QQ"
-                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/ll_login_qq"
+                android:paddingLeft="50dp"
+                >
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/ic_login_qq"
+                    />
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="QQ"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingRight="50dp"
+                >
+                <ImageView
+                    android:layout_marginTop="17dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/ic_news_keep_heighlight"
+                    android:id="@+id/enter_boohee"
+                    />
+                <TextView
+                    android:id="@+id/btn_login_signin"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="注册"
+                    />
+            </LinearLayout>
+
+
         </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/ic_news_keep_heighlight"
-                android:id="@+id/enter_boohee"
-                />
-            <TextView
-                android:id="@+id/btn_login_signin"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="注册"
-                />
-        </LinearLayout>
-
-
 
     </LinearLayout>
 
-
-
-
-
-
-    <ImageView
-
+    <View
         android:layout_width="match_parent"
-        android:background="@mipmap/splash_bg"
         android:layout_height="0dp"
-        android:layout_weight="3"
-        />
+        android:layout_weight="3"/>
 
 </LinearLayout>

@@ -11,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.bean.DesignerRecommendBean;
+import com.lu.beauty.my.Attention;
+import com.lu.beauty.my.AttentionUser;
 import com.lu.beauty.my.LoginActivity;
 
 import java.util.ArrayList;
@@ -124,19 +125,14 @@ public class DesignerAllAdapter extends RecyclerView.Adapter<CommonViewHolder> {
             @Override
             public void onClick(View v) {
 
-                // 点击时打印 是否 处于关注状态
-
                 final AttentionUser designerAttentionUser = AttentionUser.getCurrentUser(AttentionUser.class);
-                Log.d("DesignerAllAdapter", "用户的信息:" + designerAttentionUser);
-
 
                 if (designerAttentionUser != null) {
                     // 当点击时 处于登录状态
                     Log.d("DesignerAllAdapter", "处于登录状态");
 
-
                     String attentionId1 = String.valueOf(arrayList.get(position).getId());
-                    // 查询数据库, 当有该用户时
+                    // 查询数据库
                     BmobQuery<Attention> query = new BmobQuery<>();
                     query.addWhereEqualTo("myUser", designerAttentionUser); // 查询当前用户的所有关注的设计师
                     query.addWhereEqualTo("attentionId", attentionId1);

@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -42,28 +43,25 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
     private boolean isChange = false; // 判断表情是否处于变化状态, 默认不是
 
     // by 小玉
-    private  boolean isSelected = false; // 用一个静态变量来判断是否选择了 哭脸
+    private boolean isSelected = false; // 用一个静态变量来判断是否选择了 哭脸
     private int myBackgroundDrawable = R.drawable.shap;  // 哭脸的默认背景色为白色
     private SmileFaceView mSmileFaceView;
 
     // 设置 isSelected 的 set get方法
-    public  boolean getIsSelected() {
+    public boolean getIsSelected() {
         return isSelected;
     }
-    public  void setIsSelected(boolean isSelected) {
+
+    public void setIsSelected(boolean isSelected) {
         this.isSelected = isSelected;
     }
 
-    // 设置 myBackgroundDrawable 的 set get 方法
-    public  int getMyBackgroundDrawable() {
-        return myBackgroundDrawable;
-    }
+    // 设置 myBackgroundDrawable 的 set方法
     public void setMyBackgroundDrawable(int myBackgroundDrawable) {
-        this.myBackgroundDrawable = myBackgroundDrawable;
-        // 刷新 UI
-        this.invalidate();
+        setBackground(getResources().getDrawable(myBackgroundDrawable));
     }
 
+    // 点击哭脸 笑脸变白的 不可行的方式1
     // 对象 mSmileFaceView 的set方法
     public void setSmileFaceView(SmileFaceView smileFaceView) {
         Log.d("CryFaceViewSet", "setSmileFaceView---参数的smile对象" + smileFaceView);
@@ -138,11 +136,27 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
         mHeight = getHeight();
     }
 
+    // 将 笑脸变白的方法
+    private void setSmallWhite() {
+        RelativeLayout parent = (RelativeLayout) getParent();
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            Log.d("CryFaceView", "parent.getChildCount():" + parent.getChildCount());
+            if (parent.getChildAt(i) instanceof SmileFaceView) {
+                Log.d("CryFaceView", "in");
+                SmileFaceView smileFaceView = (SmileFaceView) parent.getChildAt(i);
+                smileFaceView.setMyBackgroundDrawable(R.drawable.shap);
+            }
+        }
+    }
+
     @Override
     public void onClick(View v) {
 
         Log.d("CryFaceViewOnclick", "点击了哭脸");
+        // 笑脸变白
+        setSmallWhite();
 
+        // 点击哭脸 笑脸变白的 不可行的方式1
         // 如果笑脸是选中状态
 //        if (mSmileFaceView.getIsSelected()) {
 //
@@ -152,7 +166,7 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
 //            mSmileFaceView.setMyBackgroundDrawable(R.drawable.shap); // new的没用,不能对应
 //            mSmileFaceView.setIsSelected(false);
 //        }
-        isSelected = true;
+//        isSelected = true;
 
         //获取到组件的高
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
@@ -211,7 +225,6 @@ public class CryFaceView extends RelativeLayout implements View.OnClickListener 
         // 动画结束, 布尔值为false
         isChange = false;
 
-        //
     }
 
     // 开始

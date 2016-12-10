@@ -11,8 +11,6 @@ import android.widget.Toast;
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.bean.ProductCommonBean;
-import com.lu.beauty.designer.threadactivity.DesignerItemActivity;
-import com.lu.beauty.product.daily.ProductListViewBodyAdapter;
 import com.lu.beauty.product.productitem.ProductItemActivity;
 import com.lu.beauty.tools.GetPercent;
 import com.lu.beauty.ui.CryFaceView;
@@ -89,16 +87,15 @@ public class ProductListViewAdapter extends BaseAdapter implements StickyListHea
         cryFaceView.setDP2PX_final((int) dislikeHeight);
         smileFaceView.setDP2PX_FINAL((int) likeHeight);
 
-        // 将表情对象 进行关联
+        // 将表情对象 进行关联, 不可行的方式, 可行方式在自定义组件里就写了
         cryFaceView.setSmileFaceView(smileFaceView);
         smileFaceView.setCryFaceView(cryFaceView);
 
-        // TODO 判断当点击笑脸时 哭脸是白色的, 点击哭脸时同理
         // 在这里监听点击无响应
 
-
-        viewHolder.getView(R.id.daily_item_user_icon).setOnClickListener(new MyListener(arrayList.get(position).getDesigner().getId() + "", parent.getContext()));
-        viewHolder.getView(R.id.daily_item_img).setOnClickListener(new ProductListener(arrayList.get(position).getId() + "", parent.getContext(),picRUrls));
+        // 老师加的??
+//        viewHolder.getView(R.id.daily_item_user_icon).setOnClickListener(new MyListener(arrayList.get(position).getDesigner().getId() + "", parent.getContext()));
+//        viewHolder.getView(R.id.daily_item_img).setOnClickListener(new ProductListener(arrayList.get(position).getId() + "", parent.getContext(),picRUrls));
 
 
         return viewHolder.getItemView();
