@@ -108,7 +108,7 @@
                 android:id="@+id/article_detail_author_icon_iv"
                 android:layout_width="@dimen/circle_return_button_height"
                 android:layout_height="@dimen/circle_return_button_height"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/icon_nice"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="450dp"
                 />
@@ -127,7 +127,7 @@
             <!-- 富文本下面的内容: 设计师和作品 -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="50dp"
                 android:orientation="vertical"
                 android:background="#000000"
                 android:layout_below="@id/article_detail_html_tv"

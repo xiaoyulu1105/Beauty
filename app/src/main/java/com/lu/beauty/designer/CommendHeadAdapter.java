@@ -12,13 +12,13 @@ import com.lu.beauty.base.CommonViewHolder;
  * Created by GuoXuanYu on 16/11/26.
  */
 
-public class ConmmendHeadAdapter extends RecyclerView.Adapter {
-    private  RecyclerView.Adapter inerAdapter;
+public class CommendHeadAdapter extends RecyclerView.Adapter {
+    private  RecyclerView.Adapter innerAdapter;
     private static  final  int BASE_TYPE = 100000;
     private SparseArray<View> headViews;
 
-    public ConmmendHeadAdapter(RecyclerView.Adapter inerAdapter) {
-        this.inerAdapter = inerAdapter;
+    public CommendHeadAdapter(RecyclerView.Adapter innerAdapter) {
+        this.innerAdapter = innerAdapter;
         headViews = new SparseArray<>();
     }
 
@@ -34,7 +34,7 @@ public class ConmmendHeadAdapter extends RecyclerView.Adapter {
         if (headViews.get(viewType) != null){
             holder = CommonViewHolder.getHeadViewHolder(headViews.get(viewType));
         }else {
-            holder = inerAdapter.onCreateViewHolder(parent,viewType);
+            holder = innerAdapter.onCreateViewHolder(parent,viewType);
         }
         return holder;
     }
@@ -62,7 +62,7 @@ public class ConmmendHeadAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position >= headViews.size()){
-            inerAdapter.onBindViewHolder(holder,position - headViews.size());
+            innerAdapter.onBindViewHolder(holder,position - headViews.size());
         }
     }
 
@@ -72,12 +72,12 @@ public class ConmmendHeadAdapter extends RecyclerView.Adapter {
         if (position < headViews.size()){
             return BASE_TYPE + position;
         }else {
-            return inerAdapter.getItemViewType(position - headViews.size());
+            return innerAdapter.getItemViewType(position - headViews.size());
         }
     }
 
     @Override
     public int getItemCount() {
-        return  headViews.size()+inerAdapter.getItemCount();
+        return  headViews.size()+ innerAdapter.getItemCount();
     }
 }

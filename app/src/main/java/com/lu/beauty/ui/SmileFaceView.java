@@ -7,6 +7,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,7 +21,7 @@ import com.lu.beauty.tools.DensityTool;
  * OLiGei  what is your name
  * 轻松拿下一个类 属实有牌面
  */
-//TODO 新建一个包 widget包里,自定义组件都放到这里面
+// 新建一个包 ui包 或者叫 widget,自定义组件都放到这里面
 public class SmileFaceView extends RelativeLayout implements View.OnClickListener {
 
     private Context mContext;
@@ -33,6 +34,37 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
     private int mDP2PX_60;
     private int mMDP2PX_FIRST;
     private int mDP2PX_FINAL = -1; // 最终的高度, 赋值-1是用于下面的判断
+
+    // by 小玉
+    public  boolean isSelected = false; // 用一个静态变量来判断是否选择了 笑脸
+    private int myBackgroundDrawable = R.drawable.shap;  // 笑脸的默认背景色为白色
+    private CryFaceView mCryFaceView;
+
+    // 设置 isSelected 的 set get方法
+    public  boolean getIsSelected() {
+        return isSelected;
+    }
+    public  void setIsSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
+    // 设置 myBackgroundDrawable 的 set get 方法.
+    public int getMyBackgroundDrawable() {
+        return myBackgroundDrawable;
+    }
+
+    public void setMyBackgroundDrawable(int myBackgroundDrawable) {
+        this.myBackgroundDrawable = myBackgroundDrawable;
+        // 刷新 UI
+        this.invalidate();
+    }
+    //
+    public void setCryFaceView(CryFaceView cryFaceView) {
+
+        Log.d("SmileFaceView", "setCryFaceView---参数的 cry 对象" + cryFaceView);
+        this.mCryFaceView = cryFaceView;
+        Log.d("SmileFaceView", "setCryFaceView---笑脸类中的 cry 对象" + cryFaceView);
+    }
 
     // 为最终的高度设置set方法, 添加 by 小玉 已实现
     // 在 ProductListViewAdapter 中调用该set方法, 设置最终高度
@@ -69,15 +101,14 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
     }
 
     private void init() {
-        setBackground(getResources().getDrawable(R.drawable.shap));
+        //
+        setBackground(getResources().getDrawable(myBackgroundDrawable));
 
         mButton = new Button(mContext);
         mHandler = new Handler(Looper.getMainLooper());
 
-        //TODO 需要一个工具类,dp转px
-
+        // 一个工具类,dp转px
         mMDP2PX_FIRST = DensityTool.dip2px(mContext,30); // 圆的直径
-//        mDP2PX_FINAL = DensityTool.dip2px(mContext,150); // 最后的拉申高度
         if (mDP2PX_FINAL == -1){
             // 当未动态设置高度成功, 默认高度为150
             mDP2PX_FINAL = DensityTool.dip2px(mContext, 150);
@@ -99,6 +130,19 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        Log.d("SmileFaceView", "点击了笑脸");
+        // 如果点击笑脸了
+
+        // 如果哭脸是选中状态
+//        if (mCryFaceView.getIsSelected()) {
+//            Log.d("SmileFaceView", "哭脸被选择过了");
+//            // 将哭脸变成白色
+//            // TODO 在 ProductListViewAdapter 里不能监听到 哭脸的点击事件, why?
+//            mCryFaceView.setMyBackgroundDrawable(R.drawable.shap);
+//            mCryFaceView.setIsSelected(false);
+//        }
+        isSelected = true;
+
         //动画
         //得到布局的高度,然后修改高度,并且给布局加上颜色
         ViewGroup.LayoutParams params = getLayoutParams();
@@ -137,6 +181,7 @@ public class SmileFaceView extends RelativeLayout implements View.OnClickListene
 
         if (mOnClickListener != null) {
             mOnClickListener.onClick(v);
+
         }
     }
 

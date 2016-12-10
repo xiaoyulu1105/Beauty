@@ -62,4 +62,6 @@ public class UrlValues {
     // 第二级
     public static final String DESIGNER_DETAIL_URL = "http://design.zuimeia.com/api/v1/designer/145/";
 
+    String aa = "http://design.zuimeia.com/api/v1/articles/designer/201/?page=1&page_size=30  ";
+
 }

@@ -83,9 +83,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.main_article_radio:
                 // 请求画报数据
                 ArticleDateRequest();
-//                mFragmentManager.beginTransaction()
-//                        .replace(R.id.main_frame_layout, mFragment).commit();
-
 
                 break;
             case R.id.main_product_radio:

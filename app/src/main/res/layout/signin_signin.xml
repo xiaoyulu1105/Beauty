@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#e1dfdf"
-                       >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
 
+              android:background="@mipmap/splash_bg"
+
+    >
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@mipmap/ic_back_dark"
+            android:id="@+id/btn_signin_back"
+            />
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="注册"
+            android:textSize = "20dp"
+            android:gravity="center_vertical"
+            />
+
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,12 +47,12 @@
             android:background="#fff">
 
             <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
+            <!--android:layout_width="wrap_content"-->
 
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:background="@mipmap/ic_login_username" -->
-/>
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@mipmap/ic_login_username" -->
+            />
 
             <EditText
                 android:id="@+id/et_signin_id"
@@ -50,11 +75,11 @@
             android:background="#fff">
 
             <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:background="@mipmap/ic_login_password"-->
-                />
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@mipmap/ic_login_password"-->
+            />
 
             <EditText
                 android:layout_width="match_parent"
@@ -83,5 +108,4 @@
 
     </LinearLayout>
 
-
-</RelativeLayout>
+</LinearLayout>
