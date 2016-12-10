@@ -80,7 +80,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             mBtnLogin.setVisibility(View.INVISIBLE);
             mTvName.setVisibility(View.VISIBLE);
             mTvName.setText(bmobUser.getUsername());
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.pig);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_circle_back_normal);
 
             CircleDrawable circleByZYXDrawable = new CircleDrawable(bitmap);
 

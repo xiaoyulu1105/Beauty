@@ -2,7 +2,6 @@ package com.lu.beauty.my;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,20 +9,10 @@ import android.widget.BaseAdapter;
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
 import com.lu.beauty.designer.AttentionUser;
-import com.lu.beauty.designer.Collections;
 import com.lu.beauty.designer.DesignerClickListener;
-import com.lu.beauty.designer.DesignerHeadMoreActivity;
 import com.lu.beauty.designer.DesignerItemActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import cn.bmob.v3.BmobUser;
 
 /**
  * Created by  AngleXiao on 16/12/3.
