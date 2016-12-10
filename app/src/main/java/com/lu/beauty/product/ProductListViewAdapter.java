@@ -126,7 +126,7 @@ public class ProductListViewAdapter extends BaseAdapter implements StickyListHea
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context, DesignerItemActivity.class);
+            Intent intent = new Intent(context, ProductItemActivity.class);
             intent.putExtra("id", id);
             context.startActivity(intent);
         }
