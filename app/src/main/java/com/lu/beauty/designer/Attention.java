@@ -1,16 +1,23 @@
 package com.lu.beauty.designer;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * Created by XiaoyuLu on 16/12/9.
+ *
+ * 这个类是 存放设计师信息的 数据表类
  */
 
-public class AttentionSingleBean {
+public class Attention extends BmobObject {
 
-    private String attentionId;
+    private String attentionId;  // 设计师的id
     private String attentionName;
     private String attentionLabel;
     private String attentionAvatar;
     private String attentionImage;
+
+    // 才用一对一, 或一对多的方式
+    private AttentionUser myUser;
 
     public String getAttentionId() {
         return attentionId;
@@ -50,5 +57,13 @@ public class AttentionSingleBean {
 
     public void setAttentionImage(String attentionImage) {
         this.attentionImage = attentionImage;
+    }
+
+    public AttentionUser getMyUser() {
+        return myUser;
+    }
+
+    public void setMyUser(AttentionUser myUser) {
+        this.myUser = myUser;
     }
 }

@@ -14,14 +14,17 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.lu.beauty.R;
 import com.lu.beauty.base.BaseActivity;
-import com.lu.beauty.designer.AttentionSingleBean;
+import com.lu.beauty.designer.Attention;
 import com.lu.beauty.designer.AttentionUser;
-import com.lu.beauty.designer.Collections;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
@@ -33,9 +36,6 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
  * 轻松拿下一个类 属实有牌面
  */
 public class FavoriteDesignerActivity extends BaseActivity implements View.OnClickListener, SwipeBackActivityBase {
-
-    private List<Collections> mCollections;
-    private ArrayList<AttentionSingleBean> mAttentionSingleBeens;
 
     private String mAttentionName;
     private TextView mTextView;
@@ -53,8 +53,6 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
     protected void initViews() {
         mLvFavorite = bindView(R.id.lv_favorate);
         mIvBack = bindView(R.id.favorate_back);
-        mCollections = new ArrayList<>();
-        mAttentionSingleBeens = new ArrayList<>();
 
         mTextView = bindView(R.id.bmobtest);
         setClick(this, mIvBack);
@@ -72,74 +70,58 @@ public class FavoriteDesignerActivity extends BaseActivity implements View.OnCli
         if (attentionUser != null) {
             Log.d("FavorateDesignerActivit", "已登录状态");
 
-            String[] array;
-            ArrayList<String> arrayList = new ArrayList<>();
-            int getAttentionCount;
+            BmobQuery<Attention> query = new BmobQuery<>();
+            query.addWhereEqualTo("myUser", attentionUser); // 查询当前用户的所有关注的设计师
+            query.findObjects(new FindListener<Attention>() {
+                @Override
+                public void done(List<Attention> list, BmobException e) {
+                    if (e == null) {
+                        Log.d("FavoriteDesignerActivit", "查询数据库表 Attention 成功" + list.size());
+                        showQueryData(list);
 
-            array = attentionUser.getAttentionList();
-            arrayList = (ArrayList<String>) Arrays.asList(array);
-            getAttentionCount = attentionUser.getAttentionCount();
-            Log.d("FavoriteDesignerActivit", "关注的设计师个数: " + getAttentionCount);
-
-            if (getAttentionCount == 0) {
-                Log.d("FavorateDesignerActivit", "该用户还未关注设计师");
-                Toast.makeText(this, "快去关注吧", Toast.LENGTH_SHORT).show();
-
-            } else {
-                for (int j = 0; j < arrayList.size(); j++) {
-                    String name = arrayList.get(j);
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(name);
-//                        JSONArray jsonArray = jsonObject.getJSONArray("mAttentionSingleBeens");
-//                        for (int i = 0; i < jsonArray.length(); i++) {
-//                            JSONObject json = jsonArray.getJSONObject(i);
-//                            mAttentionName = json.getString("attentionName");
-//                            String attentionLabel = json.getString("attentionLabel");
-//                            String attentionImage = json.getString("attentionImage");
-//                            String attentionAvatar = json.getString("attentionAvatar");
-//                            String attentionId = json.getString("attentionId");
-//
-//                            AttentionUser attentionUser1 = new AttentionUser();
-//                            attentionUser1.setAttentionName(mAttentionName);
-//                            attentionUser1.setAttentionLabel(attentionLabel);
-//                            attentionUser1.setAttentionImage(attentionImage);
-//                            attentionUser1.setAttentionAvatar(attentionAvatar);
-//                            attentionUser1.setAttentionId(attentionId);
-//
-//                            mAttentionSingleBeens.add(attentionUser1);
-//
-//                        }
-//                        mFavoriteAdapter = new FavoriteAdapter();
-//
-//                        mFavoriteAdapter.setAttentionUsers(mAttentionSingleBeens);
-//                        mLvFavorite.setAdapter(mFavoriteAdapter);
-//
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-
-                    // 用 Gson解析
-                    Collections collections = new Gson().fromJson(name, Collections.class);
-                    AttentionSingleBean attentionSingleBean = collections.getAttentionSingleBeens().get(0);
-                    mAttentionSingleBeens.add(attentionSingleBean);
-
-                    mFavoriteAdapter = new FavoriteAdapter();
-                    mFavoriteAdapter.setAttentionSingleBeens(mAttentionSingleBeens);
-                    mLvFavorite.setAdapter(mFavoriteAdapter);
-
+                    } else {
+                        Log.d("FavoriteDesignerActivit", "查询数据库失败");
+                    }
                 }
-            }
+            });
+
 
         } else {
             // 处于未登录状态
-            Log.d("FavoriteDesignerActivit", "请先登录");
-            Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
-            FavoriteDesignerActivity.this.finish();
+            // 先登录
+            loginFirst();
 
-            Intent intent = new Intent(FavoriteDesignerActivity.this, LoginActivity.class);
-            startActivity(intent);
         }
 
+    }
+
+    /**
+     * 跳转到登录
+     */
+    private void loginFirst() {
+        Log.d("FavoriteDesignerActivit", "请先登录");
+        Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
+        FavoriteDesignerActivity.this.finish();
+
+        Intent intent = new Intent(FavoriteDesignerActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 将查询到的数据进行显示
+     * @param list
+     */
+    private void showQueryData(List<Attention> list) {
+
+        if (list.size() == 0) {
+            Toast.makeText(this, "快去关注吧", Toast.LENGTH_SHORT).show();
+        }
+        // 先将集合倒序
+        Collections.reverse(list);
+
+        mFavoriteAdapter = new FavoriteAdapter();
+        mFavoriteAdapter.setAttentions((ArrayList<Attention>) list);
+        mLvFavorite.setAdapter(mFavoriteAdapter);
     }
 
     @Override

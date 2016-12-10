@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 
 import com.lu.beauty.R;
 import com.lu.beauty.base.CommonViewHolder;
-import com.lu.beauty.designer.AttentionSingleBean;
+import com.lu.beauty.designer.Attention;
 import com.lu.beauty.designer.threadactivity.DesignerItemActivity;
 
 import java.util.ArrayList;
@@ -20,21 +20,21 @@ import java.util.ArrayList;
  */
 public class FavoriteAdapter extends BaseAdapter {
 
- private ArrayList<AttentionSingleBean> mAttentionSingleBeens;
+    private ArrayList<Attention> mAttentions;
 
-    public void setAttentionSingleBeens(ArrayList<AttentionSingleBean> attentionSingleBeens) {
-        mAttentionSingleBeens = attentionSingleBeens;
+    public void setAttentions(ArrayList<Attention> attentions) {
+        mAttentions = attentions;
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return mAttentionSingleBeens == null ? 0 : mAttentionSingleBeens.size();
+        return mAttentions == null ? 0 : mAttentions.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mAttentionSingleBeens.get(position);
+        return mAttentions.get(position);
     }
 
     @Override
@@ -50,16 +50,16 @@ public class FavoriteAdapter extends BaseAdapter {
         CommonViewHolder viewHolder = CommonViewHolder.getViewHolder(convertView, parent, R.layout.fragment_designer_item);
 
 
-      viewHolder.setText(R.id.design_item_name,mAttentionSingleBeens.get(position).getAttentionName());
-        viewHolder.setText(R.id.design_item_label, mAttentionSingleBeens.get(position).getAttentionLabel());
-        viewHolder.setCircleImage(R.id.design_item_avatar, mAttentionSingleBeens.get(position).getAttentionAvatar());
-        viewHolder.setImage(R.id.design_item_images, mAttentionSingleBeens.get(position).getAttentionImage());
-         viewHolder.setButtonInvisibale(R.id.design_item_button);
+        viewHolder.setText(R.id.design_item_name,mAttentions.get(position).getAttentionName());
+        viewHolder.setText(R.id.design_item_label, mAttentions.get(position).getAttentionLabel());
+        viewHolder.setCircleImage(R.id.design_item_avatar, mAttentions.get(position).getAttentionAvatar());
+        viewHolder.setImage(R.id.design_item_images, mAttentions.get(position).getAttentionImage());
+        viewHolder.setButtonInvisibale(R.id.design_item_button);
         viewHolder.setItemClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //将String 转化成int
-                String id = mAttentionSingleBeens.get(position).getAttentionId();
+
+                String id = mAttentions.get(position).getAttentionId();
                 Intent intent = new Intent(context, DesignerItemActivity.class);
                 intent.putExtra(DesignerItemActivity.INTENT_ID_KEY,id);
                 context.startActivity(intent);
